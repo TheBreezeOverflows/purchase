@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.Orders" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="VARCHAR" />
+    <result column="ORDER_SOURCE" property="orderSource" jdbcType="VARCHAR" />
+    <result column="MATERIAL_CODE" property="materialCode" jdbcType="VARCHAR" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="VARCHAR" />
+    <result column="MEASURE_UNIT" property="measureUnit" jdbcType="VARCHAR" />
+    <result column="UNIT_PRICE" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="SUM_PRICE" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="AUTHOR_ID" property="authorId" jdbcType="VARCHAR" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.turing.purchase.entity.Orders" extends="BaseResultMap" >
+    <result column="ADDRESS" property="address" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ORDER_NUM, ORDER_SOURCE, MATERIAL_CODE, MATERIAL_NAME, AMOUNT, MEASURE_UNIT, 
+    UNIT_PRICE, SUM_PRICE, START_DATE, END_DATE, AUTHOR_ID, AUTHOR, PHONE, FAX, EMAIL, 
+    REMARK
+  </sql>
+  <sql id="Blob_Column_List" >
+    ADDRESS
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.turing.purchase.entity.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.OrdersExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.Orders" >
+    insert into orders (ID, ORDER_NUM, ORDER_SOURCE, 
+      MATERIAL_CODE, MATERIAL_NAME, AMOUNT, 
+      MEASURE_UNIT, UNIT_PRICE, SUM_PRICE, 
+      START_DATE, END_DATE, AUTHOR_ID, 
+      AUTHOR, PHONE, FAX, 
+      EMAIL, REMARK, ADDRESS
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderNum,jdbcType=VARCHAR}, #{orderSource,jdbcType=VARCHAR}, 
+      #{materialCode,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
+      #{measureUnit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, #{sumPrice,jdbcType=DECIMAL}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{authorId,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{address,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="orderSource != null" >
+        ORDER_SOURCE,
+      </if>
+      <if test="materialCode != null" >
+        MATERIAL_CODE,
+      </if>
+      <if test="materialName != null" >
+        MATERIAL_NAME,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="measureUnit != null" >
+        MEASURE_UNIT,
+      </if>
+      <if test="unitPrice != null" >
+        UNIT_PRICE,
+      </if>
+      <if test="sumPrice != null" >
+        SUM_PRICE,
+      </if>
+      <if test="startDate != null" >
+        START_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="authorId != null" >
+        AUTHOR_ID,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSource != null" >
+        #{orderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null" >
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="measureUnit != null" >
+        #{measureUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.OrdersExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderNum != null" >
+        ORDER_NUM = #{record.orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderSource != null" >
+        ORDER_SOURCE = #{record.orderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCode != null" >
+        MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureUnit != null" >
+        MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        UNIT_PRICE = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumPrice != null" >
+        SUM_PRICE = #{record.sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startDate != null" >
+        START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authorId != null" >
+        AUTHOR_ID = #{record.authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        AUTHOR = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update orders
+    set ID = #{record.id,jdbcType=BIGINT},
+      ORDER_NUM = #{record.orderNum,jdbcType=VARCHAR},
+      ORDER_SOURCE = #{record.orderSource,jdbcType=VARCHAR},
+      MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      UNIT_PRICE = #{record.unitPrice,jdbcType=DECIMAL},
+      SUM_PRICE = #{record.sumPrice,jdbcType=DECIMAL},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      AUTHOR_ID = #{record.authorId,jdbcType=VARCHAR},
+      AUTHOR = #{record.author,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set ID = #{record.id,jdbcType=BIGINT},
+      ORDER_NUM = #{record.orderNum,jdbcType=VARCHAR},
+      ORDER_SOURCE = #{record.orderSource,jdbcType=VARCHAR},
+      MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      UNIT_PRICE = #{record.unitPrice,jdbcType=DECIMAL},
+      SUM_PRICE = #{record.sumPrice,jdbcType=DECIMAL},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      AUTHOR_ID = #{record.authorId,jdbcType=VARCHAR},
+      AUTHOR = #{record.author,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

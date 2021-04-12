@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.SysLogsMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.SysLogs" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="LOGIN_ID" property="loginId" jdbcType="VARCHAR" />
+    <result column="PRIORITY" property="priority" jdbcType="VARCHAR" />
+    <result column="LOG_DATE" property="logDate" jdbcType="TIMESTAMP" />
+    <result column="LOG_CLASS" property="logClass" jdbcType="VARCHAR" />
+    <result column="METHOD" property="method" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.turing.purchase.entity.SysLogs" extends="BaseResultMap" >
+    <result column="MSG" property="msg" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, LOGIN_ID, PRIORITY, LOG_DATE, LOG_CLASS, METHOD
+  </sql>
+  <sql id="Blob_Column_List" >
+    MSG
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.turing.purchase.entity.SysLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.SysLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.SysLogsExample" >
+    delete from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.SysLogs" >
+    insert into sys_logs (ID, LOGIN_ID, PRIORITY, 
+      LOG_DATE, LOG_CLASS, METHOD, 
+      MSG)
+    values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=VARCHAR}, #{priority,jdbcType=VARCHAR}, 
+      #{logDate,jdbcType=TIMESTAMP}, #{logClass,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.SysLogs" >
+    insert into sys_logs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="loginId != null" >
+        LOGIN_ID,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="logDate != null" >
+        LOG_DATE,
+      </if>
+      <if test="logClass != null" >
+        LOG_CLASS,
+      </if>
+      <if test="method != null" >
+        METHOD,
+      </if>
+      <if test="msg != null" >
+        MSG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        #{logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logClass != null" >
+        #{logClass,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.SysLogsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_logs
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.loginId != null" >
+        LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logDate != null" >
+        LOG_DATE = #{record.logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logClass != null" >
+        LOG_CLASS = #{record.logClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null" >
+        METHOD = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msg != null" >
+        MSG = #{record.msg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_logs
+    set ID = #{record.id,jdbcType=BIGINT},
+      LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      LOG_DATE = #{record.logDate,jdbcType=TIMESTAMP},
+      LOG_CLASS = #{record.logClass,jdbcType=VARCHAR},
+      METHOD = #{record.method,jdbcType=VARCHAR},
+      MSG = #{record.msg,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_logs
+    set ID = #{record.id,jdbcType=BIGINT},
+      LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      LOG_DATE = #{record.logDate,jdbcType=TIMESTAMP},
+      LOG_CLASS = #{record.logClass,jdbcType=VARCHAR},
+      METHOD = #{record.method,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

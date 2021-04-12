@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--jquery-->
+    <script th:src="@{/jquery.min.js}"></script>
+
+    <!--bootstrap-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!--easyui-->
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/easyui/locale/easyui-lang-zh_CN.js}"></script>
+</head>
+<body>
+    <div style="border-radius: 5px;padding: 0px 2px;width: 300px;height: 400px;margin: 50px auto;background-color: #1b6d85;box-shadow: 2px 2px #97a6ab;">
+        <form id="ff" method="post">
+            <h3 style="text-align: center;color:white;padding: 8px 20px 0px;line-height: 30px">用户登录</h3>
+            <div style="padding: 10px 10px;width: 296px;height: 350px;background-color: white;border-radius: 5px;">
+                <h3 style="padding-bottom:10px;text-align: center;color: #0000FF;">务资采购电子商务系统</h3>
+                <div class="form-group">
+                    <input type="text" name="uName" class="form-control" id="exampleInputEmail1" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="uPassword" class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
+                </div>
+                <select class="form-control">
+                    <option value="0">请选择用户类型...</option>
+                </select>
+                <br>
+                <button style="margin: 0px 10px;width: 250px;height: 40px" type="button" class="btn btn-primary" onclick="login()">登录</button>
+                <p style="text-align: center;padding-top: 20px">还没有账号？去<a th:href="@{/regist}">注册</a></p>
+            </div>
+        </form>
+    </div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

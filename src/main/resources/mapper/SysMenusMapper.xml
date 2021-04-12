@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.SysMenusMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.SysMenus" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PARENT_ID" property="parentId" jdbcType="BIGINT" />
+    <result column="SEQ" property="seq" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TIP" property="tip" jdbcType="VARCHAR" />
+    <result column="IMAGE_URL" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="LINK_URL" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="TARGET" property="target" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.turing.purchase.entity.SysMenus" extends="BaseResultMap" >
+    <result column="DESCN" property="descn" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PARENT_ID, SEQ, NAME, TIP, IMAGE_URL, LINK_URL, TARGET, STATUS
+  </sql>
+  <sql id="Blob_Column_List" >
+    DESCN
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.turing.purchase.entity.SysMenusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_menus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.SysMenusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_menus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.SysMenusExample" >
+    delete from sys_menus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.SysMenus" >
+    insert into sys_menus (ID, PARENT_ID, SEQ, 
+      NAME, TIP, IMAGE_URL, 
+      LINK_URL, TARGET, STATUS, 
+      DESCN)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{seq,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{tip,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{linkUrl,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{descn,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.SysMenus" >
+    insert into sys_menus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="seq != null" >
+        SEQ,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="tip != null" >
+        TIP,
+      </if>
+      <if test="imageUrl != null" >
+        IMAGE_URL,
+      </if>
+      <if test="linkUrl != null" >
+        LINK_URL,
+      </if>
+      <if test="target != null" >
+        TARGET,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="descn != null" >
+        DESCN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tip != null" >
+        #{tip,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null" >
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descn != null" >
+        #{descn,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.SysMenusExample" resultType="java.lang.Integer" >
+    select count(*) from sys_menus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_menus
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.seq != null" >
+        SEQ = #{record.seq,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tip != null" >
+        TIP = #{record.tip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageUrl != null" >
+        IMAGE_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkUrl != null" >
+        LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        TARGET = #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descn != null" >
+        DESCN = #{record.descn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_menus
+    set ID = #{record.id,jdbcType=BIGINT},
+      PARENT_ID = #{record.parentId,jdbcType=BIGINT},
+      SEQ = #{record.seq,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      TIP = #{record.tip,jdbcType=VARCHAR},
+      IMAGE_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      TARGET = #{record.target,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DESCN = #{record.descn,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_menus
+    set ID = #{record.id,jdbcType=BIGINT},
+      PARENT_ID = #{record.parentId,jdbcType=BIGINT},
+      SEQ = #{record.seq,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      TIP = #{record.tip,jdbcType=VARCHAR},
+      IMAGE_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      TARGET = #{record.target,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

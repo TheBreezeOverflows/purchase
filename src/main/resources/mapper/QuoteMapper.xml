@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.QuoteMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.Quote" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="QUOTE_NUM" property="quoteNum" jdbcType="VARCHAR" />
+    <result column="ENQUIRE_ID" property="enquireId" jdbcType="BIGINT" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="BIGINT" />
+    <result column="QUO_COMPANY" property="quoCompany" jdbcType="VARCHAR" />
+    <result column="QUO_LINKMAN" property="quoLinkman" jdbcType="VARCHAR" />
+    <result column="QUO_PHONE" property="quoPhone" jdbcType="VARCHAR" />
+    <result column="QUO_FAX" property="quoFax" jdbcType="VARCHAR" />
+    <result column="QUO_EMAIL" property="quoEmail" jdbcType="VARCHAR" />
+    <result column="QUE_TITLE" property="queTitle" jdbcType="VARCHAR" />
+    <result column="QUE_DATE" property="queDate" jdbcType="TIMESTAMP" />
+    <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="SUM_AMOUNT" property="sumAmount" jdbcType="DECIMAL" />
+    <result column="OVERALL_PRICE" property="overallPrice" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.turing.purchase.entity.QuoteWithBLOBs" extends="BaseResultMap" >
+    <result column="QUO_ADDRESS" property="quoAddress" jdbcType="LONGVARCHAR" />
+    <result column="QUO_REMARK" property="quoRemark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, QUOTE_NUM, ENQUIRE_ID, SUPPLIER_ID, QUO_COMPANY, QUO_LINKMAN, QUO_PHONE, QUO_FAX, 
+    QUO_EMAIL, QUE_TITLE, QUE_DATE, END_DATE, SUM_AMOUNT, OVERALL_PRICE, STATUS
+  </sql>
+  <sql id="Blob_Column_List" >
+    QUO_ADDRESS, QUO_REMARK
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.turing.purchase.entity.QuoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from quote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.QuoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from quote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.QuoteExample" >
+    delete from quote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.QuoteWithBLOBs" >
+    insert into quote (ID, QUOTE_NUM, ENQUIRE_ID, 
+      SUPPLIER_ID, QUO_COMPANY, QUO_LINKMAN, 
+      QUO_PHONE, QUO_FAX, QUO_EMAIL, 
+      QUE_TITLE, QUE_DATE, END_DATE, 
+      SUM_AMOUNT, OVERALL_PRICE, STATUS, 
+      QUO_ADDRESS, QUO_REMARK)
+    values (#{id,jdbcType=BIGINT}, #{quoteNum,jdbcType=VARCHAR}, #{enquireId,jdbcType=BIGINT}, 
+      #{supplierId,jdbcType=BIGINT}, #{quoCompany,jdbcType=VARCHAR}, #{quoLinkman,jdbcType=VARCHAR}, 
+      #{quoPhone,jdbcType=VARCHAR}, #{quoFax,jdbcType=VARCHAR}, #{quoEmail,jdbcType=VARCHAR}, 
+      #{queTitle,jdbcType=VARCHAR}, #{queDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
+      #{sumAmount,jdbcType=DECIMAL}, #{overallPrice,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{quoAddress,jdbcType=LONGVARCHAR}, #{quoRemark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.QuoteWithBLOBs" >
+    insert into quote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="quoteNum != null" >
+        QUOTE_NUM,
+      </if>
+      <if test="enquireId != null" >
+        ENQUIRE_ID,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="quoCompany != null" >
+        QUO_COMPANY,
+      </if>
+      <if test="quoLinkman != null" >
+        QUO_LINKMAN,
+      </if>
+      <if test="quoPhone != null" >
+        QUO_PHONE,
+      </if>
+      <if test="quoFax != null" >
+        QUO_FAX,
+      </if>
+      <if test="quoEmail != null" >
+        QUO_EMAIL,
+      </if>
+      <if test="queTitle != null" >
+        QUE_TITLE,
+      </if>
+      <if test="queDate != null" >
+        QUE_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="sumAmount != null" >
+        SUM_AMOUNT,
+      </if>
+      <if test="overallPrice != null" >
+        OVERALL_PRICE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="quoAddress != null" >
+        QUO_ADDRESS,
+      </if>
+      <if test="quoRemark != null" >
+        QUO_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="quoteNum != null" >
+        #{quoteNum,jdbcType=VARCHAR},
+      </if>
+      <if test="enquireId != null" >
+        #{enquireId,jdbcType=BIGINT},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="quoCompany != null" >
+        #{quoCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="quoLinkman != null" >
+        #{quoLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="quoPhone != null" >
+        #{quoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="quoFax != null" >
+        #{quoFax,jdbcType=VARCHAR},
+      </if>
+      <if test="quoEmail != null" >
+        #{quoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="queTitle != null" >
+        #{queTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="queDate != null" >
+        #{queDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sumAmount != null" >
+        #{sumAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="overallPrice != null" >
+        #{overallPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="quoAddress != null" >
+        #{quoAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="quoRemark != null" >
+        #{quoRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.QuoteExample" resultType="java.lang.Integer" >
+    select count(*) from quote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update quote
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.quoteNum != null" >
+        QUOTE_NUM = #{record.quoteNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enquireId != null" >
+        ENQUIRE_ID = #{record.enquireId,jdbcType=BIGINT},
+      </if>
+      <if test="record.supplierId != null" >
+        SUPPLIER_ID = #{record.supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="record.quoCompany != null" >
+        QUO_COMPANY = #{record.quoCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quoLinkman != null" >
+        QUO_LINKMAN = #{record.quoLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quoPhone != null" >
+        QUO_PHONE = #{record.quoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quoFax != null" >
+        QUO_FAX = #{record.quoFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quoEmail != null" >
+        QUO_EMAIL = #{record.quoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queTitle != null" >
+        QUE_TITLE = #{record.queTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queDate != null" >
+        QUE_DATE = #{record.queDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sumAmount != null" >
+        SUM_AMOUNT = #{record.sumAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.overallPrice != null" >
+        OVERALL_PRICE = #{record.overallPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quoAddress != null" >
+        QUO_ADDRESS = #{record.quoAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.quoRemark != null" >
+        QUO_REMARK = #{record.quoRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update quote
+    set ID = #{record.id,jdbcType=BIGINT},
+      QUOTE_NUM = #{record.quoteNum,jdbcType=VARCHAR},
+      ENQUIRE_ID = #{record.enquireId,jdbcType=BIGINT},
+      SUPPLIER_ID = #{record.supplierId,jdbcType=BIGINT},
+      QUO_COMPANY = #{record.quoCompany,jdbcType=VARCHAR},
+      QUO_LINKMAN = #{record.quoLinkman,jdbcType=VARCHAR},
+      QUO_PHONE = #{record.quoPhone,jdbcType=VARCHAR},
+      QUO_FAX = #{record.quoFax,jdbcType=VARCHAR},
+      QUO_EMAIL = #{record.quoEmail,jdbcType=VARCHAR},
+      QUE_TITLE = #{record.queTitle,jdbcType=VARCHAR},
+      QUE_DATE = #{record.queDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      SUM_AMOUNT = #{record.sumAmount,jdbcType=DECIMAL},
+      OVERALL_PRICE = #{record.overallPrice,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      QUO_ADDRESS = #{record.quoAddress,jdbcType=LONGVARCHAR},
+      QUO_REMARK = #{record.quoRemark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update quote
+    set ID = #{record.id,jdbcType=BIGINT},
+      QUOTE_NUM = #{record.quoteNum,jdbcType=VARCHAR},
+      ENQUIRE_ID = #{record.enquireId,jdbcType=BIGINT},
+      SUPPLIER_ID = #{record.supplierId,jdbcType=BIGINT},
+      QUO_COMPANY = #{record.quoCompany,jdbcType=VARCHAR},
+      QUO_LINKMAN = #{record.quoLinkman,jdbcType=VARCHAR},
+      QUO_PHONE = #{record.quoPhone,jdbcType=VARCHAR},
+      QUO_FAX = #{record.quoFax,jdbcType=VARCHAR},
+      QUO_EMAIL = #{record.quoEmail,jdbcType=VARCHAR},
+      QUE_TITLE = #{record.queTitle,jdbcType=VARCHAR},
+      QUE_DATE = #{record.queDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      SUM_AMOUNT = #{record.sumAmount,jdbcType=DECIMAL},
+      OVERALL_PRICE = #{record.overallPrice,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.QuoteDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.QuoteDetail" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="QUOTE_ID" property="quoteId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="MATERIAL_CODE" property="materialCode" jdbcType="VARCHAR" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+    <result column="MEASURE_UNIT" property="measureUnit" jdbcType="VARCHAR" />
+    <result column="STANDARD" property="standard" jdbcType="VARCHAR" />
+    <result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+    <result column="PROD_YEAR" property="prodYear" jdbcType="VARCHAR" />
+    <result column="WRAP" property="wrap" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="VARCHAR" />
+    <result column="UNIT_PRICE" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="SUM_PRICE" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="MIX_PRICE" property="mixPrice" jdbcType="DECIMAL" />
+    <result column="OTHER_PRICE" property="otherPrice" jdbcType="DECIMAL" />
+    <result column="TOTAL_PRICE" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, QUOTE_ID, ORDER_ID, MATERIAL_CODE, MATERIAL_NAME, MEASURE_UNIT, STANDARD, FACTORY, 
+    PROD_YEAR, WRAP, AMOUNT, UNIT_PRICE, SUM_PRICE, MIX_PRICE, OTHER_PRICE, TOTAL_PRICE, 
+    START_DATE, END_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.QuoteDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from quote_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.QuoteDetailExample" >
+    delete from quote_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.QuoteDetail" >
+    insert into quote_detail (ID, QUOTE_ID, ORDER_ID, 
+      MATERIAL_CODE, MATERIAL_NAME, MEASURE_UNIT, 
+      STANDARD, FACTORY, PROD_YEAR, 
+      WRAP, AMOUNT, UNIT_PRICE, 
+      SUM_PRICE, MIX_PRICE, OTHER_PRICE, 
+      TOTAL_PRICE, START_DATE, END_DATE
+      )
+    values (#{id,jdbcType=BIGINT}, #{quoteId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{materialCode,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, #{measureUnit,jdbcType=VARCHAR}, 
+      #{standard,jdbcType=VARCHAR}, #{factory,jdbcType=VARCHAR}, #{prodYear,jdbcType=VARCHAR}, 
+      #{wrap,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, 
+      #{sumPrice,jdbcType=DECIMAL}, #{mixPrice,jdbcType=DECIMAL}, #{otherPrice,jdbcType=DECIMAL}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.QuoteDetail" >
+    insert into quote_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="quoteId != null" >
+        QUOTE_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="materialCode != null" >
+        MATERIAL_CODE,
+      </if>
+      <if test="materialName != null" >
+        MATERIAL_NAME,
+      </if>
+      <if test="measureUnit != null" >
+        MEASURE_UNIT,
+      </if>
+      <if test="standard != null" >
+        STANDARD,
+      </if>
+      <if test="factory != null" >
+        FACTORY,
+      </if>
+      <if test="prodYear != null" >
+        PROD_YEAR,
+      </if>
+      <if test="wrap != null" >
+        WRAP,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="unitPrice != null" >
+        UNIT_PRICE,
+      </if>
+      <if test="sumPrice != null" >
+        SUM_PRICE,
+      </if>
+      <if test="mixPrice != null" >
+        MIX_PRICE,
+      </if>
+      <if test="otherPrice != null" >
+        OTHER_PRICE,
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE,
+      </if>
+      <if test="startDate != null" >
+        START_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="quoteId != null" >
+        #{quoteId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="materialCode != null" >
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="measureUnit != null" >
+        #{measureUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null" >
+        #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="factory != null" >
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="prodYear != null" >
+        #{prodYear,jdbcType=VARCHAR},
+      </if>
+      <if test="wrap != null" >
+        #{wrap,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mixPrice != null" >
+        #{mixPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="otherPrice != null" >
+        #{otherPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.QuoteDetailExample" resultType="java.lang.Integer" >
+    select count(*) from quote_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update quote_detail
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.quoteId != null" >
+        QUOTE_ID = #{record.quoteId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.materialCode != null" >
+        MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureUnit != null" >
+        MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standard != null" >
+        STANDARD = #{record.standard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factory != null" >
+        FACTORY = #{record.factory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodYear != null" >
+        PROD_YEAR = #{record.prodYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wrap != null" >
+        WRAP = #{record.wrap,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        UNIT_PRICE = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumPrice != null" >
+        SUM_PRICE = #{record.sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mixPrice != null" >
+        MIX_PRICE = #{record.mixPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherPrice != null" >
+        OTHER_PRICE = #{record.otherPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalPrice != null" >
+        TOTAL_PRICE = #{record.totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startDate != null" >
+        START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update quote_detail
+    set ID = #{record.id,jdbcType=BIGINT},
+      QUOTE_ID = #{record.quoteId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      STANDARD = #{record.standard,jdbcType=VARCHAR},
+      FACTORY = #{record.factory,jdbcType=VARCHAR},
+      PROD_YEAR = #{record.prodYear,jdbcType=VARCHAR},
+      WRAP = #{record.wrap,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      UNIT_PRICE = #{record.unitPrice,jdbcType=DECIMAL},
+      SUM_PRICE = #{record.sumPrice,jdbcType=DECIMAL},
+      MIX_PRICE = #{record.mixPrice,jdbcType=DECIMAL},
+      OTHER_PRICE = #{record.otherPrice,jdbcType=DECIMAL},
+      TOTAL_PRICE = #{record.totalPrice,jdbcType=DECIMAL},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

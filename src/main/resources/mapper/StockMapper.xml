@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.StockMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.Stock" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="STOCK_NUM" property="stockNum" jdbcType="VARCHAR" />
+    <result column="STOCK_NAME" property="stockName" jdbcType="VARCHAR" />
+    <result column="AUTHOR_ID" property="authorId" jdbcType="VARCHAR" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="STOCK_TYPE" property="stockType" jdbcType="VARCHAR" />
+    <result column="BUDGET" property="budget" jdbcType="DECIMAL" />
+    <result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="SUBMIT_DATE" property="submitDate" jdbcType="TIMESTAMP" />
+    <result column="LEADER_ID" property="leaderId" jdbcType="VARCHAR" />
+    <result column="LEADER" property="leader" jdbcType="VARCHAR" />
+    <result column="LEAD_AGREE" property="leadAgree" jdbcType="VARCHAR" />
+    <result column="LEAD_DATE" property="leadDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.turing.purchase.entity.StockWithBLOBs" extends="BaseResultMap" >
+    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="LEAD_OPINION" property="leadOpinion" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, STOCK_NUM, STOCK_NAME, AUTHOR_ID, AUTHOR, STOCK_TYPE, BUDGET, START_DATE, END_DATE, 
+    SUBMIT_DATE, LEADER_ID, LEADER, LEAD_AGREE, LEAD_DATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    REMARK, LEAD_OPINION
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.turing.purchase.entity.StockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.StockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.StockExample" >
+    delete from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.StockWithBLOBs" >
+    insert into stock (ID, STOCK_NUM, STOCK_NAME, 
+      AUTHOR_ID, AUTHOR, STOCK_TYPE, 
+      BUDGET, START_DATE, END_DATE, 
+      SUBMIT_DATE, LEADER_ID, LEADER, 
+      LEAD_AGREE, LEAD_DATE, REMARK, 
+      LEAD_OPINION)
+    values (#{id,jdbcType=BIGINT}, #{stockNum,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}, 
+      #{authorId,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{stockType,jdbcType=VARCHAR}, 
+      #{budget,jdbcType=DECIMAL}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
+      #{submitDate,jdbcType=TIMESTAMP}, #{leaderId,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{leadAgree,jdbcType=VARCHAR}, #{leadDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}, 
+      #{leadOpinion,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.StockWithBLOBs" >
+    insert into stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="stockNum != null" >
+        STOCK_NUM,
+      </if>
+      <if test="stockName != null" >
+        STOCK_NAME,
+      </if>
+      <if test="authorId != null" >
+        AUTHOR_ID,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="stockType != null" >
+        STOCK_TYPE,
+      </if>
+      <if test="budget != null" >
+        BUDGET,
+      </if>
+      <if test="startDate != null" >
+        START_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="submitDate != null" >
+        SUBMIT_DATE,
+      </if>
+      <if test="leaderId != null" >
+        LEADER_ID,
+      </if>
+      <if test="leader != null" >
+        LEADER,
+      </if>
+      <if test="leadAgree != null" >
+        LEAD_AGREE,
+      </if>
+      <if test="leadDate != null" >
+        LEAD_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="leadOpinion != null" >
+        LEAD_OPINION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="stockNum != null" >
+        #{stockNum,jdbcType=VARCHAR},
+      </if>
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="stockType != null" >
+        #{stockType,jdbcType=VARCHAR},
+      </if>
+      <if test="budget != null" >
+        #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitDate != null" >
+        #{submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaderId != null" >
+        #{leaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="leadAgree != null" >
+        #{leadAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="leadDate != null" >
+        #{leadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="leadOpinion != null" >
+        #{leadOpinion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.StockExample" resultType="java.lang.Integer" >
+    select count(*) from stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stock
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.stockNum != null" >
+        STOCK_NUM = #{record.stockNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockName != null" >
+        STOCK_NAME = #{record.stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorId != null" >
+        AUTHOR_ID = #{record.authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        AUTHOR = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockType != null" >
+        STOCK_TYPE = #{record.stockType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.budget != null" >
+        BUDGET = #{record.budget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startDate != null" >
+        START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitDate != null" >
+        SUBMIT_DATE = #{record.submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaderId != null" >
+        LEADER_ID = #{record.leaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        LEADER = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadAgree != null" >
+        LEAD_AGREE = #{record.leadAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadDate != null" >
+        LEAD_DATE = #{record.leadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.leadOpinion != null" >
+        LEAD_OPINION = #{record.leadOpinion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update stock
+    set ID = #{record.id,jdbcType=BIGINT},
+      STOCK_NUM = #{record.stockNum,jdbcType=VARCHAR},
+      STOCK_NAME = #{record.stockName,jdbcType=VARCHAR},
+      AUTHOR_ID = #{record.authorId,jdbcType=VARCHAR},
+      AUTHOR = #{record.author,jdbcType=VARCHAR},
+      STOCK_TYPE = #{record.stockType,jdbcType=VARCHAR},
+      BUDGET = #{record.budget,jdbcType=DECIMAL},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      SUBMIT_DATE = #{record.submitDate,jdbcType=TIMESTAMP},
+      LEADER_ID = #{record.leaderId,jdbcType=VARCHAR},
+      LEADER = #{record.leader,jdbcType=VARCHAR},
+      LEAD_AGREE = #{record.leadAgree,jdbcType=VARCHAR},
+      LEAD_DATE = #{record.leadDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=LONGVARCHAR},
+      LEAD_OPINION = #{record.leadOpinion,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stock
+    set ID = #{record.id,jdbcType=BIGINT},
+      STOCK_NUM = #{record.stockNum,jdbcType=VARCHAR},
+      STOCK_NAME = #{record.stockName,jdbcType=VARCHAR},
+      AUTHOR_ID = #{record.authorId,jdbcType=VARCHAR},
+      AUTHOR = #{record.author,jdbcType=VARCHAR},
+      STOCK_TYPE = #{record.stockType,jdbcType=VARCHAR},
+      BUDGET = #{record.budget,jdbcType=DECIMAL},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      SUBMIT_DATE = #{record.submitDate,jdbcType=TIMESTAMP},
+      LEADER_ID = #{record.leaderId,jdbcType=VARCHAR},
+      LEADER = #{record.leader,jdbcType=VARCHAR},
+      LEAD_AGREE = #{record.leadAgree,jdbcType=VARCHAR},
+      LEAD_DATE = #{record.leadDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

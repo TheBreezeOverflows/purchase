@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.Material" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="MATERIAL_NUM" property="materialNum" jdbcType="VARCHAR" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+    <result column="MATERIAL_UNIT" property="materialUnit" jdbcType="VARCHAR" />
+    <result column="MATERIAL_TYPE" property="materialType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MATERIAL_NUM, MATERIAL_NAME, MATERIAL_UNIT, MATERIAL_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.MaterialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.MaterialExample" >
+    delete from material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.Material" >
+    insert into material (ID, MATERIAL_NUM, MATERIAL_NAME, 
+      MATERIAL_UNIT, MATERIAL_TYPE)
+    values (#{id,jdbcType=BIGINT}, #{materialNum,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, 
+      #{materialUnit,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.Material" >
+    insert into material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="materialNum != null" >
+        MATERIAL_NUM,
+      </if>
+      <if test="materialName != null" >
+        MATERIAL_NAME,
+      </if>
+      <if test="materialUnit != null" >
+        MATERIAL_UNIT,
+      </if>
+      <if test="materialType != null" >
+        MATERIAL_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="materialNum != null" >
+        #{materialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialUnit != null" >
+        #{materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null" >
+        #{materialType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.MaterialExample" resultType="java.lang.Integer" >
+    select count(*) from material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update material
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.materialNum != null" >
+        MATERIAL_NUM = #{record.materialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialUnit != null" >
+        MATERIAL_UNIT = #{record.materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialType != null" >
+        MATERIAL_TYPE = #{record.materialType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update material
+    set ID = #{record.id,jdbcType=BIGINT},
+      MATERIAL_NUM = #{record.materialNum,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      MATERIAL_UNIT = #{record.materialUnit,jdbcType=VARCHAR},
+      MATERIAL_TYPE = #{record.materialType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

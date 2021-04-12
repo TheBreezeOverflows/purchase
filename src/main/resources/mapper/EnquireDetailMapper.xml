@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turing.purchase.mapper.EnquireDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.turing.purchase.entity.EnquireDetail" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ENQUIRE_ID" property="enquireId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="MATERIAL_CODE" property="materialCode" jdbcType="VARCHAR" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="VARCHAR" />
+    <result column="MEASURE_UNIT" property="measureUnit" jdbcType="VARCHAR" />
+    <result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="STANDARD" property="standard" jdbcType="VARCHAR" />
+    <result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+    <result column="PROD_YEAR" property="prodYear" jdbcType="VARCHAR" />
+    <result column="WRAP" property="wrap" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.turing.purchase.entity.EnquireDetail" extends="BaseResultMap" >
+    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ENQUIRE_ID, ORDER_ID, MATERIAL_CODE, MATERIAL_NAME, AMOUNT, MEASURE_UNIT, START_DATE, 
+    END_DATE, STANDARD, FACTORY, PROD_YEAR, WRAP
+  </sql>
+  <sql id="Blob_Column_List" >
+    REMARK
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.turing.purchase.entity.EnquireDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from enquire_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.turing.purchase.entity.EnquireDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from enquire_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.turing.purchase.entity.EnquireDetailExample" >
+    delete from enquire_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.turing.purchase.entity.EnquireDetail" >
+    insert into enquire_detail (ID, ENQUIRE_ID, ORDER_ID, 
+      MATERIAL_CODE, MATERIAL_NAME, AMOUNT, 
+      MEASURE_UNIT, START_DATE, END_DATE, 
+      STANDARD, FACTORY, PROD_YEAR, 
+      WRAP, REMARK)
+    values (#{id,jdbcType=BIGINT}, #{enquireId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{materialCode,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
+      #{measureUnit,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
+      #{standard,jdbcType=VARCHAR}, #{factory,jdbcType=VARCHAR}, #{prodYear,jdbcType=VARCHAR}, 
+      #{wrap,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.EnquireDetail" >
+    insert into enquire_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="enquireId != null" >
+        ENQUIRE_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="materialCode != null" >
+        MATERIAL_CODE,
+      </if>
+      <if test="materialName != null" >
+        MATERIAL_NAME,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="measureUnit != null" >
+        MEASURE_UNIT,
+      </if>
+      <if test="startDate != null" >
+        START_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="standard != null" >
+        STANDARD,
+      </if>
+      <if test="factory != null" >
+        FACTORY,
+      </if>
+      <if test="prodYear != null" >
+        PROD_YEAR,
+      </if>
+      <if test="wrap != null" >
+        WRAP,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="enquireId != null" >
+        #{enquireId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="materialCode != null" >
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="measureUnit != null" >
+        #{measureUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standard != null" >
+        #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="factory != null" >
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="prodYear != null" >
+        #{prodYear,jdbcType=VARCHAR},
+      </if>
+      <if test="wrap != null" >
+        #{wrap,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.turing.purchase.entity.EnquireDetailExample" resultType="java.lang.Integer" >
+    select count(*) from enquire_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update enquire_detail
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.enquireId != null" >
+        ENQUIRE_ID = #{record.enquireId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.materialCode != null" >
+        MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureUnit != null" >
+        MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null" >
+        START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.standard != null" >
+        STANDARD = #{record.standard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factory != null" >
+        FACTORY = #{record.factory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodYear != null" >
+        PROD_YEAR = #{record.prodYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wrap != null" >
+        WRAP = #{record.wrap,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update enquire_detail
+    set ID = #{record.id,jdbcType=BIGINT},
+      ENQUIRE_ID = #{record.enquireId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      STANDARD = #{record.standard,jdbcType=VARCHAR},
+      FACTORY = #{record.factory,jdbcType=VARCHAR},
+      PROD_YEAR = #{record.prodYear,jdbcType=VARCHAR},
+      WRAP = #{record.wrap,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update enquire_detail
+    set ID = #{record.id,jdbcType=BIGINT},
+      ENQUIRE_ID = #{record.enquireId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      MEASURE_UNIT = #{record.measureUnit,jdbcType=VARCHAR},
+      START_DATE = #{record.startDate,jdbcType=TIMESTAMP},
+      END_DATE = #{record.endDate,jdbcType=TIMESTAMP},
+      STANDARD = #{record.standard,jdbcType=VARCHAR},
+      FACTORY = #{record.factory,jdbcType=VARCHAR},
+      PROD_YEAR = #{record.prodYear,jdbcType=VARCHAR},
+      WRAP = #{record.wrap,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
