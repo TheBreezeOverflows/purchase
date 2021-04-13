@@ -1,36 +1,73 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>新增供应商产品类别</TITLE>
-<META http-equiv=Content-Language content=zh-cn>
-<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
-href="ProviderContract.files/style.css" rel=stylesheet>
+﻿<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--jquery-->
+    <script th:src="@{/jquery.min.js}"></script>
 
-<META content="MSHTML 6.00.2900.5626" name=GENERATOR></HEAD>
+    <!--bootstrap-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!--easyui-->
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/easyui/locale/easyui-lang-zh_CN.js}"></script>
+
+    <style type="text/css">
+        .t2 {
+            background-color: #f2f8ff;
+        }
+
+        .t1 {
+            background-color: rgb(153, 204, 255);
+        }
+
+        .myp input{
+            width: 64px;
+            height: 20px;
+            font-size: 10px;
+        }
+    </style>
 <BODY>
 <center>
-<form name=form action="jiffprov_hysave.asp" method="post">
-<input type=hidden name="but" value="updaback">
-<input type=hidden name="rad" value="zzCEO">
- 
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
-<tr>
-<td>
-<table cellpadding="3" cellspacing="1" border="0" width="100%">
-<tr bgcolor="#ffffff"> 
-<td width="100%" colspan="20" bgcolor="#ffffff" align=center height=22><B><H2><font  color=#0070C0 >新增供应商产品类别</b>
-<img alt="帮助" src="css/help_a.gif" border="0">
-</td>
-</tr>
-<tr>
-		<TD class=t1 noWrap width="20%">类别编号</td>
-		<TD class=t2 noWrap width="20%"><INPUT  name=strMemlogPass style="HEIGHT: 21px; WIDTH: 129px" size=16 maxlength=16 type="text" ></TD>
-		<TD class=t1 noWrap width="20%">类别名称</td>
-		<TD class=t2 noWrap width="30%"><INPUT  name=strMemlogPass1 style="HEIGHT: 21px; WIDTH: 129px" size=16 maxlength=16 type="text" ></TD>
-</TR>
-</table></td></tr></table>
- 
-</P>
-<P align=center>
-		<INPUT id=button1 name=button1 type=button value="保存返回" onclick="updaback()">
-		<INPUT id=button2 name=button2 type=button value="直接返回" onclick="history.back()">
-</P>
-</form></BODY></HTML>
+    <form name=form action="" method="post">
+        <input type=hidden name="but" value="updaback">
+        <input type=hidden name="rad" value="zzCEO">
+
+        <TABLE class="table" style="LINE-HEIGHT: 30px;margin-bottom: 0px" cellSpacing=1 cellPadding=0 width="100%" bgColor=#336699
+               borderColorLight=#006699 border=0>
+            <tr>
+                <td>
+                    <table class="table table-bordered table-hover table-condensed" cellpadding="3" cellspacing="1" border="0" width="100%">
+                        <tr bgcolor="#ffffff">
+                            <td width="100%" colspan="20" bgcolor="#ffffff" align=center height=22><B><H4><font
+                                    color=#0070C0 style="font-weight: bold">新增供应商产品类别</font><img alt="帮助" src="css/help_a.gif" border="0"></H4></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <TD class=t1 noWrap width="20%">类别编号</td>
+                            <TD class=t2 noWrap width="20%"><INPUT name=strMemlogPass style="HEIGHT: 21px; WIDTH: 129px"
+                                                                   size=16 maxlength=16 type="text"></TD>
+                            <TD class=t1 noWrap width="20%">类别名称</td>
+                            <TD class=t2 noWrap width="30%"><INPUT name=strMemlogPass1
+                                                                   style="HEIGHT: 21px; WIDTH: 129px" size=16
+                                                                   maxlength=16 type="text"></TD>
+                        </TR>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        </P>
+        <P align=center class="myp">
+            <INPUT id=button1 name=button1 type=button value="保存返回" onclick="updaback()">
+            <INPUT id=button2 name=button2 type=button value="直接返回" onclick="history.back()">
+        </P>
+    </form>
+</center></BODY>
+</HTML>
