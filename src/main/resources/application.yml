@@ -15,7 +15,7 @@ spring:
     minIdle: 5
     #最大连接数20
     maxActive: 20
-    #获取连接等待时间60秒，超出报错
+    #获取连接等待时间60秒
     maxWait: 60000
     #每60秒执行一次连接回收器
     timeBetweenEvictionRunsMillis: 60000
