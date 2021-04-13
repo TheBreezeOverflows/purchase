@@ -175,7 +175,6 @@
                 }
             }
         }
-        alert("临时供应商注册 成功,请进行供应商会员注册！");
         window.document.forms[0].submit();
         return true;
     }
@@ -217,121 +216,161 @@
 
 
 <html>
-<link rel="stylesheet" href="css/style.css">
 <head>
-	<title>临时供应商注册</title>
-	<script language=javascript>
-        function subback()
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+    <meta name="ProgId" content="FrontPage.Editor.Document">
+    <LINK href="css/style.css" rel=stylesheet>
+    <div ID="overDiv" STYLE="position:absolute; z-index:1;"></div>
+    <SCRIPT language=JavaScript src="css/pub_Calendar.js"></SCRIPT>
+    <script LANGUAGE="JavaScript" SRC="../PUB/ShowTIP.JS" TYPE="text/javascript"></script>
+    <title>未确认需求一览表</title>
+    <SCRIPT LANGUAGE=javascript>
+        function submit_form(theForm,i)
         {
-
-            form.but.value ="add";
-            CheckAll();
+            var count=0;
+            for (var k = 0; k < theForm.length; k++)
+                if ((theForm[k].type == "checkbox") && (theForm[k].checked))
+                    count++;
+            if (count==0)
+            {
+                alert("提示信息：\n请选择需求计划。");
+                return;
+            }
+            if (i==1)
+            {
+                if(count>1)
+                {
+                    alert("提示信息：\n只能选择一个需求计划操作。");
+                    return;
+                }
+            }
+            if (i==2)
+            {
+                goAhead = confirm("确认删除需求计划？");
+                if(goAhead==false)
+                {
+                    return;
+                }
+            }
+            document.form.p_type.value=i;
+            window.document.form.submit();
+            submitonce(form);
+            window.close();
+            return true;
         }
-	</script>
+        function select_check(theForm)
+        {
+            var count=0;
+            for (var k = 0; k < theForm.length; k++)
+                if ((theForm[k].type == "checkbox") && (theForm[k].checked))
+                    count++;
+            if (count==0)
+            {
+                for (k = 0; k < theForm.length; k++)
+                {
+                    if (theForm[k].type == "checkbox")
+                        theForm[k].checked=true;
+                }
+            }
+            else
+            {
+                for (k = 0; k < theForm.length; k++)
+                {
+                    if (theForm[k].type == "checkbox")
+                        theForm[k].checked=false;
+                }
+            }
+        }
+    </SCRIPT>
 </head>
 <body>
-<center>
-	<form name=form action="supply2"  method="post">
-		<input type="hidden" name="p_Enquireno" value="100020101348014">
-		<input type=hidden name=but value="ture">
+<div>
+    产品名称：<input type="text" size=10 value="" name="p_prodno">&nbsp;&nbsp;
+    产品编码：<input type="text" size=10 value="" name="p_prodname">&nbsp;&nbsp;
+</div>
+<div>
+    规格型号：<input type="text" size=10 value="" name="xinghao">&nbsp;&nbsp;
+    <input type="button" value="搜索" onClick="submit_form_cx()"></td>
+</div>
+<div>
+    <center><font color='#000064'>◆&nbsp;</font><font color='#000064'>首页 上一页</font>&nbsp;<a href=Order_ytb_list.asp?p_type=&p_prodno=&p_prodname=&p_status=&p_stocktype=&p_ordertype=&page=2><font color='0000BE'>下一页</font></a>&nbsp;<a href=Order_ytb_list.asp?p_type=&p_prodno=&p_prodname=&p_status=&p_stocktype=&p_ordertype=&page=26><font color='0000BE'>尾页</font></a><font color='000064'>&nbsp;共 257 个需求计划 每页10 个需求计划</font><font color='000064'>&nbsp;页次:<font color=blue>1</font>/26页</font><font color='#000064'>&nbsp;◆&nbsp;</font>
+    </center></div>
+<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
+    <tr>
+        <td>
+            <table cellpadding="3" cellspacing="1" border="0" width="100%">
 
-		<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
-			<tr>
-				<td>
-					<table cellpadding="3" cellspacing="1" border="0" width="100%">
-						<tr bgcolor="#ffffff">
-							<td width="100%" colspan="20" bgcolor="#ffffff" align=center height=22><B><H2><font  color=#0070C0 >临时供应商注册</font></H2></B></td>
-						</tr>
+                <center>
+                    <form name=form action="pclass_select" method="post">
+                        <tr  class="t1">
+                            <td nowrap align="center">选择</td>
+                            <td nowrap align="center">序号</td>
+                            <td nowrap align="center">产品编码</td>
+                            <td nowrap align="center">产品名称</td>
+                            <td nowrap align="center">有无供应商</td>
+                        </tr>
 
-						<tr>
-							<td class=t1 nowrap >供应商名称</td><td class=t2><INPUT maxLength=50 name="strCorpName" style="HEIGHT: 22px; WIDTH: 161px"  Chk=1 alt="请输入供应商名称！" >**</td>
-							<td class=t1 nowrap>供应商简称</td><td class=t2><input name="strShortName" style="HEIGHT: 22px; WIDTH: 161px"  Chk=1 alt="请输入供应商简称！">**</td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>法人代表</td><td class=t2><INPUT maxLength=10 name="strManager" style="HEIGHT: 22px; WIDTH: 161px" Chk=1 alt="请输入法人代表！">**</td>
-							<td class=t1 nowrap>供应商证书编号</td><td class=t2><INPUT maxLength=50 name="strCert" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>地&nbsp;&nbsp;&nbsp;&nbsp;址</td><td class=t2><input maxLength="50" name="strAddr" style="HEIGHT: 22px; WIDTH: 161px"  Chk=1 alt="请输入地址！" >**</td>
-							<td class=t1 nowrap>邮&nbsp;&nbsp;&nbsp;&nbsp;编</td><td class=t2><input maxLength="6" name="strZip" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>注册资金</td><td class=t2><input maxLength="10" name="strFinancing"  style="HEIGHT: 22px; WIDTH: 161px">(元)</td>
-							<td class=t1 nowrap>联&nbsp;系&nbsp;人</td><td class=t2><input maxLength="10" name="strContact" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>电&nbsp;&nbsp;&nbsp;&nbsp;话</td><td class=t2><input maxLength="15" name="strTel" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>传&nbsp;&nbsp;&nbsp;&nbsp;真</td><td class=t2><input maxLength="15" name="strFax" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>电子邮箱</td><td class=t2><input maxLength="40" name="strEmail" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>网站地址</td><td class=t2><input maxLength="40" name="strUrl" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>公司性质</td><td class=t2><select name="intCorpChara" style="HEIGHT: 22px; WIDTH: 161px">
+                        <tr class="t2" >
+                            <td align=center><input type="checkbox" name="p_orderno" value="1000201011133305"></td>
+                            <td >1</td>
+                            <td >W64001005000<br></td>
 
-							<OPTION value="1">国有企业</OPTION>
+                            <td >晶振(HC-49U-500K-0.005%)<br></td>
 
-							<OPTION value="2">集体企业</OPTION>
+                            <td >有<br></td>
+                        </tr>
 
-							<OPTION value="3">股份合作企业</OPTION>
+                        <tr class="t2" >
+                            <td align=center><input type="checkbox" name="p_orderno" value="1000201011133272"></td>
+                            <td >2</td>
+                            <td >W64001005000<br></td>
 
-							<OPTION value="4">国有联营企业</OPTION>
+                            <td >晶振(HC-49U-500K-0.005%)<br></td>
 
-							<OPTION value="5">集体联营企业</OPTION>
+                            <td >无<br></td>
 
-							<OPTION value="6">国有与集体联营企业</OPTION>
+                        </tr>
 
-							<OPTION value="7">其他联营企业</OPTION>
+                        <tr class="t2" >
+                            <td align=center><input type="checkbox" name="p_orderno" value="1000201011133262"></td>
+                            <td >3</td>
+                            <td >W64001005000<br></td>
 
-							<OPTION value="8">国有独资公司</OPTION>
+                            <td >晶振(HC-49U-500K-0.005%)<br></td>
 
-							<OPTION value="9">有限责任公司</OPTION>
+                            <td >有<br></td>
 
-							<OPTION value="10">股份有限公司</OPTION>
+                        </tr>
 
-							<OPTION value="11">私营独资企业</OPTION>
+                    </form></center></table></td></tr></table>
 
-							<OPTION value="12">私营合伙企业</OPTION>
+<input type="hidden" name="p_type" value="">
+<p align=center>
+    <input type=button  value="全选/取消" onClick="select_check(document.form)">
+    <input type=button  value="确定/关闭窗口" onClick="submit_form(document.form,4)">
 
-							<OPTION value="13">私营有限责任公司</OPTION>
-
-							<OPTION value="14">私营股份有限公司</OPTION>
-
-							<OPTION value="15">其他企业</OPTION>
-
-							<OPTION value="16">合资经营企业（港或澳、台资)</OPTION>
-
-							<OPTION value="17">合作经营企业（港或澳、台资)</OPTION>
-
-							<OPTION value="18">港、澳、台商独资经营企业</OPTION>
-
-							<OPTION value="19">港、澳、台商投资股份有限公司</OPTION>
-
-							<OPTION value="20">中外合资经营企业</OPTION>
-
-							<OPTION value="21">中外合作经营企业</OPTION>
-
-						</select></td>
-							<td class=t1 nowrap>认证状况</td><td class=t2><input maxLength="30" name="strCertStatus" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>开户银行</td><td class=t2><input name="strBank" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>帐&nbsp;&nbsp;&nbsp;&nbsp;号</td><td class=t2><input maxLength="20" name="strAccount" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>税&nbsp;&nbsp;&nbsp;&nbsp;号</td><td class=t2><input maxLength="20" name="strTax" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>银行信誉等级证书 </td><td class=t2><input maxLength="20" name="strBankcert" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-
-					</table></td></tr></table>
-
-		<p align=center>
-			<!-- <INPUT type=button value="保存/填写注册信息" onClick="subback()" id=button1 name=button1> -->
-			<INPUT type=button value="保存/填写注册信息" onClick="subback()" id="button1" name=button1>
-			<INPUT type=button value="清 除" onClick="form.reset()" id="button2" name=button1>
-			<INPUT type=reset value="返 回" onClick="history.back()" id=reset1 name=reset1>
-		</P>
-	</form>
-</center></body>
+    <input type=button  value="放入待录入产品目录" onClick="submit_form(document.form,1)">
+</p>
+</form>
+</body>
 </html>
+<script language="javascript">
+    function OrderPrint()
+    {
+        //  window.open("Order_Print.ASP,","toolbar=0,resizable=yes,location=0,status=0,menubar=1,scrollbars=1,width=800,height=600,left=0,top=0");
+        window.open("Order_Print.ASP");
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+

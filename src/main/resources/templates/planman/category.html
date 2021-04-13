@@ -1,106 +1,113 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-		<title>ËùÓĞÔ­²ÄÁÏÀà±ğ</title>
-
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link href="css/default.css" rel="stylesheet" type="text/css" />
-		<script>
-			function save1(){
-				alert('ÀàĞÍÃû³Æ Ğ¾Æ¬||ÀàĞÍµÄÃèÊö µçÄÔµÄĞ¾Æ¬ Ìí¼Ó³É¹¦£¡£¡');
-				var al=document.getElementById("aaa");
-				
-				al.innerHTML="<tr><td><input type='checkbox' name='num' value='' /></td><td><div align='center'>Ğ¾Æ¬</div></td><td>";
-				}
-			function addData(){
-				//save1();
-				var name = categoryForm.categoryName.value;
-				var des = categoryForm.descn.value;
-				var objTable = document.getElementById("mytable");
-				objTable.insertRow().insertCell().innerText="200701001";
-				
-				var lastIndex=objTable.rows.length;
-				alert(lastIndex);
-				objTable.rows[lastIndex-1].insertCell().innerText=name;
-				alert(lastIndex);
-				objTable.rows[lastIndex-1].insertCell().innerText=des;
-				alert(lastIndex);
-				objTable.rows[lastIndex-1].insertCell().innerText="sdfjsd";
-				objTable.rows[lastIndex-1].insertCell().innerText="sdiojsd";
-			}
-		</script>
-        <style type="text/css">
-<!--
-.STYLE2 {color: #FFFFFF}
--->
-        </style>
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('æ‰€æœ‰åŸææ–™ç±»åˆ«')}">
 </head>
-	<body>
-		<div class="pageTitle">
-			&nbsp; ¹©Ó¦ÉÌ²ÄÁÏÀà±ğ²éÑ¯
-		</div>
-		<div class="list">
-			<div class="listTopOperation">
-				<div class="select">
-				<form action="" method="post">
-						²ÄÁÏÀàĞÍÃû³Æ£º
-						  <input type="text" name="">
-						&nbsp;
-						<button type="submit">
-							²éÑ¯
-						</button>
-				  </form>
-				</jodd:form>
-				</div>
-			</div>
+<title>æ‰€æœ‰åŸææ–™ç±»åˆ«</title>
 
-			<form action="" method="post"id="myform" onsubmit="">
+<link rel="stylesheet" type="text/css" href="css/default.css"/>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link href="css/default.css" rel="stylesheet" type="text/css"/>
+<script>
+    function save1() {
+        alert('ç±»å‹åç§° èŠ¯ç‰‡||ç±»å‹çš„æè¿° ç”µè„‘çš„èŠ¯ç‰‡ æ·»åŠ æˆåŠŸï¼ï¼');
+        var al = document.getElementById("aaa");
 
-				<div>
-					<table id="mytable" border="0" cellspacing="1" cellpadding="0"
-						width="100%">
-						<thead>
-							<tr>
-								<th width="30px;"><span class="STYLE2">
-								  Ñ¡Ôñ								</span></th>
-								<th><span class="STYLE2">
-								  ÀàĞÍ±àºÅ								</span></th>
-								<th><span class="STYLE2">
-								  Ãû³Æ								</span></th>
-								
-								<th><span class="STYLE2"> ¹©Ó¦ÉÌÀà±ğ </span></th>
-								<th><span class="STYLE2">
-								  Í³Ò»Àà±ğ±àºÅ</span></th>
-							</tr>
-						</thead>
-						
-						<tbody id="_list_Tbody">
-						
-							        <tr>
-									<td>
-										<input type="checkbox" name="num" value="" />									</td>
-									<td align="center">
-									  <a href="#" onclick="alert('Ïà¶ÔÓ¦µÄ²úÆ·ĞÅÏ¢!')">adasdasf</a>				</td>
-									<td align="center">
-									  asfasf</td>
-									
-									<td align="center"> Î´Öª </td>
-									<td align="center">
-									  w2007010011</td>
-								</tr>
-								<div id="aaa">								</div>
-								
-						</tbody>
-					</table>
-					<br>
-					<div class="listBottomOperation">
-				  ·ÖÒ³ĞÅÏ¢ÏÔÊ¾
-			        </div>
-              </div>
-			</form>
-		</div>
-		
-	</body>
+        al.innerHTML = "<tr><td><input type='checkbox' name='num' value='' /></td><td><div align='center'>èŠ¯ç‰‡</div></td><td>";
+    }
+
+    function addData() {
+        //save1();
+        var name = categoryForm.categoryName.value;
+        var des = categoryForm.descn.value;
+        var objTable = document.getElementById("mytable");
+        objTable.insertRow().insertCell().innerText = "200701001";
+
+        var lastIndex = objTable.rows.length;
+        alert(lastIndex);
+        objTable.rows[lastIndex - 1].insertCell().innerText = name;
+        alert(lastIndex);
+        objTable.rows[lastIndex - 1].insertCell().innerText = des;
+        alert(lastIndex);
+        objTable.rows[lastIndex - 1].insertCell().innerText = "sdfjsd";
+        objTable.rows[lastIndex - 1].insertCell().innerText = "sdiojsd";
+    }
+</script>
+<style type="text/css">
+    <!--
+    .STYLE2 {
+        color: #FFFFFF
+    }
+
+    -->
+</style>
+</head>
+<body>
+<div class="pageTitle">
+    &nbsp; ä¾›åº”å•†ææ–™ç±»åˆ«æŸ¥è¯¢
+</div>
+<div class="list">
+    <div class="listTopOperation">
+        <div class="select">
+            <form action="" method="post">
+                ææ–™ç±»å‹åç§°ï¼š
+                <input type="text" name="">
+                &nbsp;
+                <button type="submit">
+                    æŸ¥è¯¢
+                </button>
+            </form>
+            </jodd:form>
+        </div>
+    </div>
+
+    <form action="" method="post" id="myform" onsubmit="">
+
+        <div>
+            <table id="mytable" border="0" cellspacing="1" cellpadding="0"
+                   width="100%">
+                <thead>
+                <tr>
+                    <th width="30px;"><span class="STYLE2">
+								  é€‰æ‹©								</span></th>
+                    <th><span class="STYLE2">
+								  ç±»å‹ç¼–å·								</span></th>
+                    <th><span class="STYLE2">
+								  åç§°								</span></th>
+
+                    <th><span class="STYLE2"> ä¾›åº”å•†ç±»åˆ« </span></th>
+                    <th><span class="STYLE2">
+								  ç»Ÿä¸€ç±»åˆ«ç¼–å·</span></th>
+                </tr>
+                </thead>
+
+                <tbody id="_list_Tbody">
+
+                <tr>
+                    <td>
+                        <input type="checkbox" name="num" value=""/></td>
+                    <td align="center">
+                        <a href="#" onclick="alert('ç›¸å¯¹åº”çš„äº§å“ä¿¡æ¯!')">adasdasf</a></td>
+                    <td align="center">
+                        asfasf
+                    </td>
+
+                    <td align="center"> æœªçŸ¥</td>
+                    <td align="center">
+                        w2007010011
+                    </td>
+                </tr>
+                <div id="aaa"></div>
+
+                </tbody>
+            </table>
+            <br>
+            <div class="listBottomOperation">
+                åˆ†é¡µä¿¡æ¯æ˜¾ç¤º
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
 </html>
 

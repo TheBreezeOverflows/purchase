@@ -175,7 +175,6 @@
                 }
             }
         }
-        alert("临时供应商注册 成功,请进行供应商会员注册！");
         window.document.forms[0].submit();
         return true;
     }
@@ -217,121 +216,93 @@
 
 
 <html>
-<link rel="stylesheet" href="css/style.css">
 <head>
-	<title>临时供应商注册</title>
-	<script language=javascript>
-        function subback()
-        {
-
-            form.but.value ="add";
-            CheckAll();
-        }
-	</script>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+    <meta name="ProgId" content="FrontPage.Editor.Document">
+    <link rel="stylesheet" href="css/style.css">
+    <title>操作情况记录</title>
 </head>
 <body>
 <center>
-	<form name=form action="supply2"  method="post">
-		<input type="hidden" name="p_Enquireno" value="100020101348014">
-		<input type=hidden name=but value="ture">
+    <form name="form" action method="post">
 
-		<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
-			<tr>
-				<td>
-					<table cellpadding="3" cellspacing="1" border="0" width="100%">
-						<tr bgcolor="#ffffff">
-							<td width="100%" colspan="20" bgcolor="#ffffff" align=center height=22><B><H2><font  color=#0070C0 >临时供应商注册</font></H2></B></td>
-						</tr>
+        <h2><font color="#0070C0">操作情况记录</font></h2>
 
-						<tr>
-							<td class=t1 nowrap >供应商名称</td><td class=t2><INPUT maxLength=50 name="strCorpName" style="HEIGHT: 22px; WIDTH: 161px"  Chk=1 alt="请输入供应商名称！" >**</td>
-							<td class=t1 nowrap>供应商简称</td><td class=t2><input name="strShortName" style="HEIGHT: 22px; WIDTH: 161px"  Chk=1 alt="请输入供应商简称！">**</td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>法人代表</td><td class=t2><INPUT maxLength=10 name="strManager" style="HEIGHT: 22px; WIDTH: 161px" Chk=1 alt="请输入法人代表！">**</td>
-							<td class=t1 nowrap>供应商证书编号</td><td class=t2><INPUT maxLength=50 name="strCert" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>地&nbsp;&nbsp;&nbsp;&nbsp;址</td><td class=t2><input maxLength="50" name="strAddr" style="HEIGHT: 22px; WIDTH: 161px"  Chk=1 alt="请输入地址！" >**</td>
-							<td class=t1 nowrap>邮&nbsp;&nbsp;&nbsp;&nbsp;编</td><td class=t2><input maxLength="6" name="strZip" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>注册资金</td><td class=t2><input maxLength="10" name="strFinancing"  style="HEIGHT: 22px; WIDTH: 161px">(元)</td>
-							<td class=t1 nowrap>联&nbsp;系&nbsp;人</td><td class=t2><input maxLength="10" name="strContact" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>电&nbsp;&nbsp;&nbsp;&nbsp;话</td><td class=t2><input maxLength="15" name="strTel" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>传&nbsp;&nbsp;&nbsp;&nbsp;真</td><td class=t2><input maxLength="15" name="strFax" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>电子邮箱</td><td class=t2><input maxLength="40" name="strEmail" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>网站地址</td><td class=t2><input maxLength="40" name="strUrl" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>公司性质</td><td class=t2><select name="intCorpChara" style="HEIGHT: 22px; WIDTH: 161px">
+        <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
+            <tr>
+                <td>
+                    <table cellpadding="3" cellspacing="1" border="0" width="100%">
 
-							<OPTION value="1">国有企业</OPTION>
+                        <tr class="t1">
+                            <td nowrap align="center">序号</td>
+                            <td nowrap align="center">操作者</td>
+                            <td nowrap align="center">所属部门</td>
+                            <td nowrap align="center">用户类型</td>
+                            <td nowrap align="center">操作动作</td>
+                            <td nowrap align="center">操作时间</td>
+                        </tr>
 
-							<OPTION value="2">集体企业</OPTION>
+                        <tr class="t2">
+                            <td>1</td>
+                            <td>杨春<br></td>
+                            <td>采购部<br></td>
+                            <td>计划员<br></td>
+                            <td>录入需求计划<br></td>
+                            <td>2010-1-7 15:36:55<br></td>
+                        </tr>
 
-							<OPTION value="3">股份合作企业</OPTION>
+                        <tr class="t2">
+                            <td>2</td>
+                            <td>杨春<br></td>
+                            <td>采购部<br></td>
+                            <td>计划员<br></td>
+                            <td>修改需求计划<br></td>
+                            <td>2010-1-7 15:39:15<br></td>
+                        </tr>
 
-							<OPTION value="4">国有联营企业</OPTION>
+                        <tr class="t2">
+                            <td>3</td>
+                            <td>杨春<br></td>
+                            <td>采购部<br></td>
+                            <td>计划员<br></td>
+                            <td>确认需求计划<br></td>
+                            <td>2010-1-7 15:43:35<br></td>
+                        </tr>
 
-							<OPTION value="5">集体联营企业</OPTION>
+                        <tr class="t2">
+                            <td>4</td>
+                            <td>杨春<br></td>
+                            <td>采购部<br></td>
+                            <td>计划员<br></td>
+                            <td>编制采购计划<br></td>
+                            <td>2010-1-8 16:52:40<br></td>
+                        </tr>
 
-							<OPTION value="6">国有与集体联营企业</OPTION>
+                        <tr class="t2">
+                            <td>5</td>
+                            <td>杨春<br></td>
+                            <td>采购部<br></td>
+                            <td>计划员<br></td>
+                            <td>报批采购计划<br></td>
+                            <td>2010-1-8 16:56:19<br></td>
+                        </tr>
 
-							<OPTION value="7">其他联营企业</OPTION>
+                        <tr class="t2">
+                            <td>6</td>
+                            <td>张惠<br></td>
+                            <td>采购部<br></td>
+                            <td>部门领导<br></td>
+                            <td>采购计划通过审批<br></td>
+                            <td>2010-1-10 10:19:04<br></td>
+                        </tr>
 
-							<OPTION value="8">国有独资公司</OPTION>
+                    </table></td></tr></table>
 
-							<OPTION value="9">有限责任公司</OPTION>
-
-							<OPTION value="10">股份有限公司</OPTION>
-
-							<OPTION value="11">私营独资企业</OPTION>
-
-							<OPTION value="12">私营合伙企业</OPTION>
-
-							<OPTION value="13">私营有限责任公司</OPTION>
-
-							<OPTION value="14">私营股份有限公司</OPTION>
-
-							<OPTION value="15">其他企业</OPTION>
-
-							<OPTION value="16">合资经营企业（港或澳、台资)</OPTION>
-
-							<OPTION value="17">合作经营企业（港或澳、台资)</OPTION>
-
-							<OPTION value="18">港、澳、台商独资经营企业</OPTION>
-
-							<OPTION value="19">港、澳、台商投资股份有限公司</OPTION>
-
-							<OPTION value="20">中外合资经营企业</OPTION>
-
-							<OPTION value="21">中外合作经营企业</OPTION>
-
-						</select></td>
-							<td class=t1 nowrap>认证状况</td><td class=t2><input maxLength="30" name="strCertStatus" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>开户银行</td><td class=t2><input name="strBank" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>帐&nbsp;&nbsp;&nbsp;&nbsp;号</td><td class=t2><input maxLength="20" name="strAccount" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-						</tr>
-						<tr>
-							<td class=t1 nowrap>税&nbsp;&nbsp;&nbsp;&nbsp;号</td><td class=t2><input maxLength="20" name="strTax" style="HEIGHT: 22px; WIDTH: 161px" ></td>
-							<td class=t1 nowrap>银行信誉等级证书 </td><td class=t2><input maxLength="20" name="strBankcert" style="HEIGHT: 22px; WIDTH: 161px"></td>
-						</tr>
-
-					</table></td></tr></table>
-
-		<p align=center>
-			<!-- <INPUT type=button value="保存/填写注册信息" onClick="subback()" id=button1 name=button1> -->
-			<INPUT type=button value="保存/填写注册信息" onClick="subback()" id="button1" name=button1>
-			<INPUT type=button value="清 除" onClick="form.reset()" id="button2" name=button1>
-			<INPUT type=reset value="返 回" onClick="history.back()" id=reset1 name=reset1>
-		</P>
-	</form>
+        <p align="center">
+            <input type="button" value="关闭窗口" onclick="window.close()">
+        </p>
+    </form>
 </center></body>
 </html>
