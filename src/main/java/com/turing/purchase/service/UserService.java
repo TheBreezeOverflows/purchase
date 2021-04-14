@@ -1,11 +1,12 @@
-package moabi.lsp.lsplsp.service;
+package com.turing.purchase.service;
 
-import moabi.lsp.lsplsp.entity.user;
+
+import com.turing.purchase.entity.SysUsers;
 
 public interface UserService {
     //注册
-    void regist(user user);
+    void regist(SysUsers user);
 
     //查询
-    user findByName(String name);
+    SysUsers findByName(String name);
 }

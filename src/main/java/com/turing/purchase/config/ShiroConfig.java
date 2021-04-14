@@ -25,11 +25,21 @@ public class ShiroConfig  {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
         //创建一个Map用来保存拦截器
-        Map<String,String> map = new HashMap<>();
+       Map<String,String> map = new HashMap<>();
         //配置公共资源（anon）---不用认证即可访问
-        map.put("/login", "anon");
-        map.put("/regist", "anon");
-
+        map.put("/*.js", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/bootstrap/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/contractmanager/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/css/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/easyui/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/imgs/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/js/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/mycss/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/planman/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/queryandqueto/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/**/supplyman/**", "anon");//anon表示不需要认证和授权就能访问
+        map.put("/login", "anon");//登录
+        map.put("/regist", "anon");//注册
         //配置受限资源（authc）---需要认证和授权才能访问
         map.put("/**", "authc");//把拦截所有的过滤器放到最后
 

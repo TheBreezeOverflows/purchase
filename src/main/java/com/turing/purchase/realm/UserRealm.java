@@ -1,8 +1,8 @@
 package com.turing.purchase.realm;
 
 
-import moabi.lsp.lsplsp.entity.user;
-import moabi.lsp.lsplsp.service.UserService;
+import com.turing.purchase.entity.SysUsers;
+import com.turing.purchase.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,7 +17,7 @@ import org.springframework.util.ObjectUtils;
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService userService;
+    private UserService UserService;
 
 
     /**
@@ -43,11 +43,11 @@ public class UserRealm extends AuthorizingRealm {
         //获取用户名
         System.out.println("用户名"+Token.getPrincipal());
         String uname=(String) Token.getPrincipal();
-        user byuser = userService.findByName(uname);
-        System.out.println(byuser.getName()+"密码："+byuser.getPwd()+"盐值："+byuser.getSalt());
-
+        SysUsers byuser = UserService.findByName(uname);
+        //判断是否有该用户
         if (!ObjectUtils.isEmpty(byuser)){
-            return new SimpleAuthenticationInfo(byuser.getName(),byuser.getPwd(), ByteSource.Util.bytes(byuser.getSalt()),this.getName());
+            System.out.println("用户名："+byuser.getLoginId()+"密码："+byuser.getPassword()+"状态："+byuser.getStatus());
+            return new SimpleAuthenticationInfo(byuser.getLoginId(),byuser.getPassword(), this.getName());
         }
         return null;
 

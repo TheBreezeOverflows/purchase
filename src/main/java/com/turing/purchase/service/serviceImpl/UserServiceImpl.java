@@ -1,42 +1,41 @@
-package moabi.lsp.lsplsp.service.serviceImpl;
+package com.turing.purchase.service.serviceImpl;
 
-import moabi.lsp.lsplsp.entity.user;
-import moabi.lsp.lsplsp.mapper.userMapper;
-import moabi.lsp.lsplsp.service.UserService;
-import moabi.lsp.lsplsp.utils.SaltUtils;
+import com.turing.purchase.entity.SysUsers;
+import com.turing.purchase.entity.SysUsersExample;
+import com.turing.purchase.mapper.SysUsersMapper;
+import com.turing.purchase.service.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     //@Resource
-    @Autowired
-    private userMapper userMapper;
+    @Autowired(required = false)
+    private SysUsersMapper sysUsersMapper;
     //注册
     @Override
-    public void regist(user use) {
-        //获取盐值
-        String salt = SaltUtils.getSalt(10);
-        //保存盐值
-        use.setSalt(salt);
-        System.out.println("盐值："+salt);
-        //对用户密码进行加密
-        Md5Hash md5Hash = new Md5Hash(use.getPwd(), salt, 128);
-        System.out.println("加密用户密码："+md5Hash.toHex());
-        use.setPwd(md5Hash.toHex());
-        System.out.println("保存加密密码成功：");
-        userMapper.adduser(use);
+    public void regist(SysUsers use) {
+        sysUsersMapper.insert(use);
     }
 
     //登录
     @Override
-    public user findByName(String name) {
-
-
-        return userMapper.finByname(name);
+    public SysUsers findByName(String name) {
+        System.out.println("用户："+name);
+        SysUsersExample example =new SysUsersExample();
+        SysUsersExample.Criteria create = example.createCriteria();
+        create.andLoginIdEqualTo(name);
+        List<SysUsers> sysUsers = sysUsersMapper.selectByExample(example);
+        System.out.println("获取到的用户集合有:"+sysUsers.size());
+        if (sysUsers.size()>0){
+            System.out.println("是登录");
+        return sysUsers.get(0);
+        }
+        return null;
     }
 }
