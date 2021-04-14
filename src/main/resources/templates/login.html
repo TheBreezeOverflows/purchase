@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{common::header('登录')}"></head>
 </head>
-<body>
-    <div style="border-radius: 5px;padding: 0px 2px;width: 300px;height: 400px;margin: 50px auto;background-color: #1b6d85;box-shadow: 2px 2px #97a6ab;">
-        <form th:action="@{/user/userLogin}" method="post">
+<body style="background-color: #1b6d8555;">
+    <div style="border-radius: 5px;padding: 0px 2px;width: 300px;height: 400px;margin: 50px auto;background-color: #1b6d85;box-shadow: 5px 5px #00000020;">
+        <form id="ff" method="post">
             <h3 style="text-align: center;color:white;padding: 8px 20px 0px;line-height: 30px">用户登录</h3>
             <div style="padding: 10px 10px;width: 296px;height: 350px;background-color: white;border-radius: 5px;">
                 <h3 style="padding-bottom:10px;text-align: center;color: #0000FF;">务资采购电子商务系统</h3>
@@ -13,11 +14,11 @@
                 <div class="form-group">
                     <input type="password" name="uPassword" class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
                 </div>
-                <!--<select class="form-control">
+                <select class="form-control">
                     <option value="0">请选择用户类型...</option>
-                </select>-->
+                </select>
                 <br>
-                <input style="margin: 0px 10px;width: 250px;height: 40px"  class="btn btn-primary" type="submit" value="登录">
+                <button style="margin: 0px 10px;width: 250px;height: 40px" type="button" class="btn btn-primary" onclick="login()">登录</button>
                 <p style="text-align: center;padding-top: 20px">还没有账号？去<a th:href="@{/regist}">注册</a></p>
             </div>
         </form>
