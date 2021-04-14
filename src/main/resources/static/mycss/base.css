@@ -1,0 +1,22 @@
+table{
+    font-size: 14px;
+}
+
+.t2 {
+    background-color: #f2f8ff;
+    text-align: center;
+}
+
+.t1 {
+    background-color: rgb(153, 204, 255);
+}
+
+mybtn,.myp input {
+    width: 64px;
+    height: 20px;
+    font-size: 10px;
+}
+
+* {
+    text-align: center;
+}

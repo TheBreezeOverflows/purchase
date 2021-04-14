@@ -1,77 +1,123 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>¹©Ó¦ÉÌ²úÆ·ĞÅÏ¢</TITLE>
-<SCRIPT language=JAVASCRIPT> 
-function prosave(){
-	window.document.location="category_save.html";
-}
-function mydelete(obj)
-{
-	if(confirm("ÄúÈ·¶¨É¾³ı±¾ÉÌÆ·£¿"))
-	{	
-		var myobj=obj.parentNode.parentNode.parentNode;
-		var myrow=obj.parentNode.parentNode;
-		myobj.deleteRow(myrow.rowIndex);
-	}
-}
-</SCRIPT>
- 
-<META http-equiv=Content-Language content=zh-cn>
-<META http-equiv=Content-Type content="text/html; charset=gb2312">
-<META content="MSHTML 6.00.2900.5626" name=GENERATOR>
-<META content=FrontPage.Editor.Document name=ProgId><LINK 
-href="css/style.css" rel=stylesheet>
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--jquery-->
+    <script th:src="@{/jquery.min.js}"></script>
+
+    <!--bootstrap-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!--easyui-->
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/easyui/locale/easyui-lang-zh_CN.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/mycss/base.css}">
+
+    <style type="text/css">
+        table input{
+            font-size: 12px;
+            height: 18px;
+        }
+        .mylittelbtn{
+            width: 50px;
+            height: 20px;
+            vertical-align: middle;
+            line-height: 12px;
+        }
+    </style>
+
+    <SCRIPT language=JAVASCRIPT>
+        function prosave() {
+            window.document.location = "category_save";
+        }
+
+        function mydelete(obj) {
+            if (confirm("æ‚¨ç¡®å®šåˆ é™¤æœ¬å•†å“ï¼Ÿ")) {
+                var myobj = obj.parentNode.parentNode.parentNode;
+                var myrow = obj.parentNode.parentNode;
+                myobj.deleteRow(myrow.rowIndex);
+            }
+        }
+    </SCRIPT>
+
 </HEAD>
 <BODY>
 <CENTER>
-<FORM name=form action="" method=post>
-<H2><FONT color=#0070c0>¹©Ó¦ÉÌ²ÄÁÏÀàĞÍÎ¬»¤</FONT></H2>
-<TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff 
-borderColorLight=#ffffff border=0>
-  <TBODY>
-  <TR>
-    <TD>
-      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
-        <TBODY>
-        <TR>
-          <TD noWrap align=middle>ÀàĞÍ±àºÅ£º<INPUT maxLength=15 size=15 
-            name=p_prodno>&nbsp;&nbsp; ÀàĞÍÃû³Æ£º<INPUT maxLength=15 size=15 
-            name=p_prodname>&nbsp;&nbsp; <INPUT id=button2 onclick=submit_form_cx() type=button value=²éÑ¯ name=button2></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><FORM 
-name="form1" action="" method="Post">
+    <FORM name=form action="" method=post>
+        <H4><FONT color=#0070c0 style="font-weight: bold">ä¾›åº”å•†ææ–™ç±»å‹ç»´æŠ¤</FONT></H4>
+        <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff
+               borderColorLight=#ffffff border=0>
+            <TBODY>
+            <TR>
+                <TD>
+                    <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
+                        <TBODY>
+                        <TR>
+                            <TD noWrap align=middle>
+                                ç±»å‹ç¼–å·ï¼š<INPUT maxLength=15 size=15 name=p_prodno>&nbsp;&nbsp;
+                                ç±»å‹åç§°ï¼š<INPUT maxLength=15 size=15 name=p_prodname>&nbsp;&nbsp;
+                                <INPUT class="mylittelbtn" id=button2 onclick=submit_form_cx() type=button value=æŸ¥è¯¢ name=button2>
+                            </TD>
+                        </TR>
+                        </TBODY>
+                    </TABLE>
+                </TD>
+            </TR>
+            </TBODY>
+        </TABLE>
+        <FORM name="form1" action="" method="Post">
+            <TABLE style="LINE-HEIGHT: 30px" width="100%"
+                   bgColor=#336699 borderColorLight=#006699>
+                <TBODY>
+                <TR>
+                    <TD>
+                        <TABLE class="table table-bordered table-hover table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
+                            <TBODY>
+                            <tr class=t2>
+                                <td colspan="11"><input class="mylittelbtn" style="float: left" type="button" value="å¢åŠ " onclick="prosave();"/></td>
+                            </tr>
+                            <TR class=t1 style="background-color: rgb(153, 204, 255);">
+                                <TD noWrap align=middle>åºå·</TD>
+                                <TD noWrap align=middle>ç±»å‹ç¼–å·</TD>
+                                <TD noWrap align=middle>ç±»å‹åç§°</TD>
+                                <TD noWrap align=middle>ç±»å‹æè¿°</TD>
+                                <TD noWrap align=middle>æ“çºµ</TD>
+                            </TR>
+                            <TR class=t2>
+                                <TD align=middle>2</TD>
+                                <TD align=middle>001005000<BR></TD>
+                                <TD>æ™¶æŒ¯<BR></TD>
+                                <TD align=right>èŠ¯ç‰‡</TD>
+                                <TD align=center><a href="category_update">ä¿®æ”¹</a>&nbsp;&nbsp;<a
+                                        onclick="mydelete(this)" style="cursor:hand">åˆ é™¤</a></TD>
+                            </TR>
+                            <tr class=t2>
+                                <td colspan="11">
+                                    <CENTER><FONT color=#000064>â—†&nbsp;</FONT><FONT color=#000064>é¦–é¡µ
+                                        ä¸Šä¸€é¡µ</FONT>&nbsp;<A
+                                            href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2"><FONT
+                                            color=#0000be>ä¸‹ä¸€é¡µ</FONT></A>&nbsp;<A
+                                            href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4"><FONT
+                                            color=#0000be>å°¾é¡µ</FONT></A><FONT color=#000064>&nbsp;å…± 40 ä¸ªéœ€æ±‚è®¡åˆ’ æ¯é¡µ10
+                                        ä¸ªéœ€æ±‚è®¡åˆ’</FONT><FONT color=#000064>&nbsp;é¡µæ¬¡:<FONT
+                                            color=blue>1</FONT>/4é¡µ</FONT><FONT color=#000064>&nbsp;â—†&nbsp;</FONT>
+                                    </CENTER></td>
+                            </tr>
+                            </TBODY>
+                        </TABLE>
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
 
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" 
-bgColor=#336699 borderColorLight=#006699 border=0>
-  <TBODY>
-  <TR>
-    <TD>
-      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
-        <TBODY>
-		<tr class=t2>
-			<td colspan="11"><input type="button" value="Ôö¼Ó" onclick="prosave();"/></td>
-			
-		</tr>
-        <TR class=t1>
-          <TD noWrap align=middle>ĞòºÅ</TD>
-          <TD noWrap align=middle>ÀàĞÍ±àºÅ</TD>
-          <TD noWrap align=middle>ÀàĞÍÃû³Æ</TD>
-          <TD noWrap align=middle>ÀàĞÍÃèÊö</TD>
-		  <TD noWrap align=middle>²Ù×İ</TD></TR>
-        <TR class=t2>
-          <TD align=middle>2</TD>
-          <TD align=middle>001005000<BR></TD>
-          <TD>¾§Õñ<BR></TD>
-          <TD align=right>Ğ¾Æ¬</TD>
-		  <TD align=center><a href="category_update.html">ĞŞ¸Ä</a>&nbsp;&nbsp;<a onclick="mydelete(this)" style="cursor:hand">É¾³ı</a></TD>
-		  </TR>
-		<tr class=t2>
-			<td colspan="11"><CENTER><FONT color=#000064>¡ô&nbsp;</FONT><FONT color=#000064>Ê×Ò³ 
-ÉÏÒ»Ò³</FONT>&nbsp;<A 
-href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2"><FONT 
-color=#0000be>ÏÂÒ»Ò³</FONT></A>&nbsp;<A 
-href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4"><FONT 
-color=#0000be>Î²Ò³</FONT></A><FONT color=#000064>&nbsp;¹² 40 ¸öĞèÇó¼Æ»® Ã¿Ò³10 
-¸öĞèÇó¼Æ»®</FONT><FONT color=#000064>&nbsp;Ò³´Î:<FONT 
-color=blue>1</FONT>/4Ò³</FONT><FONT color=#000064>&nbsp;¡ô&nbsp;</FONT> </td>
-		</tr>
-       </TBODY></TABLE></TD></TR></TBODY></TABLE>
-	  
-</FORM></CENTER></CENTER></BODY></HTML>
+        </FORM>
+    </FORM></CENTER>
+</CENTER></BODY>
+</HTML>

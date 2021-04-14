@@ -2,7 +2,6 @@ package com.turing.purchase.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,7 +19,24 @@ public class WebConfig implements WebMvcConfigurer {
 
         //供应商平台
         registry.addViewController("/supplymanLook").setViewName("supplyman/supplymanLook");
+
         registry.addViewController("/supplymanPwdUpdate").setViewName("supplyman/supplymanPwdUpdate");
+
+        registry.addViewController("/goodsSelect").setViewName("supplyman/goodsSelect");
+        registry.addViewController("/product_save").setViewName("supplyman/product_save");
+        registry.addViewController("/product_update").setViewName("supplyman/product_update");
+        registry.addViewController("/category").setViewName("supplyman/category");
+        registry.addViewController("/category_save").setViewName("supplyman/category_save");
+        registry.addViewController("/category_update").setViewName("supplyman/category_update");
+
+        registry.addViewController("/Project_list").setViewName("supplyman/Project_list");
+        registry.addViewController("/修改公开求购报价书").setViewName("supplyman/修改公开求购报价书");
+
+        registry.addViewController("/Order_wbxjfa_list").setViewName("supplyman/Order_wbxjfa_list");
+        registry.addViewController("/报价历史记录").setViewName("supplyman/报价历史记录");
+
+        registry.addViewController("/ProviderConsignment").setViewName("supplyman/ProviderConsignment");
+        registry.addViewController("/contract_view").setViewName("supplyman/contract_view");
 
         /**
          * 计划员
@@ -56,5 +72,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("planman/xjfatz_xjfamx").setViewName("planman/xjfatz_xjfamx");
         registry.addViewController("planman/xjfatz_xjfamx2").setViewName("planman/xjfatz_xjfamx2");
         registry.addViewController("planman/xjfatz_xjfamx3").setViewName("planman/xjfatz_xjfamx3");
+
+
     }
 }

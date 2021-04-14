@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--jquery-->
+    <script th:src="@{/jquery.min.js}"></script>
+
+    <!--bootstrap-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!--easyui-->
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/easyui/locale/easyui-lang-zh_CN.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/mycss/base.css}">
+
+    <style type="text/css">
+        table input{
+            font-size: 12px;
+            height: 18px;
+        }
+        .mylittelbtn{
+            width: 50px;
+            height: 20px;
+            vertical-align: middle;
+            line-height: 12px;
+        }
+        a{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<FORM name=form action="" method=post>
+    <center><H4><FONT color=#0070c0 style="font-weight: bold">供应商产品信息</FONT></H4></center>
+    <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff
+           borderColorLight=#ffffff border=0>
+        <TBODY>
+        <TR>
+            <TD>
+                <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                        <TD noWrap align=middle>
+                            产品编号：<INPUT maxLength=15 size=15 name=p_prodno>&nbsp;&nbsp;
+                            产品名称：<INPUT maxLength=15 size=15 name=p_prodname>&nbsp;&nbsp;
+                            每页显示个数：
+                            <SELECT name=p_pagesize>
+                                <OPTION value=10 selected>10</OPTION>
+                                <OPTION value=20>20</OPTION>
+                                <OPTION value=30>30</OPTION>
+                                <OPTION value=50>50</OPTION>
+                                <OPTION value=100>100</OPTION>
+                                <OPTION value=4>全部</OPTION>
+                            </SELECT>
+                            排序：
+                            <SELECT name=p_orderby>
+                                <OPTION value="" selected>产品编号</OPTION>
+                                <OPTION value=1>产品名称</OPTION>
+                                <OPTION value=2>价格</OPTION>
+                                <OPTION value=2>数量</OPTION>
+                            </SELECT>
+                            <INPUT class="mylittelbtn" id=button2 onclick=submit_form_cx() type=button value=查询 name=button2>
+                        </TD>
+                    </TR>
+                    </TBODY>
+                </TABLE>
+            </TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+    <FORM name="form1" action="" method="Post">
+        <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" bgColor=#336699 borderColorLight=#006699 border=0>
+            <TBODY class="mytbody">
+            <TR>
+                <TD>
+                    <TABLE class="table table-bordered table-hover table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
+                        <TBODY>
+                        <tr class=t2>
+                            <td colspan="11">
+                                <input class="mylittelbtn" style="float: left" type="button" value="增加" onclick="prosave();"/>
+                            </td>
+                        </tr>
+                        <TR class=t1 style="background-color: rgb(153, 204, 255);">
+                            <TD noWrap align=middle>序号</TD>
+                            <TD noWrap align=middle>产品编号</TD>
+                            <TD noWrap align=middle>产品名称</TD>
+                            <TD noWrap align=middle>产品类别</TD>
+                            <TD noWrap align=middle>数量</TD>
+                            <TD noWrap align=middle>价格</TD>
+                            <TD noWrap align=middle>单位</TD>
+                            <TD noWrap align=middle>材料描述</TD>
+                            <TD noWrap align=middle>操纵</TD>
+                        </TR>
+                        <TR class=t2>
+                            <TD align=middle>2</TD>
+                            <TD align=middle>W64001005000<BR></TD>
+                            <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
+                            <TD align=right><BR></TD>
+                            <TD align=right>1<BR></TD>
+                            <TD align=right>12<BR></TD>
+                            <TD align=right>个<BR></TD>
+                            <TD align=right></TD>
+                            <TD align=center>
+                                <a href="product_update">修改</a>&nbsp;&nbsp;
+                                <a onclick="mydelete(this)" style="cursor:hand">删除</a>
+                            </TD>
+                        </TR>
+                        <TR class=t2>
+                            <TD align=middle>3</TD>
+                            <TD align=middle>W64001005000<BR></TD>
+                            <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
+                            <TD align=right><BR></TD>
+                            <TD align=right>10<BR></TD>
+                            <TD align=right>12<BR></TD>
+                            <TD align=right>个<BR></TD>
+                            <TD align=right></TD>
+                            <TD align=center>
+                                <a href="product_update">修改</a>&nbsp;&nbsp;
+                                <a onclick="mydelete(this)" style="cursor:hand">删除</a>
+                            </TD>
+                        </TR>
+                        <TR class=t2>
+                            <TD align=middle>4</TD>
+                            <TD align=middle>W64001005000<BR></TD>
+                            <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
+                            <TD align=right><BR></TD>
+                            <TD align=right>22<BR></TD>
+                            <TD align=right>55<BR></TD>
+                            <TD align=right>个<BR></TD>
+                            <TD align=right></TD>
+                            <TD align=center>
+                                <a href="product_update">修改</a>&nbsp;&nbsp;
+                                <a onclick="mydelete(this)" style="cursor:hand">删除</a>
+                            </TD>
+                        </TR>
+                        <tr class=t2>
+
+                            <td colspan="11">
+                                <center>
+                                <FONT color=#000064>◆&nbsp;</FONT>
+                                <FONT color=#000064>首页 上一页</FONT>&nbsp;
+                                <A href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2">
+                                    <FONT color=#0000be>下一页</FONT>
+                                </A>&nbsp;
+                                <A href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4">
+                                    <FONT color=#0000be>尾页</FONT>
+                                </A>
+                                <FONT color=#000064>&nbsp;共 40 个需求计划 每页10个需求计划</FONT>
+                                <FONT color=#000064>&nbsp;页次:
+                                    <FONT color=blue>1</FONT>/4页
+                                </FONT>
+                                <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
+                            </center>
+                            </td>
+                        </tr>
+                        </TBODY>
+                    </TABLE>
+                </TD>
+            </TR>
+            </TBODY>
+        </TABLE>
+
+    </FORM>
+</FORM>
+<script type="text/javascript">
+    function prosave(){
+        window.document.location="product_save";
+    }
+    function mydelete(obj)
+    {
+        if(confirm("您确定删除本商品？"))
+        {
+            var myobj=obj.parentNode.parentNode.parentNode;
+            var myrow=obj.parentNode.parentNode;
+            myobj.deleteRow(myrow.rowIndex);
+        }
+    }
+</script>
+</body>
+</html>
