@@ -18,7 +18,7 @@ function Add(SourceList,TargetList)
 	if (nIndex == -1)
 	{
 		// Process continue only if at least one item selected
-		//alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
+		//alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
 		return;
 	}
 	for (i=0;i<SourceList.length;i++)
@@ -59,7 +59,7 @@ function Remove(SelectList)
 	if (nIndex == -1)
 	{
 		// Process continue only if at least one item selected
-		//alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
+		//alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
 		return;
 	}
   while(nCount<SelectList.length)
@@ -156,7 +156,7 @@ function check_num_dot()
        {
          if (NotNumber(window.document.forms[0].elements[i].value))
          {
-            alert("ÌáÊ¾ÐÅÏ¢£º\n²»ÊÇÓÐÐ§µÄÊý×Ö£¬ÇëÖØÐÂÊäÈë¡£");
+            alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
             window.document.forms[0].elements[i].focus();
             return;
          }
@@ -168,7 +168,7 @@ function check_num_dot()
        {
          if (NotNumber(window.document.forms[0].elements[i].value))
          {
-            alert("ÌáÊ¾ÐÅÏ¢£º\n²»ÊÇÓÐÐ§µÄÊý×Ö£¬ÇëÖØÐÂÊäÈë¡£");
+            alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
             window.document.forms[0].elements[i].focus();
             return;
          }
@@ -218,12 +218,12 @@ function check_num_dot()
 <html>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
 <meta name="ProgId" content="FrontPage.Editor.Document">
 <link rel="stylesheet" href="css/style.css">
 <script Language="JavaScript" src="css/pub_Calendar.js"></script>
-<title>±àÖÆ²É¹º¼Æ»®</title>
+<title>ç¼–åˆ¶é‡‡è´­è®¡åˆ’</title>
 <SCRIPT LANGUAGE=javascript>
 function abc(){
 	var ll=document.getElementById("p_cgtype").value;
@@ -250,12 +250,12 @@ function abc(){
            document.form.p_cgtype.value==8||
            document.form.p_cgtype.value==11))
         {
-           alert("ÇëÑ¡Ôñ¹©Ó¦ÉÌ¡£");
+           alert("è¯·é€‰æ‹©ä¾›åº”å•†ã€‚");
            return;
         }
        // if (form.p_input[5].value.length>400)
        // {
-      //     alert("ËµÃ÷²»ÄÜ³¬¹ý400×Ö¡£");
+      //     alert("è¯´æ˜Žä¸èƒ½è¶…è¿‡400å­—ã€‚");
        //    return;
        // }
         for (n=0;n<document.form.p_gys_all.options.length;n++)
@@ -267,8 +267,8 @@ function abc(){
            document.form.p_gys_sel.options(n).selected=true;
         }
         document.form.p_type.value=i;
-	alert("²É¹º¼Æ»®±¨Åú³É¹¦£¡");
-	window.location.href="Project_list.htm";
+	alert("é‡‡è´­è®¡åˆ’æŠ¥æ‰¹æˆåŠŸï¼");
+	window.location.href="Project_list";
         //CheckAll();
       }
       function select_cgtype(xyprice_null)
@@ -293,7 +293,7 @@ function abc(){
         }
         if (xyprice_null=="True"&&document.form.p_cgtype.value==6)
         {
-           alert("ÌáÊ¾ÐÅÏ¢£º\nÎï×Ê¶ÔÓ¦µÄÐ­Òé¼Û¸ñÎª¿Õ¡£\nÇëÏÈÎ¬»¤¹©Ó¦ÉÌ¶ÔÓ¦Îï×ÊµÄÐ­Òé¼Û¸ñºóÔÙ±àÖÆÐ­Òé²É¹ºµÄ²É¹º¼Æ»®¡£");
+           alert("æç¤ºä¿¡æ¯ï¼š\nç‰©èµ„å¯¹åº”çš„åè®®ä»·æ ¼ä¸ºç©ºã€‚\nè¯·å…ˆç»´æŠ¤ä¾›åº”å•†å¯¹åº”ç‰©èµ„çš„åè®®ä»·æ ¼åŽå†ç¼–åˆ¶åè®®é‡‡è´­çš„é‡‡è´­è®¡åˆ’ã€‚");
            document.form.p_cgtype.value="1";
            document.form.add.disabled=true;
            document.form.del.disabled=true;
@@ -329,7 +329,7 @@ function abc(){
 <body>
 <center>
 
-    <h2><font color=#0070C0>²µ»Ø²É¹º¼Æ»®Ã÷Ï¸</font></h2>
+    <h2><font color=#0070C0>é©³å›žé‡‡è´­è®¡åˆ’æ˜Žç»†</font></h2>
 
     <form name="form" action="Project_Save.asp" method="post">
  
@@ -340,27 +340,27 @@ function abc(){
 
  <tr>
        <tr class="t1">
-<td>²É¹º¼Æ»®±àºÅ</td>
+<td>é‡‡è´­è®¡åˆ’ç¼–å·</td>
       	<td>
       	1000201001251787
       	<input type="hidden" name="p_input" value="1000201001251787">      	</td>
-<td><font color=red>²É¹º¼Æ»®Ãû³Æ</font></td>
+<td><font color=red>é‡‡è´­è®¡åˆ’åç§°</font></td>
       <td>20020055100109</td>      
 </tr>
        <tr class="t1" >
-<td>¹«Ë¾Ãû³Æ</td>
+<td>å…¬å¸åç§°</td>
       	<td>
-        ÖêÖÞÄÏ³µÊ±´úµçÆø¹É·ÝÓÐÏÞ¹«Ë¾
+        æ ªæ´²å—è½¦æ—¶ä»£ç”µæ°”è‚¡ä»½æœ‰é™å…¬å¸
       	<input type="hidden" name="p_input" value="1000">      	</td>
-<td>±àÖÆÈË</td>
+<td>ç¼–åˆ¶äºº</td>
        <td>
-       <input type="text" name="p_input" size="20"  readonly  maxlength="100" value="Ñî´º"  Chk=1 alt="ÇëÊäÈë±àÖÆÈË¡£">       </td>
+       <input type="text" name="p_input" size="20"  readonly  maxlength="100" value="æ¨æ˜¥"  Chk=1 alt="è¯·è¾“å…¥ç¼–åˆ¶äººã€‚">       </td>
 </tr>
        <tr class="t1" >
-<td>Ô¤Ëã½ð¶î(Ôª)</td>
+<td>é¢„ç®—é‡‘é¢(å…ƒ)</td>
        <td>
        <input type="text" name="p_input" size="20" maxlength="20" value="84360"  onKeyPress="check_num_dot()" Chk=3>       </td>
-<td>²É¹º¼Æ»®±àÖÆÊ±¼ä</td>
+<td>é‡‡è´­è®¡åˆ’ç¼–åˆ¶æ—¶é—´</td>
        <td>2010/01/09</td>
 </tr>
 </table></td></tr></table>
@@ -371,36 +371,36 @@ function abc(){
 <table cellpadding="3" cellspacing="1" border="0" width="100%">
 
     <tr class="t1">
-    <td nowrap align="center">ÐòºÅ</td>
-    <td nowrap align="center">Îï×Ê±àÂë</td>
-    <td nowrap align="center">Îï×ÊÃû³Æ</td>
-    <td nowrap align="center">ÊýÁ¿</td>
+    <td nowrap align="center">åºå·</td>
+    <td nowrap align="center">ç‰©èµ„ç¼–ç </td>
+    <td nowrap align="center">ç‰©èµ„åç§°</td>
+    <td nowrap align="center">æ•°é‡</td>
     
-    <td nowrap align="center">¼ÆÁ¿<br>µ¥Î»</td>
-    <td nowrap align="center">½»»õÆÚ</td> 
+    <td nowrap align="center">è®¡é‡<br>å•ä½</td>
+    <td nowrap align="center">äº¤è´§æœŸ</td> 
     
-       <td nowrap align="center">Ð­Òé¼Û¸ñ<br>£¨Ôª£©</td>
+       <td nowrap align="center">åè®®ä»·æ ¼<br>ï¼ˆå…ƒï¼‰</td>
     
-    <td nowrap align="center">Ô¤Ëã×Ü½ð¶î<br>£¨Ôª£©</td>
-    <td nowrap align="center">¼Æ»®¼Û<br>£¨Ôª/²»º¬Ë°£©</td>
+    <td nowrap align="center">é¢„ç®—æ€»é‡‘é¢<br>ï¼ˆå…ƒï¼‰</td>
+    <td nowrap align="center">è®¡åˆ’ä»·<br>ï¼ˆå…ƒ/ä¸å«ç¨Žï¼‰</td>
     <!--
-    <td nowrap align="center">Â¼ÈëÏêÏ¸<br>½»»õÇé¿ö</td>
+    <td nowrap align="center">å½•å…¥è¯¦ç»†<br>äº¤è´§æƒ…å†µ</td>
     -->
     </tr>
  
        <tr class="t2" >
        <td align=center>1</td>
        <td >W64001005001<br></td>
-       <td ><a href="../Project/print_order_detail.asp?p_type=1&p_orderno=1000201011133266&p_ordernum=1" target="_new" >¾§Õñ(HC-49U-500M-0.005%)</a><br></td>
-       <td align=right><input type="text" name="p_input2" size="20"  readonly  maxlength="100" width=30 value="222"  Chk=1 alt="ÇëÊäÈë±àÖÆÈË¡£">
+       <td ><a href="../Project/print_order_detail.asp?p_type=1&p_orderno=1000201011133266&p_ordernum=1" target="_new" >æ™¶æŒ¯(HC-49U-500M-0.005%)</a><br></td>
+       <td align=right><input type="text" name="p_input2" size="20"  readonly  maxlength="100" width=30 value="222"  Chk=1 alt="è¯·è¾“å…¥ç¼–åˆ¶äººã€‚">
          <br></td>
        
-       <td align=center>¸ö<br></td>
+       <td align=center>ä¸ª<br></td>
        <td align=center>2010/01/08<br></td>
        
-            <td nowrap align="center"><a href="Xyprice_list.asp?itemcode=W64001005001"><br></td>       
+           <td nowrap align="center"><a href="Xyprice_list.asp?itemcode=W64001005001"><br></a></td>
        
-       <td align=right><input type="text" name="p_input22" size="20"  readonly  maxlength="100" width=30 value="222"  Chk=1 alt="ÇëÊäÈë±àÖÆÈË¡£">
+       <td align=right><input type="text" name="p_input22" size="20"  readonly  maxlength="100" width=30 value="222"  Chk=1 alt="è¯·è¾“å…¥ç¼–åˆ¶äººã€‚">
          <br></td>
        <td align=right><br></td>
        <!--
@@ -416,33 +416,33 @@ function abc(){
 <table cellpadding="3" cellspacing="1" border="0" width="100%">
 
  <tr  class="t1" >
- <td width=15% align="center"><font color=red>²É¹º·½Ê½</font></td>
+ <td width=15% align="center"><font color=red>é‡‡è´­æ–¹å¼</font></td>
  <td colspan=3>
 
-    <SELECT name="p_cgtype" Chk=1 alt="ÇëÑ¡Ôñ²É¹º·½Ê½¡£" onChange="abc()">
-          <OPTION value="1" >¹«¿ªÇó¹º</OPTION>
-          <OPTION value="2" >¶¨ÏòÑ¯¼Û</OPTION>
+    <SELECT name="p_cgtype" Chk=1 alt="è¯·é€‰æ‹©é‡‡è´­æ–¹å¼ã€‚" onChange="abc()">
+          <OPTION value="1" >å…¬å¼€æ±‚è´­</OPTION>
+          <OPTION value="2" >å®šå‘è¯¢ä»·</OPTION>
     </SELECT></td>
 </tr>
 
   <input type="hidden" name="p_orderno" value="1000201011133266">
 <tr  class="t1">
-<td>Âú×ãÌõ¼þµÄ¹©Ó¦ÉÌÁÐ±í</td>
+<td>æ»¡è¶³æ¡ä»¶çš„ä¾›åº”å•†åˆ—è¡¨</td>
 
 <td align="center" colspan="3">
 <div id="gkqg" style="display:block">
   <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
 	<tr class="t1">
 		<th>
-			<font color="black">¹©Ó¦ÉÌÃû³Æ</font>		</th>
+			<font color="black">ä¾›åº”å•†åç§°</font>		</th>
 	</tr>
 	<tr class="t2">
 		<td>
-			<div align="center">ºÃÓÖ¶à			  </div></td>
+			<div align="center">å¥½åˆå¤š			  </div></td>
 	</tr>
 	<tr class="t2">
 		<td>
-			<div align="center">¶àÓÖºÃ			  </div></td>
+			<div align="center">å¤šåˆå¥½			  </div></td>
 	</tr>
   </table>
   </div>
@@ -451,36 +451,36 @@ function abc(){
   <table>
  <tr  class="t1" >
 <td align="center">
-<b>¿ÉÑ¡</b>
+<b>å¯é€‰</b>
 <br>
-<select name="p_gys_all" size=15 style="width=160px" multiple>
+<select name="p_gys_all" size=15 style="width:160px" multiple>
 
-   <OPTION value="12" >±±¾©¿µÌØµç×ÓÓÐÏÞ¹«Ë¾</OPTION>
+   <OPTION value="12" >åŒ—äº¬åº·ç‰¹ç”µå­æœ‰é™å…¬å¸</OPTION>
 </SELECT>
 <td align="center" vAlign=center>
 
-    <input type=button name="add" value="Ìí¼Ó" onclick=Add(document.form.p_gys_all,document.form.p_gys_sel)>
+    <input type=button name="add" value="æ·»åŠ " onclick=Add(document.form.p_gys_all,document.form.p_gys_sel)>
     <p>
-    <input type=button name="del" value="É¾³ý" onclick=Remove(document.form.p_gys_sel)>
+    <input type=button name="del" value="åˆ é™¤" onclick=Remove(document.form.p_gys_sel)>
 </td>
 <td align="center">
-<b>ÒÑÑ¡</b>
+<b>å·²é€‰</b>
 <br>
-<select name="p_gys_sel" size=15 style="width=160px" multiple>
+<select name="p_gys_sel" size=15 style="width:160px" multiple>
 </SELECT></td>
 </tr>
 </table>
 </div></td>
 <tr  class="t1" >
-   <TD width="20%">²ÆÎñ²¿ÊÇ·ñÍ¬Òâ</TD>
-          <TD class=t2>²»Í¬Òâ</TD>
+   <TD width="20%">è´¢åŠ¡éƒ¨æ˜¯å¦åŒæ„</TD>
+          <TD class=t2>ä¸åŒæ„</TD>
         </TR>
         <TR class=t1>
-          <TD width="20%">²ÆÎñ²¿ÉóºËÒâ¼û</TD>
-          <TD class=t2>²»Í¬Òâ</TD>
+          <TD width="20%">è´¢åŠ¡éƒ¨å®¡æ ¸æ„è§</TD>
+          <TD class=t2>ä¸åŒæ„</TD>
 </tr>
 <tr  class="t1" >
-<td width=15% align="center" nowrap>ËµÃ÷£º<br>£¨400×ÖÒÔÄÚ£©</td>
+<td width=15% align="center" nowrap>è¯´æ˜Žï¼š<br>ï¼ˆ400å­—ä»¥å†…ï¼‰</td>
 <td colspan=3>
 <TEXTAREA NAME="p_input" ROWS=3 COLS=77 style="width:100%">
 
@@ -499,8 +499,8 @@ function abc(){
 <input type="hidden" name="page" value="">
 
 <br>
-<input type="button" value="±¨Åú" onClick="submit_form(document.form,1)">
-    <input name="button" type="button" onClick="javascript:history.back ();" value="·µ»Ø">
+<input type="button" value="æŠ¥æ‰¹" onClick="submit_form(document.form,1)">
+    <input name="button" type="button" onClick="javascript:history.back ();" value="è¿”å›ž">
     </form>
 <form name="form1" action="../Demand/xjfatz_gysxx.asp" method="post"target=_new>
 <input type="hidden" name="p_suppsql" value="select * from Tb_ProjectSupp_Tmp where strProjCode='1000201001251787'">

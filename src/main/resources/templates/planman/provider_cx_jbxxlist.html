@@ -1,5 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>Î´±à²É¹º¼Æ»®µÄÐèÇó¼Æ»®Ò»ÀÀ±í</TITLE>
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('')}"></head>
 <SCRIPT language=JAVASCRIPT> 
 function chck()
 {  var  count=0;
@@ -19,7 +20,7 @@ function Add(SourceList,TargetList)
 	if (nIndex == -1)
 	{
 		// Process continue only if at least one item selected
-		//alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
+		//alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
 		return;
 	}
 	for (i=0;i<SourceList.length;i++)
@@ -60,7 +61,7 @@ function Remove(SelectList)
 	if (nIndex == -1)
 	{
 		// Process continue only if at least one item selected
-		//alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
+		//alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
 		return;
 	}
   while(nCount<SelectList.length)
@@ -157,7 +158,7 @@ function check_num_dot()
        {
          if (NotNumber(window.document.forms[0].elements[i].value))
          {
-            alert("ÌáÊ¾ÐÅÏ¢£º\n²»ÊÇÓÐÐ§µÄÊý×Ö£¬ÇëÖØÐÂÊäÈë¡£");
+            alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
             window.document.forms[0].elements[i].focus();
             return;
          }
@@ -169,7 +170,7 @@ function check_num_dot()
        {
          if (NotNumber(window.document.forms[0].elements[i].value))
          {
-            alert("ÌáÊ¾ÐÅÏ¢£º\n²»ÊÇÓÐÐ§µÄÊý×Ö£¬ÇëÖØÐÂÊäÈë¡£");
+            alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
             window.document.forms[0].elements[i].focus();
             return;
          }
@@ -216,7 +217,7 @@ function check_num_dot()
 </SCRIPT>
 
 <META http-equiv=Content-Language content=zh-cn>
-<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
 <META content="MSHTML 6.00.2900.5626" name=GENERATOR>
 <META content=FrontPage.Editor.Document name=ProgId><LINK 
 href="css/style.css" rel=stylesheet>
@@ -229,7 +230,7 @@ href="css/style.css" rel=stylesheet>
         count++;
         if (count==0)
         {
-        alert("ÌáÊ¾ÐÅÏ¢£º\nÇëÑ¡ÔñÐèÇó¼Æ»®¡£");
+        alert("æç¤ºä¿¡æ¯ï¼š\nè¯·é€‰æ‹©éœ€æ±‚è®¡åˆ’ã€‚");
         return;
         }
         if (i==4)
@@ -239,7 +240,7 @@ href="css/style.css" rel=stylesheet>
         
         if (i==5)
 		{	if(count>1) 
-			{ alert("ÌáÊ¾ÐÅÏ¢£º\nÖ»ÄÜ¶Ôµ¥Ìõ¼ÇÂ¼½øÐÐ²Ù×÷¡£");}
+			{ alert("æç¤ºä¿¡æ¯ï¼š\nåªèƒ½å¯¹å•æ¡è®°å½•è¿›è¡Œæ“ä½œã€‚");}
 			else
 			{ 
 			form.action="Order_wtb_upddate.asp";        
@@ -292,7 +293,7 @@ href="css/style.css" rel=stylesheet>
 <BODY>
 <CENTER>
 <FORM name=form action="" method=post>
-<H2><FONT color=#0070c0>Î´±à²É¹º¼Æ»®µÄÐèÇóÒ»ÀÀ±í</FONT></H2>
+<H2><FONT color=#0070c0>æœªç¼–é‡‡è´­è®¡åˆ’çš„éœ€æ±‚ä¸€è§ˆè¡¨</FONT></H2>
 <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff 
 borderColorLight=#ffffff border=0>
   <TBODY>
@@ -301,24 +302,24 @@ borderColorLight=#ffffff border=0>
       <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
         <TBODY>
         <TR>
-          <TD noWrap align=middle>Îï×Ê±àÂë£º<INPUT maxLength=15 size=15 
-            name=p_prodno>&nbsp;&nbsp; Îï×ÊÃû³Æ£º<INPUT maxLength=15 size=15 
-            name=p_prodname>&nbsp;&nbsp; Ã¿Ò³ÏÔÊ¾¸öÊý£º <SELECT name=p_pagesize> 
+          <TD noWrap align=middle>ç‰©èµ„ç¼–ç ï¼š<INPUT maxLength=15 size=15 
+            name=p_prodno>&nbsp;&nbsp; ç‰©èµ„åç§°ï¼š<INPUT maxLength=15 size=15 
+            name=p_prodname>&nbsp;&nbsp; æ¯é¡µæ˜¾ç¤ºä¸ªæ•°ï¼š <SELECT name=p_pagesize> 
               <OPTION value=10 selected>10</OPTION> <OPTION value=20>20</OPTION> 
               <OPTION value=30>30</OPTION> <OPTION value=50>50</OPTION> <OPTION 
-              value=100>100</OPTION> <OPTION value=4>È«²¿</OPTION></SELECT> ÅÅÐò£º 
-            <SELECT name=p_orderby> <OPTION value="" selected>°´Îï×Ê´úÂë</OPTION> 
-              <OPTION value=1>°´ÐèÇóÊ±¼ä</OPTION> <OPTION 
-            value=2>°´ÐèÇó¼Æ»®ºÅ</OPTION></SELECT> <INPUT id=button2 onclick=submit_form_cx() type=button value=²éÑ¯ name=button2></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><FORM 
+              value=100>100</OPTION> <OPTION value=4>å…¨éƒ¨</OPTION></SELECT> æŽ’åºï¼š 
+            <SELECT name=p_orderby> <OPTION value="" selected>æŒ‰ç‰©èµ„ä»£ç </OPTION> 
+              <OPTION value=1>æŒ‰éœ€æ±‚æ—¶é—´</OPTION> <OPTION 
+            value=2>æŒ‰éœ€æ±‚è®¡åˆ’å·</OPTION></SELECT> <INPUT id=button2 onclick=submit_form_cx() type=button value=æŸ¥è¯¢ name=button2></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><FORM 
 name="form1" action="" method="Post">
-<CENTER><FONT color=#000064>¡ô&nbsp;</FONT><FONT color=#000064>Ê×Ò³ 
-ÉÏÒ»Ò³</FONT>&nbsp;<A 
+<CENTER><FONT color=#000064>â—†&nbsp;</FONT><FONT color=#000064>é¦–é¡µ 
+ä¸Šä¸€é¡µ</FONT>&nbsp;<A 
 href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2"><FONT 
-color=#0000be>ÏÂÒ»Ò³</FONT></A>&nbsp;<A 
+color=#0000be>ä¸‹ä¸€é¡µ</FONT></A>&nbsp;<A 
 href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4"><FONT 
-color=#0000be>Î²Ò³</FONT></A><FONT color=#000064>&nbsp;¹² 33 ¸öÐèÇó¼Æ»® Ã¿Ò³10 
-¸öÐèÇó¼Æ»®</FONT><FONT color=#000064>&nbsp;Ò³´Î:<FONT 
-color=blue>1</FONT>/4Ò³</FONT><FONT color=#000064>&nbsp;¡ô&nbsp;</FONT> 
+color=#0000be>å°¾é¡µ</FONT></A><FONT color=#000064>&nbsp;å…± 33 ä¸ªéœ€æ±‚è®¡åˆ’ æ¯é¡µ10 
+ä¸ªéœ€æ±‚è®¡åˆ’</FONT><FONT color=#000064>&nbsp;é¡µæ¬¡:<FONT 
+color=blue>1</FONT>/4é¡µ</FONT><FONT color=#000064>&nbsp;â—†&nbsp;</FONT> 
 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" 
 bgColor=#336699 borderColorLight=#006699 border=0>
   <TBODY>
@@ -327,28 +328,28 @@ bgColor=#336699 borderColorLight=#006699 border=0>
       <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
         <TBODY>
         <TR class=t1>
-          <TD noWrap align=middle>Ñ¡Ôñ</TD>
-          <TD noWrap align=middle>ÐòºÅ</TD>
-          <TD noWrap align=middle>Îï×Ê´úÂë</TD>
-          <TD noWrap align=middle>Îï×ÊÃû³Æ</TD>
-          <TD noWrap align=middle>ÊýÁ¿</TD>
-          <TD noWrap align=middle>Ð­Òé¼Û¸ñ</TD>
-          <TD noWrap align=middle>µ¥Î»</TD>
-          <TD noWrap align=middle>ÐèÇóÊ±¼ä</TD><!--<td nowrap align="center">Ìá½»Ê±¼ä</td>-->
-          <TD noWrap align=middle>ÐèÇóÀ´Ô´</TD>
-          <TD noWrap align=middle>¹©Ó¦ÉÌ</TD></TR>
+          <TD noWrap align=middle>é€‰æ‹©</TD>
+          <TD noWrap align=middle>åºå·</TD>
+          <TD noWrap align=middle>ç‰©èµ„ä»£ç </TD>
+          <TD noWrap align=middle>ç‰©èµ„åç§°</TD>
+          <TD noWrap align=middle>æ•°é‡</TD>
+          <TD noWrap align=middle>åè®®ä»·æ ¼</TD>
+          <TD noWrap align=middle>å•ä½</TD>
+          <TD noWrap align=middle>éœ€æ±‚æ—¶é—´</TD><!--<td nowrap align="center">æäº¤æ—¶é—´</td>-->
+          <TD noWrap align=middle>éœ€æ±‚æ¥æº</TD>
+          <TD noWrap align=middle>ä¾›åº”å•†</TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133266 
             name=p_orderno></TD>
           <TD align=middle>1</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133266">W64001005001<BR></A></TD>
-          <TD>¾§Õñ(HC-49U-500M-0.005%)<BR></TD>
+          <TD>æ™¶æŒ¯(HC-49U-500M-0.005%)<BR></TD>
           <TD align=right>222<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/08<BR></TD><!--<td align=right>2010/01/08 16:42:14<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""></SELECT> 
 </TD></TR>
         <TR class=t2>
@@ -357,127 +358,127 @@ bgColor=#336699 borderColorLight=#006699 border=0>
           <TD align=middle>2</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133280">W64001005010<BR></A></TD>
-          <TD>¾§Õñ(POE500B/ZTB500E)<BR></TD>
+          <TD>æ™¶æŒ¯(POE500B/ZTB500E)<BR></TD>
           <TD align=right>11<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/08<BR></TD><!--<td align=right>2010/01/08 17:12:01<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=12 selected>±±¾©¿µÌØµç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=12 selected>åŒ—äº¬åº·ç‰¹ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133161 
             name=p_orderno></TD>
           <TD align=middle>3</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133161">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>20<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/07<BR></TD><!--<td align=right>2010/01/07 13:46:15<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133233 
             name=p_orderno></TD>
           <TD align=middle>4</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133233">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>23<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/08<BR></TD><!--<td align=right>2010/01/08 14:16:41<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133217 
             name=p_orderno></TD>
           <TD align=middle>5</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133217">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>111<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/07<BR></TD><!--<td align=right>2010/01/07 15:52:44<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133288 
             name=p_orderno></TD>
           <TD align=middle>6</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133288">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>1<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/09<BR></TD><!--<td align=right>2010/01/09 10:29:45<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133199 
             name=p_orderno></TD>
           <TD align=middle>7</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133199">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>10086<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/07<BR></TD><!--<td align=right>2010/01/07 15:30:23<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133167 
             name=p_orderno></TD>
           <TD align=middle>8</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133167">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>12<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/07<BR></TD><!--<td align=right>2010/01/07 13:48:22<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133252 
             name=p_orderno></TD>
           <TD align=middle>9</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133252">W65000400101<BR></A></TD>
-          <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+          <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
           <TD align=right>12<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/08<BR></TD><!--<td align=right>2010/01/08 15:53:58<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""> <OPTION 
-              value=37 selected>ÉîÛÚÊÐÓÀÊ¢Î¢µç×ÓÓÐÏÞ¹«Ë¾</OPTION></SELECT> </TD></TR>
+              value=37 selected>æ·±åœ³å¸‚æ°¸ç››å¾®ç”µå­æœ‰é™å…¬å¸</OPTION></SELECT> </TD></TR>
         <TR class=t2>
           <TD align=middle><INPUT type=checkbox value=1000201011133162 
             name=p_orderno></TD>
           <TD align=middle>10</TD>
           <TD align=middle><A 
             href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133162">W65000400102<BR></A></TD>
-          <TD>SMD CMOSµçÂ·(CD4001BM)<BR></TD>
+          <TD>SMD CMOSç”µè·¯(CD4001BM)<BR></TD>
           <TD align=right>13<BR></TD>
           <TD align=right><BR></TD>
-          <TD align=right>¸ö<BR></TD>
+          <TD align=right>ä¸ª<BR></TD>
           <TD align=right>2010/01/07<BR></TD><!--<td align=right>2010/01/07 13:46:23<br></td>-->
-          <TD align=right>µç×ÓÉÌÎñ</TD>
+          <TD align=right>ç”µå­å•†åŠ¡</TD>
           <TD align=right><SELECT style="WIDTH: 160px" name=""></SELECT> 
         </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><INPUT type=hidden value=0 
 name=p_type> 
-<P align=center><INPUT onclick=select_check(document.form) type=button value=È«Ñ¡/È¡Ïû> 
-<INPUT onclick=submit_form(document.form,4) type=button value=´ò¿ª name=upd> <INPUT onclick=submit_form(document.form,2) type=button value=±àÖÆ²É¹º¼Æ»® name=upd> <INPUT onclick=" javascript:history.back()" type=button value=·µ»Ø name=goback> 
-</P></FORM></CENTER></CENTER></BODY></HTML>
+<P align=center><INPUT onclick=select_check(document.form) type=button value=å…¨é€‰/å–æ¶ˆ> 
+<INPUT onclick=submit_form(document.form,4) type=button value=æ‰“å¼€ name=upd> <INPUT onclick=submit_form(document.form,2) type=button value=ç¼–åˆ¶é‡‡è´­è®¡åˆ’ name=upd> <INPUT onclick=" javascript:history.back()" type=button value=è¿”å›ž name=goback> 
+</P></CENTER></FORM></FORM></CENTER></CENTER></BODY></HTML>

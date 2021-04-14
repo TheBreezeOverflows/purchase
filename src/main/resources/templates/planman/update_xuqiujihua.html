@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
 <meta name="ProgId" content="FrontPage.Editor.Document">
 <LINK href="css/style.css" rel=stylesheet>
 <SCRIPT language=JavaScript src="css/pub_Calendar.js"></SCRIPT>
-<title>Â¼Èë²É¹ºĞèÇó</title>
+<title>å½•å…¥é‡‡è´­éœ€æ±‚</title>
 <script LANGUAGE="JAVASCRIPT">
       function submit_form(theForm,i)
       {
@@ -16,15 +16,15 @@
     {
         if  (value==0)
         {
-           alert("ÊıÁ¿²»ÄÜÎª0£¡");
+           alert("æ•°é‡ä¸èƒ½ä¸º0ï¼");
            input.focus();
            return;
         }
     }
    function ps() {
-   	var objSelected1 = new Option("ÅäËÍ²É¹º", "5");
-   	var objSelected2 = new Option("ÄÚ²¿²É¹º", "7");    
-   	var objSelected3 = new Option("ÌØÊâ²É¹º", "8");
+   	var objSelected1 = new Option("é…é€é‡‡è´­", "5");
+   	var objSelected2 = new Option("å†…éƒ¨é‡‡è´­", "7");    
+   	var objSelected3 = new Option("ç‰¹æ®Šé‡‡è´­", "8");
     if(form.p_cgtype.value == 1)
     {
      	form.p_stocktype.options[1] = objSelected1;
@@ -51,13 +51,13 @@
       }
       else
       {
-         window.location="Order_wtb_list.htm";
+         window.location="Order_wtb_list";
       }
    }
    
    function changeData(){
    		var cGetRow=window.event.srcElement.parentElement.parentElement.rowIndex;
-		//µÃµ½Ä³Ò»ĞĞ
+		//å¾—åˆ°æŸä¸€è¡Œ
 		var oldTr=table1.rows[cGetRow];
 		var no=oldTr.cells[2].innerText;
 		var name=oldTr.cells[3].innerText;
@@ -71,7 +71,7 @@
 <body>
 
 <center>
-<form name="form" action="Order_wtb_list.htm" method="post" enctype="multipart/form-data" >
+<form name="form" action="Order_wtb_list" method="post" enctype="multipart/form-data" >
 
 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="80%"  bgColor=#336699 borderColorLight=#006699 border=0>
 <tr>
@@ -80,17 +80,17 @@
 
    
     <tr class="t1">
-    <td >Îï×Ê±àÂë</td>
+    <td >ç‰©èµ„ç¼–ç </td>
 
    	    <td>W64001005000</td>      	
    	    <input type="hidden" name="p_input7" value="W64001005000">
 </tr>
     <tr class="t1">
-    <td >Îï×ÊÃû³Æ</td>
+    <td >ç‰©èµ„åç§°</td>
 
       	<td>
-      	¾§Õñ(HC-49U-500K-0.005%)
-      	  <input type="hidden" name="p_input8" value="¾§Õñ(HC-49U-500K-0.005%)">
+      	æ™¶æŒ¯(HC-49U-500K-0.005%)
+      	  <input type="hidden" name="p_input8" value="æ™¶æŒ¯(HC-49U-500K-0.005%)">
       	
       	</td>
       	
@@ -99,23 +99,23 @@
 </tr>
    
     <tr class="t1">
-    <td >ÊıÁ¿</td>
+    <td >æ•°é‡</td>
 
    	   <td>
-       <input type="text" name="p_input11" size="20" maxlength="20" value="1"  onKeyPress="check_num_dot()" Chk=2 alt="ÇëÊäÈëÊıÁ¿¡£" onBlur="iszero(this.value,form.p_input11)">
+       <input type="text" name="p_input11" size="20" maxlength="20" value="1"  onKeyPress="check_num_dot()" Chk=2 alt="è¯·è¾“å…¥æ•°é‡ã€‚" onBlur="iszero(this.value,form.p_input11)">
        <font color=red>*</font>
        </td>
 </tr>
     <tr class="t1">
-    <td >¼ÆÁ¿µ¥Î»</td>
+    <td >è®¡é‡å•ä½</td>
 
       	   <td>
-      	   ¸ö
-      	   <input type="hidden" name="p_input12" value="¸ö">
+      	   ä¸ª
+      	   <input type="hidden" name="p_input12" value="ä¸ª">
       	   </td>
 </tr>
     <tr class="t1">
-    <td >Ô¤Ëãµ¥¼Û(Ôª)</td>
+    <td >é¢„ç®—å•ä»·(å…ƒ)</td>
 
            <td>
            <input type="text" name="p_input13" size="20" maxlength="20" value="5"  onKeyPress="check_num_dot()" Chk=3>
@@ -123,7 +123,7 @@
       	   </td>
 </tr>
     <tr class="t1">
-    <td >½»»õÆÚ</td>
+    <td >äº¤è´§æœŸ</td>
 
       	<td>
       	<input type="text" name="p_date1" size="20" readonly value="2010/01/09">
@@ -133,7 +133,7 @@
 </tr>
    
     <tr class="t1">
-    <td >±¸×¢</td>
+    <td >å¤‡æ³¨</td>
 
       	<td>
       	<textarea name="remark"></textarea>
@@ -144,7 +144,7 @@
  <tr class="t1">
  <td colspan=2>
  <font color=red><B>
- ¸½¼şÉÏ´«ËµÃ÷£ºÎÄ¼ş´óĞ¡²»ÄÜ³¬¹ı4M¡£
+ é™„ä»¶ä¸Šä¼ è¯´æ˜ï¼šæ–‡ä»¶å¤§å°ä¸èƒ½è¶…è¿‡4Mã€‚
  </B></font>
  </td>
  </tr>
@@ -153,12 +153,12 @@
 
 <br>
 
-<input type="button" value="ÖØĞÂÑ¡ÔñÎï×Ê" onClick="window.document.location='pclass_select.html'">
+<input type="button" value="é‡æ–°é€‰æ‹©ç‰©èµ„" onClick="window.document.location='pclass_select'">
 
-   <input type="button" value="±£´æ" onClick="submit_form(document.form,2)">
+   <input type="button" value="ä¿å­˜" onClick="submit_form(document.form,2)">
 
-<input type="button" value="È«²¿ĞèÇóÂ¼ÈëÍê±Ï" onClick="submit_form(document.form,3)">
-</center>
+<input type="button" value="å…¨éƒ¨éœ€æ±‚å½•å…¥å®Œæ¯•" onClick="submit_form(document.form,3)">
+</form></center>
 <input type="hidden" name="p_ordercode" value="1000201011133304">
 <input type="hidden" name="p_orderno" value="1000201011133304">
 <input type="hidden" name="p_type" value="">

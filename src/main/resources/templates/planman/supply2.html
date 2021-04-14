@@ -1,298 +1,298 @@
 
- <SCRIPT LANGUAGE="JAVASCRIPT"> 
-function chck()
-{  var  count=0;
-   for (var i=0;i<form.length;i++)
-   if ((form[i].type == "radio") && (form[i].checked))
-   count++; 
-   if (count==0)
-      { return false;  }
-   else
-      { return true;   }
-}
- 
-function Add(SourceList,TargetList)
-	{
-	var nIndex = SourceList.selectedIndex;
- 	var nCount = 0;  
-	if (nIndex == -1)
-	{
-		// Process continue only if at least one item selected
-		//alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
-		return;
-	}
-	for (i=0;i<SourceList.length;i++)
-  {
-     if (SourceList.options(i).selected==true)
-     {    
-         if (inSouceList(SourceList.options(i).value,TargetList)==false)
-         {
-          	var objSelected = new Option(SourceList[i].text, SourceList[i].value);
-           	TargetList.options[TargetList.length] = objSelected;
-         }
-     }     
-	}
-  for (var i=0;i<TargetList.options.length;i++)
-  {
-    TargetList.options(i).selected=true;
-  }
-	if(navigator.appName=="Netscape")
-	{
-		history.go(0)
-	}
- }
- function inSouceList(SourceListOption,TargetList)
- {
- 	  for (i=0;i<TargetList.length;i++)
+<SCRIPT LANGUAGE="JAVASCRIPT">
+    function chck()
+    {  var  count=0;
+        for (var i=0;i<form.length;i++)
+            if ((form[i].type == "radio") && (form[i].checked))
+                count++;
+        if (count==0)
+        { return false;  }
+        else
+        { return true;   }
+    }
+
+    function Add(SourceList,TargetList)
     {
-	     if (TargetList.options[i].value==SourceListOption)
-       {
-        	 return true;
-       }
-    }   
-    return false;
- }  
-function Remove(SelectList)
-	{
-	var nIndex = SelectList.selectedIndex;
- 	var nCount = 0;
-	if (nIndex == -1)
-	{
-		// Process continue only if at least one item selected
-		//alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
-		return;
-	}
-  while(nCount<SelectList.length)
-  {
-       if (SelectList.options(nCount).selected==true)
-       {
-       	 SelectList.options[nCount] = null;
-       }
-       else
-       {
-         nCount++;
-       }
-  }
-	if(navigator.appName=="Netscape")
-		{
-		history.go(0)
-		}	
-	}
- function enter()
- {
-   var srcEle = window.event.srcElement;
-   var tmp;   
-   tmp = window.showModalDialog("pub_pub.Dialog_Date?vc_input=" + srcEle.value);
-     if ( tmp.indexOf("/") != -1)
-     {
-        srcEle.value = tmp;
-     }
-     return;
- }   
- function check_num()
- {
- 	 if (window.event.keyCode > 57 || window.event.keyCode < 48)
-	 {
-	 		window.event.returnValue = false;
-	 }
- }
- function check_blank()
- {
- 	 if (window.event.keyCode < 48)
-	 {
-	 		window.event.returnValue = false;
-	 }
- }
-  
-function check_num_dot()
-{
- 	 if (window.event.keyCode > 57 || window.event.keyCode < 46)
-	 {
-  		 window.event.returnValue = false;   
-	 }
-   else
-   {
-      if(window.event.keyCode==47)
-      {
-    		 window.event.returnValue = false;
-      }
-      if(window.event.keyCode==46)
-      {
-         if (window.event.srcElement.value.indexOf(".")!=-1)
-         {
-        		 window.event.returnValue = false;
-         }
-      }   
-    }  
- }
-  
- function submitonce(theform)
- {
- if (document.all || document.getElementById)
- {
- for (i=0;i<theform.length;i++)
- {
- var tempobj = theform.elements[i]
- if (tempobj.type.toLowerCase() =="button")
- tempobj.disabled = true
- }
- }
- }
- 
-  function CheckAll() 
- {
-   var i = 0;
-   for (i=0; i < window.document.forms[0].elements.length; i++) 
-   {
-     if(window.document.forms[0].elements[i].Chk<3) 
-     {
-       if(window.document.forms[0].elements[i].value=="")
-       {
-         alert(window.document.forms[0].elements[i].alt);
-         window.document.forms[0].elements[i].focus();
-         return;
-       }
-       else if (window.document.forms[0].elements[i].Chk==2)
-       {
-         if (NotNumber(window.document.forms[0].elements[i].value))
-         {
-            alert("ÌáÊ¾ĞÅÏ¢£º\n²»ÊÇÓĞĞ§µÄÊı×Ö£¬ÇëÖØĞÂÊäÈë¡£");
-            window.document.forms[0].elements[i].focus();
+        var nIndex = SourceList.selectedIndex;
+        var nCount = 0;
+        if (nIndex == -1)
+        {
+            // Process continue only if at least one item selected
+            //alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
             return;
-         }
-       }
-     }
-     else if(window.document.forms[0].elements[i].Chk==3)
-     {
-       if(window.document.forms[0].elements[i].value!="")
-       {
-         if (NotNumber(window.document.forms[0].elements[i].value))
-         {
-            alert("ÌáÊ¾ĞÅÏ¢£º\n²»ÊÇÓĞĞ§µÄÊı×Ö£¬ÇëÖØĞÂÊäÈë¡£");
-            window.document.forms[0].elements[i].focus();
+        }
+        for (i=0;i<SourceList.length;i++)
+        {
+            if (SourceList.options(i).selected==true)
+            {
+                if (inSouceList(SourceList.options(i).value,TargetList)==false)
+                {
+                    var objSelected = new Option(SourceList[i].text, SourceList[i].value);
+                    TargetList.options[TargetList.length] = objSelected;
+                }
+            }
+        }
+        for (var i=0;i<TargetList.options.length;i++)
+        {
+            TargetList.options(i).selected=true;
+        }
+        if(navigator.appName=="Netscape")
+        {
+            history.go(0)
+        }
+    }
+    function inSouceList(SourceListOption,TargetList)
+    {
+        for (i=0;i<TargetList.length;i++)
+        {
+            if (TargetList.options[i].value==SourceListOption)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    function Remove(SelectList)
+    {
+        var nIndex = SelectList.selectedIndex;
+        var nCount = 0;
+        if (nIndex == -1)
+        {
+            // Process continue only if at least one item selected
+            //alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
             return;
-         }
-       }
-     }
-   }
-   window.document.forms[0].submit();
-   alert("×¢²á³É¹¦£¡£¡");
-   window.location.href="mainRequire.html";
-   return true;
- }
- function NotNumber(Field)
- {
-   var j = 0;
-   var k = 0;
-   for (var i=0; i<Field.length; i++)
-   {
-      var ch=Field.substring(i,i+1);
-      if((ch>="0")&&(ch<="9")) 
-      {
-        j=0;
-      }
-      else if(ch==".") 
-      {
-        k++;
-      }
-      else
-      {
-        j=1;
-        break;
-      }
-   }
-   if ((j==0)&&(k<2))
-   {
-      return false;
-   }
-   else
-   {
-      return true;
-   }
- }
- function openwindown(page)
- {
-    window.open(page,"newuser","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
- }
+        }
+        while(nCount<SelectList.length)
+        {
+            if (SelectList.options(nCount).selected==true)
+            {
+                SelectList.options[nCount] = null;
+            }
+            else
+            {
+                nCount++;
+            }
+        }
+        if(navigator.appName=="Netscape")
+        {
+            history.go(0)
+        }
+    }
+    function enter()
+    {
+        var srcEle = window.event.srcElement;
+        var tmp;
+        tmp = window.showModalDialog("pub_pub.Dialog_Date?vc_input=" + srcEle.value);
+        if ( tmp.indexOf("/") != -1)
+        {
+            srcEle.value = tmp;
+        }
+        return;
+    }
+    function check_num()
+    {
+        if (window.event.keyCode > 57 || window.event.keyCode < 48)
+        {
+            window.event.returnValue = false;
+        }
+    }
+    function check_blank()
+    {
+        if (window.event.keyCode < 48)
+        {
+            window.event.returnValue = false;
+        }
+    }
+
+    function check_num_dot()
+    {
+        if (window.event.keyCode > 57 || window.event.keyCode < 46)
+        {
+            window.event.returnValue = false;
+        }
+        else
+        {
+            if(window.event.keyCode==47)
+            {
+                window.event.returnValue = false;
+            }
+            if(window.event.keyCode==46)
+            {
+                if (window.event.srcElement.value.indexOf(".")!=-1)
+                {
+                    window.event.returnValue = false;
+                }
+            }
+        }
+    }
+
+    function submitonce(theform)
+    {
+        if (document.all || document.getElementById)
+        {
+            for (i=0;i<theform.length;i++)
+            {
+                var tempobj = theform.elements[i]
+                if (tempobj.type.toLowerCase() =="button")
+                    tempobj.disabled = true
+            }
+        }
+    }
+
+    function CheckAll()
+    {
+        var i = 0;
+        for (i=0; i < window.document.forms[0].elements.length; i++)
+        {
+            if(window.document.forms[0].elements[i].Chk<3)
+            {
+                if(window.document.forms[0].elements[i].value=="")
+                {
+                    alert(window.document.forms[0].elements[i].alt);
+                    window.document.forms[0].elements[i].focus();
+                    return;
+                }
+                else if (window.document.forms[0].elements[i].Chk==2)
+                {
+                    if (NotNumber(window.document.forms[0].elements[i].value))
+                    {
+                        alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
+                        window.document.forms[0].elements[i].focus();
+                        return;
+                    }
+                }
+            }
+            else if(window.document.forms[0].elements[i].Chk==3)
+            {
+                if(window.document.forms[0].elements[i].value!="")
+                {
+                    if (NotNumber(window.document.forms[0].elements[i].value))
+                    {
+                        alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
+                        window.document.forms[0].elements[i].focus();
+                        return;
+                    }
+                }
+            }
+        }
+        window.document.forms[0].submit();
+        alert("æ³¨å†ŒæˆåŠŸï¼ï¼");
+        window.location.href="mainRequire";
+        return true;
+    }
+    function NotNumber(Field)
+    {
+        var j = 0;
+        var k = 0;
+        for (var i=0; i<Field.length; i++)
+        {
+            var ch=Field.substring(i,i+1);
+            if((ch>="0")&&(ch<="9"))
+            {
+                j=0;
+            }
+            else if(ch==".")
+            {
+                k++;
+            }
+            else
+            {
+                j=1;
+                break;
+            }
+        }
+        if ((j==0)&&(k<2))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    function openwindown(page)
+    {
+        window.open(page,"newuser","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
+    }
 </SCRIPT>
 
 
 <HTML>
 <HEAD>
-<title>ÁÙÊ±¹©Ó¦ÉÌ»áÔ±×¢²á</title>
-<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
-<link rel="stylesheet" href="css/style.css">
+	<title>ä¸´æ—¶ä¾›åº”å•†ä¼šå‘˜æ³¨å†Œ</title>
+	<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+	<link rel="stylesheet" href="css/style.css">
 </HEAD>
 <script language=javascript>
-function subback()
-	{ 
-		 if (form.strMemlogPass1.value!=form.strMemlogPass.value)
-			 {  alert("µÇÂ¼ÃÜÂëºÍÃÜÂëÈ·ÈÏ²»Ò»ÖÂ£¡");   }
-		else
-			{ 
-				form.but.value ="add"
-				CheckAll();
-			} 
-	}
+    function subback()
+    {
+        if (form.strMemlogPass1.value!=form.strMemlogPass.value)
+        {  alert("ç™»å½•å¯†ç å’Œå¯†ç ç¡®è®¤ä¸ä¸€è‡´ï¼");   }
+        else
+        {
+            form.but.value ="add"
+            CheckAll();
+        }
+    }
 </script>
 <BODY>
 <form name="form" action="jiffprov_hysave.asp" method="post">
 
-<input type="hidden" name="p_Enquireno" value="100020101348014">
-<input type=hidden name="but"> 
-<input type=hidden name="p_intSuppcode" value="4955">
+	<input type="hidden" name="p_Enquireno" value="100020101348014">
+	<input type=hidden name="but">
+	<input type=hidden name="p_intSuppcode" value="4955">
 
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
-<tr>
-<td>
-<table cellpadding="3" cellspacing="1" border="0" width="100%">
-<tr bgcolor="#ffffff"> 
-<td width="100%" colspan="20" bgcolor="#ffffff" align=center height=22><B><H2><font  color=#0070C0 >¹©Ó¦ÉÌ»áÔ±×¢²á</b>
-</td>
-</tr>
- 
-<tr> 
-		<TD class=t1 noWrap width="20%">µÇ&nbsp;Â¼&nbsp;Ãû</td>
-		<TD class=t2 noWrap width="30%" colspan=3><INPUT name="rad" Chk=1 alt="ÇëÊäÈëµÇÂ¼Ãû£¡">¡¾±ØĞëÌîĞ´<=10Î»¡¿</TD>
-</TR>
-<tr>
-		<TD class=t1 noWrap width="20%">µÇÂ½ÃÜÂë</td>
-		<TD class=t2 noWrap width="30%"><INPUT  name=strMemlogPass Chk=1 alt="ÇëÊäÈëµÇÂ½ÃÜÂë£¡" type="password" >¡¾±ØĞëÌîĞ´<=12Î»¡¿</TD>
-		<TD class=t1 noWrap width="20%">È·ÈÏÃÜÂë</td>
-		<TD class=t2 noWrap width="30%"><INPUT  name=strMemlogPass1 Chk=1 alt="ÇëÊäÈëÈ·ÈÏÃÜÂë£¡"  type="password" ></TD>
-</TR>
-<tr>
-		<TD class=t1 noWrap width="20%">ÓÃ»§ĞÕÃû</td>
-		<TD class=t2 noWrap width="30%"><INPUT  name=strMemName Chk=1 alt="ÇëÊäÈëÓÃ»§ĞÕÃû£¡">¡¾±ØĞëÌîĞ´¡¿</TD>
-		<TD class=t1 noWrap width="20%"> ĞÔ&nbsp;&nbsp;&nbsp;&nbsp;±ğ</td>
-		<TD class=t2 noWrap width="30%"><SELECT  name=intSex > 
-																	 <OPTION value="1">ÄĞ</OPTION>
-																	 <OPTION value="2">Å®</OPTION>
-																	 </SELECT> </TD>
-</TR>
-<tr>
-		<TD class=t1 noWrap width="20%">ÁªÏµµç»°</td>
-		<TD class=t2 noWrap width="30%"><INPUT name=strTel value=""></TD>
-											<input type=hidden name="intcocode" value="">
-		<TD class=t1 noWrap width="20%">´«&nbsp;&nbsp;&nbsp;&nbsp;Õæ</td>
-		<TD class=t2 noWrap width="30%"><INPUT name=strFax value="" ></TD>
-</TR>        
-<tr>
-		<TD class=t1 noWrap width="20%">µç×ÓÓÊÏä</td>
-		<TD class=t2 noWrap width="30%"><INPUT  name=strEmail value="" ></TD>
-		<TD class=t1 noWrap width="20%"> ÓÊ&nbsp;&nbsp;&nbsp;&nbsp;±à</td>
-		<TD class=t2 noWrap width="30%"><INPUT  name=strZip value="" ></TD>
-</TR>
-<tr>
-		<TD class=t1 noWrap width="10%">ÁªÏµµØÖ·</td>
-		<TD class=t2 noWrap width="30%" colspan=3><INPUT name=strAddr Chk=1 alt="ÇëÊäÈëÁªÏµµØÖ·£¡" style=" WIDTH: 98%" value="23213"></TD></TR>
+	<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
+		<tr>
+			<td>
+				<table cellpadding="3" cellspacing="1" border="0" width="100%">
+					<tr bgcolor="#ffffff">
+						<td width="100%" colspan="20" bgcolor="#ffffff" align=center height=22><B><H2><font  color=#0070C0 >ä¾›åº”å•†ä¼šå‘˜æ³¨å†Œ</font></H2></b>
+						</td>
+					</tr>
 
-</table></td></tr></table>
+					<tr>
+						<TD class=t1 noWrap width="20%">ç™»&nbsp;å½•&nbsp;å</td>
+						<TD class=t2 noWrap width="30%" colspan=3><INPUT name="rad" Chk=1 alt="è¯·è¾“å…¥ç™»å½•åï¼">ã€å¿…é¡»å¡«å†™<=10ä½ã€‘</TD>
+					</TR>
+					<tr>
+						<TD class=t1 noWrap width="20%">ç™»é™†å¯†ç </td>
+						<TD class=t2 noWrap width="30%"><INPUT  name=strMemlogPass Chk=1 alt="è¯·è¾“å…¥ç™»é™†å¯†ç ï¼" type="password" >ã€å¿…é¡»å¡«å†™<=12ä½ã€‘</TD>
+						<TD class=t1 noWrap width="20%">ç¡®è®¤å¯†ç </td>
+						<TD class=t2 noWrap width="30%"><INPUT  name=strMemlogPass1 Chk=1 alt="è¯·è¾“å…¥ç¡®è®¤å¯†ç ï¼"  type="password" ></TD>
+					</TR>
+					<tr>
+						<TD class=t1 noWrap width="20%">ç”¨æˆ·å§“å</td>
+						<TD class=t2 noWrap width="30%"><INPUT  name=strMemName Chk=1 alt="è¯·è¾“å…¥ç”¨æˆ·å§“åï¼">ã€å¿…é¡»å¡«å†™ã€‘</TD>
+						<TD class=t1 noWrap width="20%"> æ€§&nbsp;&nbsp;&nbsp;&nbsp;åˆ«</td>
+						<TD class=t2 noWrap width="30%"><SELECT  name=intSex >
+							<OPTION value="1">ç”·</OPTION>
+							<OPTION value="2">å¥³</OPTION>
+						</SELECT> </TD>
+					</TR>
+					<tr>
+						<TD class=t1 noWrap width="20%">è”ç³»ç”µè¯</td>
+						<TD class=t2 noWrap width="30%"><INPUT name=strTel value=""></TD>
+						<input type=hidden name="intcocode" value="">
+						<TD class=t1 noWrap width="20%">ä¼ &nbsp;&nbsp;&nbsp;&nbsp;çœŸ</td>
+						<TD class=t2 noWrap width="30%"><INPUT name=strFax value="" ></TD>
+					</TR>
+					<tr>
+						<TD class=t1 noWrap width="20%">ç”µå­é‚®ç®±</td>
+						<TD class=t2 noWrap width="30%"><INPUT  name=strEmail value="" ></TD>
+						<TD class=t1 noWrap width="20%"> é‚®&nbsp;&nbsp;&nbsp;&nbsp;ç¼–</td>
+						<TD class=t2 noWrap width="30%"><INPUT  name=strZip value="" ></TD>
+					</TR>
+					<tr>
+						<TD class=t1 noWrap width="10%">è”ç³»åœ°å€</td>
+						<TD class=t2 noWrap width="30%" colspan=3><INPUT name=strAddr Chk=1 alt="è¯·è¾“å…¥è”ç³»åœ°å€ï¼" style=" WIDTH: 98%" value="23213"></TD></TR>
 
-<P align=center>
-	<INPUT type=button value="±£ ´æ" onclick="subback()" id=button1 name=button1> 
-    <INPUT type=button value="Çå ³ı" onclick="form.reset()" id=button1 name=button1>  
-</P>
+				</table></td></tr></table>
+
+	<P align=center>
+		<INPUT type=button value="ä¿ å­˜" onclick="subback()" id=button1 name=button1>
+		<INPUT type=button value="æ¸… é™¤" onclick="form.reset()" id=button2 name=button1>
+	</P>
 </form>
 </BODY>
 </HTML>
