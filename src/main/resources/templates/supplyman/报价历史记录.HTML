@@ -180,7 +180,7 @@
     <meta http-equiv="Content-Language" content="zh-cn">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <script Language="JavaScript" src="../pub_Calendar.js"></script>
+    <script Language="JavaScript" src="../css/pub_Calendar.js"></script>
 
     <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
     <head>
@@ -323,8 +323,8 @@
         </table>
 
         <p Align="center" class="myp">
-            <input onclick=" javascript:form_back()" type="button" name="TJBJ" value="修改">
-            <input onclick=" javascript:form_back()" type="button" name="TJBJ" value="返回">
+            <input onclick="" type="button" name="TJBJ" value="修改">
+            <input onclick="toreload('Order_wbxjfa_list')" type="button" name="TJBJ" value="返回">
         </p>
     </form>
 </center>
@@ -356,10 +356,6 @@
         }
     }
 
-    function form_back() {
-        toreload("Order_wbxjfa_list")
-        // window.location = "Order_wbxjfa_list";
-    }
 </script>
 <script language="javascript">
     function get_jsz(k)      //失去焦点时计算总价，总金额

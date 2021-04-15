@@ -4,6 +4,7 @@ import com.turing.purchase.entity.SysMenus;
 import com.turing.purchase.entity.SysMenusExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface SysMenusMapper {
     int countByExample(SysMenusExample example);
@@ -23,4 +24,8 @@ public interface SysMenusMapper {
     int updateByExampleWithBLOBs(@Param("record") SysMenus record, @Param("example") SysMenusExample example);
 
     int updateByExample(@Param("record") SysMenus record, @Param("example") SysMenusExample example);
+
+    //自定义sql
+    @Select("select * from sys_menus where ID in ( select MENU_ID from sys_menu_role where ROLE_ID = ( select ROLE_ID from sys_user_role where USER_ID = ( select id from sys_users where LOGIN_ID = #{userName})))")
+    List<SysMenus> getRoleMenus(@Param("userName")String userName);
 }

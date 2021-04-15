@@ -62,14 +62,14 @@
     <FORM name=form action=Project_list_do.asp method=post><INPUT type=hidden
                                                                   value=1 name=p_type>
         <H4><FONT color=#0070c0 style="font-weight: bold">报价维护</FONT></H4>
-        <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff
+        <TABLE cellSpacing=1 cellPadding=0 width="100%"
                borderColorLight=#ffffff border=0>
             <TBODY>
             <TR>
                 <TD>
                     <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
                         <TBODY>
-                        <TR bgColor=#ffffff>
+                        <TR>
                             <TD noWrap align=middle>报价书名称：<INPUT size=10
                                                                  name=p_title>&nbsp;&nbsp; 对应询价书名称：<INPUT size=10
                                                                                                           name=p_Item>&nbsp;&nbsp;
@@ -91,7 +91,7 @@
                         <TD>
                             <TABLE class="table table-bordered table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
                                 <TBODY>
-                                <TR class=t1>
+                                <TR class=t1 style="background-color: rgb(153, 204, 255);">
                                     <TD noWrap align=middle>选择</TD>
                                     <TD noWrap align=middle>序号</TD>
                                     <TD noWrap align=middle>报价书标题</TD>
@@ -153,7 +153,7 @@
                 <FONT color=#000064>&nbsp;页次:<FONT color=blue>1</FONT>/15页</FONT>
                 <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
                 <INPUT type=hidden value=1 name=p_listtype>
-                <P align=center class="myp" style="margin-top: 15px"><INPUT onclick=submit_form(document.form,1) type=button value=打开> <INPUT
+                <P align=center class="myp" style="margin-top: 15px"><INPUT onclick=toreload("修改公开求购报价书") type=button value=打开> <INPUT
                         onclick="ret1();" type=button value=删除>
                 </P>
             </CENTER></FORM>
