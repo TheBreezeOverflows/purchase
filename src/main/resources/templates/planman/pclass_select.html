@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common::header('')}"></head>
+<html lang="zh_CN" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('')}">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
 <META content=FrontPage.Editor.Document name=ProgId><LINK
         href="css/style.css" rel=stylesheet>
 <SCRIPT language=JAVASCRIPT>
@@ -49,9 +53,9 @@
                             href="#"><FONT
                             color=#0000be>下一页</FONT></A>&nbsp;<A
                             href="#"><FONT
-                            color=#0000be>尾页</FONT></A><FONT color=#000064>&nbsp;共 40 个需求计划 每页10
+                            color=#0000be>尾页</FONT></A><FONT color=#000064>&nbsp;共 [[${session.pageInfo.total}]] 个需求计划 每页[[${session.pageInfo.endRow}]]
                         个需求计划</FONT><FONT color=#000064>&nbsp;页次:<FONT
-                            color=blue>1</FONT>/4页</FONT><FONT color=#000064>&nbsp;◆&nbsp;</FONT>
+                            color=blue>[[${session.pageInfo.pageNum}]]</FONT>/[[${session.pageInfo.pages}]]页</FONT><FONT color=#000064>&nbsp;◆&nbsp;</FONT>
                     </div>
                 </td>
             </tr>
@@ -62,7 +66,7 @@
                                borderColorLight=#006699 border=0>
                             <tr>
                                 <td>
-                                    <table cellpadding="3" cellspacing="1" border="0" width="100%" id="table1">
+                                    <table cellpadding="3" cellspacing="1" border="2" width="100%" id="table1" style="text-align: center" >
 
                                         <center>
                                             <form name=form action="Order_wtb_do.asp" method="post">
@@ -72,40 +76,28 @@
                                                     <td nowrap align="center">产品编码</td>
                                                     <td nowrap align="center">产品名称</td>
                                                 </tr>
-
-                                                <tr class="t2">
-                                                    <td align=center><input type="checkbox" name="p_orderno"
-                                                                            value="1000201011133305" checked="checked">
-                                                    </td>
-                                                    <td>1</td>
-                                                    <td>W64001005000<br></td>
-
-                                                    <td>晶振(HC-49U-500K-0.005%)<br></td>
-
-                                                </tr>
-
-                                                <tr class="t2">
-                                                    <td align=center><input type="checkbox" name="p_orderno"
-                                                                            value="1000201011133272" checked="checked">
-                                                    </td>
-                                                    <td>2</td>
-                                                    <td>W64001005000<br></td>
-
-                                                    <td>晶振(HC-49U-500K-0.005%)<br></td>
+                                                <tr th:each="Material,stat:${session.pageInfo.list}">
+                                                        <td align=center>
+                                                            <input type="checkbox" name="p_orderno"value="1000201011133305" checked="checked">
+                                                        </td>
+                                                        <td>[[${Material.id}]]</td>
+                                                        <td>[[${Material.materialNum}]]</td>
+                                                        <td>[[${Material.materialName}]]</td>
+                                                    </tr>
 
 
-                                                </tr>
+                                                <!--Bootstrap方法遍历model
+                                                <c:forEach items="${pageInfo}" var="Material">
+                                                    <tr class="t2">
+                                                        <td align=center>
+                                                            <input type="checkbox" name="p_orderno"value="1000201011133305" checked="checked">
+                                                        </td>
+                                                        <td>${Material.id}</td>
+                                                        <td>${Material.materialNum}</td>
+                                                        <td>${Material.materialName}</td>
+                                                    </tr>
+                                                </c:forEach>-->
 
-                                                <tr class="t2">
-                                                    <td align=center><input type="checkbox" name="p_orderno"
-                                                                            value="1000201011133262" checked="checked">
-                                                    </td>
-                                                    <td>3</td>
-                                                    <td>W64001005000<br></td>
-
-                                                    <td>晶振(HC-49U-500K-0.005%)<br></td>
-
-                                                </tr>
 
                                             </form></center></table>
                                 </td>
@@ -113,7 +105,7 @@
                         </table>
                         <div align="center">
                             请先选择物资，然后点击：<A
-                                href="javascript:window.document.location='Order_newform'"><FONT
+                                href="javascript:window.document.location='planman/Order_newform'"><FONT
                                 size=3><U>下一步</U>
                         </FONT></A></div>
                     </div></td></tr></TBODY></TABLE></CENTER></BODY></form>
