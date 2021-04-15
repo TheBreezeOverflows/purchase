@@ -43,7 +43,7 @@ public class ShiroConfig  {
         map.put("/user/userLogin","anon");
 
         //测试页面
-        map.put("/myindex","anon");
+        //map.put("/myindex","anon");
 
         //配置受限资源（authc）---需要认证和授权才能访问
         map.put("/**", "authc");//把拦截所有的过滤器放到最后

@@ -48,3 +48,5 @@ mybatis:
   type-aliases-package: com.turing.purchase.entity
   #配置mapper.xml，扫描所在包
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

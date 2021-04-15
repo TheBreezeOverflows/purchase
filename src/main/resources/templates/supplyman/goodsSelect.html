@@ -67,7 +67,7 @@
                         <TBODY>
                         <tr class=t2>
                             <td colspan="11">
-                                <input class="mylittelbtn" style="float: left" type="button" value="增加" onclick="prosave();"/>
+                                <input class="mylittelbtn" style="float: left" type="button" value="增加" onclick="toreload('product_save');"/>
                             </td>
                         </tr>
                         <TR class=t1 style="background-color: rgb(153, 204, 255);">
@@ -153,11 +153,6 @@
     </FORM>
 </FORM>
 <script type="text/javascript">
-    function prosave(){
-        toreload("product_save")
-        // $("#mycontent").panel("refresh","product_save")
-        // window.document.location="product_save";
-    }
     function mydelete(obj)
     {
         if(confirm("您确定删除本商品？"))

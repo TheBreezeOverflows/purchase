@@ -196,10 +196,6 @@
         }
     </SCRIPT>
     <SCRIPT language=javascript>
-        function req() {
-            window.document.location = "报价历史记录";
-        }
-
         function submit_form(theForm, i) {
             window.document.location = "报价历史记录";
             /* var count=0;
@@ -240,7 +236,7 @@
               */
         }
 
-        function select_check(theForm) {
+        function select_check2(theForm) {
             var count = 0;
             for (var k = 0; k < theForm.length; k++)
                 if ((theForm[k].type == "checkbox") && (theForm[k].checked))
@@ -323,7 +319,7 @@
                         <TD>
                             <TABLE class="table table-bordered table-condensed table-hover" cellSpacing=1 cellPadding=3 width="100%" border=0>
                                 <TBODY>
-                                <TR class=t1>
+                                <TR class=t1 style="background-color: rgb(153, 204, 255);">
                                     <TD noWrap align=middle>选择</TD>
                                     <TD noWrap align=middle>序号</TD>
                                     <TD noWrap align=middle>物资代码</TD>
@@ -386,8 +382,8 @@
                 </TABLE>
                 <INPUT type=hidden value=0
                        name=p_type>
-                <P align=center class="myp"><INPUT onclick=select_check(document.form) type=button value=全选/取消>
-                    <INPUT onclick="req();" type=button value=详情 name=upd>
+                <P align=center class="myp"><INPUT onclick=select_check2(document.form) type=button value=全选/取消>
+                    <INPUT onclick="toreload('报价历史记录');" type=button value=详情 name=upd>
                 </P>
             </CENTER></FORM>
     </FORM></CENTER>

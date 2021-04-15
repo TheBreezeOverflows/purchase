@@ -13,4 +13,11 @@ public interface SysMenusService {
      */
     List<SysMenus> getAllMenus();
 
+    /**
+     * 获取该角色下的菜单
+     * @param userName
+     * @return
+     */
+    List<SysMenus> getRoleMenus(String userName);
+
 }

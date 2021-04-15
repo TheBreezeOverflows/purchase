@@ -24,6 +24,12 @@ public class SysMenusServiceImpl implements SysMenusService {
         return findChildrenWhile(0,menus);
     }
 
+    @Override
+    public List<SysMenus> getRoleMenus(String userName) {
+        List<SysMenus> menus = sysMenusMapper.getRoleMenus(userName);
+        return findChildrenWhile(0,menus);
+    }
+
     /**
      * 递归寻找子菜单
      * @param id 父菜单id

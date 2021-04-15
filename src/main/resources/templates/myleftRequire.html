@@ -13,9 +13,16 @@
             animate:true,
             onClick:function(node){
                 // alert(node.attributes.url)
-                if(node.attributes.url != null){
+                // if(node.attributes.url != null){
+                //     toreload(node.attributes.url)
+                //     // $("#mycontent").panel("refresh",node.attributes.url);
+                // }
+                if($(this).tree('isLeaf',node.target)){
+                    // addPanel(node);
                     toreload(node.attributes.url)
-                    // $("#mycontent").panel("refresh",node.attributes.url);
+                }else{
+                    $(this).tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);
+                    node.state = node.state === 'closed' ? 'open' : 'closed';
                 }
             }
         })

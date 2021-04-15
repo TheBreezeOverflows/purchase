@@ -17,11 +17,6 @@
     </style>
 
     <SCRIPT language=JAVASCRIPT>
-        function prosave() {
-            toreload("category_save")
-            // window.document.location = "category_save";
-        }
-
         function mydelete(obj) {
             if (confirm("您确定删除本商品？")) {
                 var myobj = obj.parentNode.parentNode.parentNode;
@@ -65,7 +60,7 @@
                         <TABLE class="table table-bordered table-hover table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
                             <TBODY>
                             <tr class=t2>
-                                <td colspan="11"><input class="mylittelbtn" style="float: left" type="button" value="增加" onclick="prosave();"/></td>
+                                <td colspan="11"><input class="mylittelbtn" style="float: left" type="button" value="增加" onclick="toreload('category_save');"/></td>
                             </tr>
                             <TR class=t1 style="background-color: rgb(153, 204, 255);">
                                 <TD noWrap align=middle>序号</TD>
