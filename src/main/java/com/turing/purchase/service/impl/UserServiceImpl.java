@@ -1,14 +1,12 @@
-package com.turing.purchase.service.serviceImpl;
+package com.turing.purchase.service.impl;
 
 import com.turing.purchase.entity.SysUsers;
 import com.turing.purchase.entity.SysUsersExample;
 import com.turing.purchase.mapper.SysUsersMapper;
 import com.turing.purchase.service.UserService;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service

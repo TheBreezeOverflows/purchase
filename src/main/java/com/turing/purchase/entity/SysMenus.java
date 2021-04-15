@@ -1,6 +1,10 @@
 package com.turing.purchase.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class SysMenus implements Serializable {
     private Long id;
@@ -9,6 +13,7 @@ public class SysMenus implements Serializable {
 
     private Long seq;
 
+    @JsonProperty("text")
     private String name;
 
     private String tip;
@@ -19,9 +24,51 @@ public class SysMenus implements Serializable {
 
     private String target;
 
+    @JsonProperty("state")
     private String status;
 
     private String descn;
+
+    private List<SysMenus> children;
+
+    private Attributes attributes;
+
+    @JsonIgnore
+    private String url;
+    @JsonIgnore
+    private String icon;
+
+    public List<SysMenus> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysMenus> children) {
+        this.children = children;
+    }
+
+    public Attributes getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     private static final long serialVersionUID = 1L;
 

@@ -39,7 +39,7 @@
             var nCount = 0;
             if (nIndex == -1) {
                 // Process continue only if at least one item selected
-                //alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
+                //alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
                 return;
             }
             for (i = 0; i < SourceList.length; i++) {
@@ -72,7 +72,7 @@
             var nCount = 0;
             if (nIndex == -1) {
                 // Process continue only if at least one item selected
-                //alert("ÇëÏÈÑ¡ÔñÒ»Ïî!");
+                //alert("è¯·å…ˆé€‰æ‹©ä¸€é¡¹!");
                 return;
             }
             while (nCount < SelectList.length) {
@@ -147,7 +147,7 @@
                     }
                     else if (window.document.forms[0].elements[i].Chk == 2) {
                         if (NotNumber(window.document.forms[0].elements[i].value)) {
-                            alert("ÌáÊ¾ÐÅÏ¢£º\n²»ÊÇÓÐÐ§µÄÊý×Ö£¬ÇëÖØÐÂÊäÈë¡£");
+                            alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
                             window.document.forms[0].elements[i].focus();
                             return;
                         }
@@ -156,7 +156,7 @@
                 else if (window.document.forms[0].elements[i].Chk == 3) {
                     if (window.document.forms[0].elements[i].value != "") {
                         if (NotNumber(window.document.forms[0].elements[i].value)) {
-                            alert("ÌáÊ¾ÐÅÏ¢£º\n²»ÊÇÓÐÐ§µÄÊý×Ö£¬ÇëÖØÐÂÊäÈë¡£");
+                            alert("æç¤ºä¿¡æ¯ï¼š\nä¸æ˜¯æœ‰æ•ˆçš„æ•°å­—ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚");
                             window.document.forms[0].elements[i].focus();
                             return;
                         }
@@ -195,27 +195,20 @@
             window.open(page, "newuser", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
         }
     </SCRIPT>
-
-    <META http-equiv=Content-Language content=zh-cn>
-    <META http-equiv=Content-Type content="text/html; charset=gb2312">
-    <META content="MSHTML 6.00.2900.5626" name=GENERATOR>
-    <META content=FrontPage.Editor.Document name=ProgId>
-    <LINK
-            href="css/style.css" rel=stylesheet>
     <SCRIPT language=javascript>
         function req() {
-            window.document.location = "±¨¼ÛÀúÊ·¼ÇÂ¼";
+            window.document.location = "æŠ¥ä»·åŽ†å²è®°å½•";
         }
 
         function submit_form(theForm, i) {
-            window.document.location = "±¨¼ÛÀúÊ·¼ÇÂ¼";
+            window.document.location = "æŠ¥ä»·åŽ†å²è®°å½•";
             /* var count=0;
              for (var k = 0; k < theForm.length; k++)
              if ((theForm[k].type == "checkbox") && (theForm[k].checked))
              count++;
              if (count==0)
              {
-             alert("ÌáÊ¾ÐÅÏ¢£º\nÇëÑ¡ÔñÐèÇó¼Æ»®¡£");
+             alert("æç¤ºä¿¡æ¯ï¼š\nè¯·é€‰æ‹©éœ€æ±‚è®¡åˆ’ã€‚");
              return;
              }
              if (i==4)
@@ -225,7 +218,7 @@
 
              if (i==5)
              {	if(count>1)
-                 { alert("ÌáÊ¾ÐÅÏ¢£º\nÖ»ÄÜ¶Ôµ¥Ìõ¼ÇÂ¼½øÐÐ²Ù×÷¡£");}
+                 { alert("æç¤ºä¿¡æ¯ï¼š\nåªèƒ½å¯¹å•æ¡è®°å½•è¿›è¡Œæ“ä½œã€‚");}
                  else
                  {
                  form.action="Order_wtb_upddate.asp";
@@ -275,7 +268,7 @@
 <BODY>
 <CENTER>
     <FORM name=form action="" method=post>
-        <H4><FONT color=#0070c0 style="font-weight: bold">Î´Í¨¹ýµÄ²É¹º¼Æ»®</FONT></H4>
+        <H4><FONT color=#0070c0 style="font-weight: bold">æœªé€šè¿‡çš„é‡‡è´­è®¡åˆ’</FONT></H4>
         <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff
                borderColorLight=#ffffff border=0>
             <TBODY>
@@ -284,11 +277,11 @@
                     <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
                         <TBODY>
                         <TR>
-                            <TD noWrap align=middle>Îï×Ê±àÂë£º<INPUT maxLength=15 size=15
-                                                                name=p_prodno>&nbsp;&nbsp; Îï×ÊÃû³Æ£º<INPUT maxLength=15
+                            <TD noWrap align=middle>ç‰©èµ„ç¼–ç ï¼š<INPUT maxLength=15 size=15
+                                                                name=p_prodno>&nbsp;&nbsp; ç‰©èµ„åç§°ï¼š<INPUT maxLength=15
                                                                                                        size=15
                                                                                                        name=p_prodname>&nbsp;&nbsp;
-                                Ã¿Ò³ÏÔÊ¾¸öÊý£º <SELECT name=p_pagesize>
+                                æ¯é¡µæ˜¾ç¤ºä¸ªæ•°ï¼š <SELECT name=p_pagesize>
                                     <OPTION value=10 selected>10</OPTION>
                                     <OPTION value=20>20</OPTION>
                                     <OPTION value=30>30</OPTION>
@@ -296,15 +289,15 @@
                                     <OPTION
                                             value=100>100
                                     </OPTION>
-                                    <OPTION value=4>È«²¿</OPTION>
-                                </SELECT> ×´Ì¬£º
+                                    <OPTION value=4>å…¨éƒ¨</OPTION>
+                                </SELECT> çŠ¶æ€ï¼š
                                 <SELECT name=p_orderby>
-                                    <OPTION value="" selected>È«²¿</OPTION>
-                                    <OPTION value="">²µ»Ø</OPTION>
+                                    <OPTION value="" selected>å…¨éƒ¨</OPTION>
+                                    <OPTION value="">é©³å›ž</OPTION>
                                     <OPTION
-                                            value=2>·ÏÆú
+                                            value=2>åºŸå¼ƒ
                                     </OPTION>
-                                </SELECT> <INPUT id=button2 onclick=submit_form_cx() type=button value=²éÑ¯ name=button2>
+                                </SELECT> <INPUT id=button2 onclick=submit_form_cx() type=button value=æŸ¥è¯¢ name=button2>
                             </TD>
                         </TR>
                         </TBODY>
@@ -315,14 +308,14 @@
         </TABLE>
         <FORM
                 name="form1" action="" method="Post">
-            <CENTER><FONT color=#000064>¡ô&nbsp;</FONT><FONT color=#000064>Ê×Ò³
-                ÉÏÒ»Ò³</FONT>&nbsp;<A
+            <CENTER><FONT color=#000064>â—†&nbsp;</FONT><FONT color=#000064>é¦–é¡µ
+                ä¸Šä¸€é¡µ</FONT>&nbsp;<A
                     href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2"><FONT
-                    color=#0000be>ÏÂÒ»Ò³</FONT></A>&nbsp;<A
+                    color=#0000be>ä¸‹ä¸€é¡µ</FONT></A>&nbsp;<A
                     href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4"><FONT
-                    color=#0000be>Î²Ò³</FONT></A><FONT color=#000064>&nbsp;¹² 35 ¸öÐèÇó¼Æ»® Ã¿Ò³10
-                ¸öÐèÇó¼Æ»®</FONT><FONT color=#000064>&nbsp;Ò³´Î:<FONT
-                    color=blue>1</FONT>/4Ò³</FONT><FONT color=#000064>&nbsp;¡ô&nbsp;</FONT>
+                    color=#0000be>å°¾é¡µ</FONT></A><FONT color=#000064>&nbsp;å…± 35 ä¸ªéœ€æ±‚è®¡åˆ’ æ¯é¡µ10
+                ä¸ªéœ€æ±‚è®¡åˆ’</FONT><FONT color=#000064>&nbsp;é¡µæ¬¡:<FONT
+                    color=blue>1</FONT>/4é¡µ</FONT><FONT color=#000064>&nbsp;â—†&nbsp;</FONT>
                 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
                        bgColor=#336699 borderColorLight=#006699 border=0>
                     <TBODY>
@@ -331,14 +324,14 @@
                             <TABLE class="table table-bordered table-condensed table-hover" cellSpacing=1 cellPadding=3 width="100%" border=0>
                                 <TBODY>
                                 <TR class=t1>
-                                    <TD noWrap align=middle>Ñ¡Ôñ</TD>
-                                    <TD noWrap align=middle>ÐòºÅ</TD>
-                                    <TD noWrap align=middle>Îï×Ê´úÂë</TD>
-                                    <TD noWrap align=middle>Îï×ÊÃû³Æ</TD>
-                                    <TD noWrap align=middle>ÐèÇó¼Æ»®ºÅ</TD>
-                                    <TD noWrap align=middle>ÊýÁ¿</TD>
-                                    <TD noWrap align=middle>ÉóÅúÈË</TD>
-                                    <TD noWrap align=middle>ÉóÅú×´Ì¬</TD>
+                                    <TD noWrap align=middle>é€‰æ‹©</TD>
+                                    <TD noWrap align=middle>åºå·</TD>
+                                    <TD noWrap align=middle>ç‰©èµ„ä»£ç </TD>
+                                    <TD noWrap align=middle>ç‰©èµ„åç§°</TD>
+                                    <TD noWrap align=middle>éœ€æ±‚è®¡åˆ’å·</TD>
+                                    <TD noWrap align=middle>æ•°é‡</TD>
+                                    <TD noWrap align=middle>å®¡æ‰¹äºº</TD>
+                                    <TD noWrap align=middle>å®¡æ‰¹çŠ¶æ€</TD>
 
                                 </TR>
                                 <TR class=t2>
@@ -346,21 +339,21 @@
                                                             name=p_orderno></TD>
                                     <TD align=middle>1</TD>
                                     <TD align=middle>W64001005000<BR></TD>
-                                    <TD>¾§Õñ(HC-49U-500K-0.005%)<BR></TD>
+                                    <TD>æ™¶æŒ¯(HC-49U-500K-0.005%)<BR></TD>
                                     <TD>111111<BR></TD>
                                     <TD align=right>22<BR></TD>
-                                    <TD align=right>¼Æ»®²¿³¤<BR></TD>
-                                    <TD align=right>·ÏÆú<BR></TD>
+                                    <TD align=right>è®¡åˆ’éƒ¨é•¿<BR></TD>
+                                    <TD align=right>åºŸå¼ƒ<BR></TD>
                                 <TR class=t2>
                                     <TD align=middle><INPUT type=checkbox value=1000201011133190
                                                             name=p_orderno></TD>
                                     <TD align=middle>2</TD>
                                     <TD align=middle>W64001005000<BR></TD>
-                                    <TD>¾§Õñ(HC-49U-500K-0.005%)<BR></TD>
+                                    <TD>æ™¶æŒ¯(HC-49U-500K-0.005%)<BR></TD>
                                     <TD>111111<BR></TD>
                                     <TD align=right>1<BR></TD>
-                                    <TD align=right>¼Æ»®²¿³¤<BR></TD>
-                                    <TD align=right>²µ»Ø<BR></TD>
+                                    <TD align=right>è®¡åˆ’éƒ¨é•¿<BR></TD>
+                                    <TD align=right>é©³å›ž<BR></TD>
 
                                 </TR>
                                 <TR class=t2>
@@ -368,22 +361,22 @@
                                                             name=p_orderno></TD>
                                     <TD align=middle>3</TD>
                                     <TD align=middle>W64001005000<BR></TD>
-                                    <TD>¾§Õñ(HC-49U-500K-0.005%)<BR></TD>
+                                    <TD>æ™¶æŒ¯(HC-49U-500K-0.005%)<BR></TD>
                                     <TD>4353463<BR></TD>
                                     <TD align=right>10<BR></TD>
-                                    <TD align=right>²ÆÎñ<BR></TD>
-                                    <TD align=right>·ÏÆú<BR></TD>
+                                    <TD align=right>è´¢åŠ¡<BR></TD>
+                                    <TD align=right>åºŸå¼ƒ<BR></TD>
                                 </TR>
                                 <TR class=t2>
                                     <TD align=middle><INPUT type=checkbox value=1000201011133199
                                                             name=p_orderno></TD>
                                     <TD align=middle>10</TD>
                                     <TD align=middle>W65000400101<BR></TD>
-                                    <TD>CMOSµçÂ·(CD4001BCN)<BR></TD>
+                                    <TD>CMOSç”µè·¯(CD4001BCN)<BR></TD>
                                     <TD>5436456<BR></TD>
                                     <TD align=right>10086<BR></TD>
-                                    <TD align=right>²ÆÎñ<BR></TD>
-                                    <TD align=right>²µ»Ø<BR></TD>
+                                    <TD align=right>è´¢åŠ¡<BR></TD>
+                                    <TD align=right>é©³å›ž<BR></TD>
                                 </TR>
                                 </TBODY>
                             </TABLE>
@@ -393,8 +386,8 @@
                 </TABLE>
                 <INPUT type=hidden value=0
                        name=p_type>
-                <P align=center class="myp"><INPUT onclick=select_check(document.form) type=button value=È«Ñ¡/È¡Ïû>
-                    <INPUT onclick="req();" type=button value=ÏêÇé name=upd>
+                <P align=center class="myp"><INPUT onclick=select_check(document.form) type=button value=å…¨é€‰/å–æ¶ˆ>
+                    <INPUT onclick="req();" type=button value=è¯¦æƒ… name=upd>
                 </P>
             </CENTER></FORM>
     </FORM></CENTER>

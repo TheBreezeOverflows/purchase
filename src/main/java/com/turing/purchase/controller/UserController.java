@@ -67,7 +67,7 @@ public class UserController {
             //获取令牌
             subject.login(new UsernamePasswordToken(userName, passWord));
             //登录成功
-            return "redirect:/index";
+            return "redirect:/myindex";
         }catch (UnknownAccountException e){
             e.printStackTrace();
             System.out.println("用户名不存在");

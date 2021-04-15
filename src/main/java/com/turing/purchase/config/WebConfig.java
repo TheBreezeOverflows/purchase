@@ -73,6 +73,10 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("planman/xjfatz_xjfamx2").setViewName("planman/xjfatz_xjfamx2");
         registry.addViewController("planman/xjfatz_xjfamx3").setViewName("planman/xjfatz_xjfamx3");
 
+        //测试页面
+        registry.addViewController("/myindex").setViewName("myindex");
+        registry.addViewController("/myleftRequire").setViewName("myleftRequire");
+
 
     }
 }

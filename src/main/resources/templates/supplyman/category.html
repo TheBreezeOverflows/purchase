@@ -18,7 +18,8 @@
 
     <SCRIPT language=JAVASCRIPT>
         function prosave() {
-            window.document.location = "category_save";
+            toreload("category_save")
+            // window.document.location = "category_save";
         }
 
         function mydelete(obj) {
@@ -78,7 +79,7 @@
                                 <TD align=middle>001005000<BR></TD>
                                 <TD>晶振<BR></TD>
                                 <TD align=right>芯片</TD>
-                                <TD align=center><a href="category_update">修改</a>&nbsp;&nbsp;<a
+                                <TD align=center><a href="javascript:toreload('category_update')">修改</a>&nbsp;&nbsp;<a
                                         onclick="mydelete(this)" style="cursor:hand">删除</a></TD>
                             </TR>
                             <tr class=t2>

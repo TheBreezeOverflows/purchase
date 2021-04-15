@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('主页')}"></head>
+<body class="easyui-layout">
+    //状态条
+    <div data-options="region:'north',href:'/bar',border:false" style="height:22px;background-color: #005890;font-size: 12px">
+
+    </div>
+    //菜单
+    <div data-options="region:'west',title:'菜单',border:false,collapsible:false" href="/myleftRequire" style="width:250px;">
+
+    </div>
+    //内容
+    <div id="mycontent" data-options="region:'center'" href="/mainRequire">
+
+    </div>
+</body>
+</html>
