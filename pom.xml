@@ -39,6 +39,13 @@
             <artifactId>shiro-spring-boot-web-starter</artifactId>
             <version>1.5.3</version>
         </dependency>
+        <!--pagehelper分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+
 
         <!--热部署依赖-->
         <dependency>
