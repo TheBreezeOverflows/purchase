@@ -1,6 +1,8 @@
 package com.turing.purchase.controller;
 
+import com.turing.purchase.entity.Employee;
 import com.turing.purchase.entity.SysUsers;
+import com.turing.purchase.service.EmployeeService;
 import com.turing.purchase.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -10,10 +12,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 登录控制层
@@ -24,6 +25,8 @@ public class UserController {
 
     @Autowired
     private UserService UserService;
+    @Autowired
+    private EmployeeService employeeService;
 
     //注册
     @PostMapping("/userRegist")
@@ -59,7 +62,7 @@ public class UserController {
 
     //登录
     @PostMapping("/userLogin")
-    public String userLogin(@RequestParam("uName") String userName,@RequestParam("uPassword")  String passWord){
+    public String userLogin(@RequestParam("uName") String userName, @RequestParam("uPassword")  String passWord){
         System.out.println("进入登录控制器");
         //获取主体
         Subject subject = SecurityUtils.getSubject();
@@ -67,6 +70,11 @@ public class UserController {
             //获取令牌
             subject.login(new UsernamePasswordToken(userName, passWord));
             //登录成功
+                //获取用户信息
+            Employee emp = employeeService.getEmpByUserName((String) subject.getPrincipal());
+                //存入session
+            subject.getSession().setAttribute("emp",emp);
+            //跳转主页
             return "redirect:/myindex";
         }catch (UnknownAccountException e){
             e.printStackTrace();
@@ -76,5 +84,20 @@ public class UserController {
             System.out.println("密码错误");
         }
         return "redirect:/login";
+    }
+
+    @PostMapping("/updatePwd")
+    @ResponseBody
+    public String updatePwd(@RequestParam("rad") String loginId,@RequestParam("but") String password,HttpSession session){
+        int result = UserService.updatePwd(loginId, password);
+        if(result > 0){
+            //修改密码成功
+            session.setAttribute("resultStr","修改成功");
+        }else{
+            //修改密码失败
+            session.setAttribute("resultStr","修改失败");
+        }
+        session.setAttribute("resultUrl","/supplymanPwdUpdate");
+        return "/updateResult";
     }
 }

@@ -9,4 +9,6 @@ public interface UserService {
 
     //查询
     SysUsers findByName(String name);
+
+    Integer updatePwd(String loginId,String password);
 }

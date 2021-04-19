@@ -76,7 +76,7 @@ public class WebConfig implements WebMvcConfigurer {
         //测试页面
         registry.addViewController("/myindex").setViewName("myindex");
         registry.addViewController("/myleftRequire").setViewName("myleftRequire");
-
+        registry.addViewController("/updateResult").setViewName("updateResult");
 
     }
 }

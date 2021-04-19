@@ -27,4 +27,11 @@ public class SupplierController {
         return "redirect:/supplymanLook";
     }
 
+    @GetMapping("/getLoginId")
+    @ResponseBody
+    public String getLoginId(){
+        String loginId = (String)SecurityUtils.getSubject().getPrincipal();
+        return loginId;
+    }
+
 }

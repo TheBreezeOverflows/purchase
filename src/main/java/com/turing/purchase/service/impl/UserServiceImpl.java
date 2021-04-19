@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public Integer updatePwd(String loginId, String password) {
+        return sysUsersMapper.updatePwdByLoginId(loginId, password);
+    }
 }
