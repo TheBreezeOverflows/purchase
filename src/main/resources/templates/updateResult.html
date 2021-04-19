@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('')}"></head>
+<body>
+    <script type="text/javascript">
+        $(function(){
+            setTimeout(function(){
+                var myUrl = $("#myUrl").val();
+                $("#mycontent").panel("refresh",myUrl);
+            },2000);
+        })
+    </script>
+    <p id="myresult">[[${session.resultStr}]]，正在返回…… <input id="myUrl" name="myUrl" type="hidden" th:value="${session.resultUrl}"></p>
+</body>
+</html>

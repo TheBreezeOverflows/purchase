@@ -3,14 +3,14 @@
 <head th:insert="~{common::header('')}">
 </head>
 <body>
-<TABLE style="line-height: 30px" cellSpacing=1 cellPadding=0 width="100%" bgColor=#336699 borderColorLight=#006699 border=0>
+<TABLE style="line-height: 30px" cellSpacing=1 cellPadding=0 width="100%" borderColorLight=#006699 border=0>
     <TBODY>
     <TR>
         <TD>
             <TABLE class="table table-bordered table-hover table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
                 <TBODY>
-                <TR bgColor=#ffffff>
-                    <TD align=middle width="100%" bgColor=#ffffff colSpan=20
+                <TR>
+                    <TD align=middle width="100%" colSpan=20
                         height=22>
                         <H4>
                             <FONT color=#0070c0><B>查看供应商信息</B>
@@ -24,55 +24,55 @@
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">供应商编号</TD>
-                    <TD colSpan=3>4779</TD>
+                    <TD colSpan=3>[[${session.supplier.supplierNum}]]</TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">供应商证书编号</TD>
-                    <TD>4580</TD>
+                    <TD>[[${session.supplier.certificate}]]</TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">公司名称</TD>
-                    <TD>aive115</TD>
+                    <TD>[[${session.supplier.company}]]</TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">公司简称</TD>
-                    <TD>中国国家游戏文化有限公司</TD>
+                    <TD></TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">法人代表</TD>
-                    <TD>邹卓</TD>
+                    <TD>[[${session.supplier.corporation}]]</TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">地&nbsp;&nbsp;&nbsp;&nbsp;址</TD>
-                    <TD>湖南长沙解放西路403号</TD>
+                    <TD>[[${session.supplier.address}]]</TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">邮&nbsp;&nbsp;&nbsp;&nbsp;编</TD>
-                    <TD>410000</TD>
+                    <TD>[[${session.supplier.zip}]]</TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">注册资金</TD>
-                    <TD>60000</TD>
+                    <TD>[[${session.supplier.regFund}]]</TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">联&nbsp;系&nbsp;人</TD>
-                    <TD>邹卓</TD>
+                    <TD>[[${session.supplier.contact}]]</TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">电&nbsp;&nbsp;&nbsp;&nbsp;话</TD>
-                    <TD>0731-87777888</TD>
+                    <TD>[[${session.supplier.phone}]]</TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">传&nbsp;&nbsp;&nbsp;&nbsp;真</TD>
-                    <TD>0731-88888777</TD>
+                    <TD>[[${session.supplier.fax}]]</TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">电子邮箱</TD>
-                    <TD>zgyxwh@yahoo.com.cn</TD>
+                    <TD>[[${session.supplier.email}]]</TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">网站地址</TD>
-                    <TD>www.nimalaikan.com</TD>
+                    <TD></TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">公司性质</TD>
-                    <TD class=t2>股份有限公司</TD>
+                    <TD class=t2>[[${session.supplier.kind}]]</TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">税&nbsp;&nbsp;&nbsp;&nbsp;号</TD>
-                    <TD>90</TD>
+                    <TD></TD>
                 </TR>
                 <TR bgColor=#f2f8ff>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="20%">开户银行</TD>
-                    <TD>瑞士银行</TD>
+                    <TD></TD>
                     <TD bgcolor="#99ccff" class=t1 noWrap width="18%">帐&nbsp;&nbsp;&nbsp;&nbsp;号</TD>
-                    <TD>248879655468487731</TD>
+                    <TD></TD>
                 </TR>
                 </TBODY>
             </TABLE>

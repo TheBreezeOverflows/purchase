@@ -43,6 +43,9 @@ spring:
 server:
   #端口号
   port: 81
+  servlet:
+    session:
+      timeout: 1440m
 mybatis:
   #配置别名，扫描实体类
   type-aliases-package: com.turing.purchase.entity
