@@ -29,7 +29,6 @@ public class PlanDemandEnteringServerImpl implements PlanDemandEnteringServer {
         MaterialExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(id);
         List<Material> materials = materMapper.selectByExample(example);
-        System.out.println("获取到的物资有:"+materials.size());
         if (materials.size()>0){
             return materials.get(0);
         }

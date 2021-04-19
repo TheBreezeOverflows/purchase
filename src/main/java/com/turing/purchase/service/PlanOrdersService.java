@@ -1,0 +1,14 @@
+package com.turing.purchase.service;
+
+import com.turing.purchase.entity.Orders;
+
+import java.util.List;
+
+public interface PlanOrdersService {
+    //查询所有需求计划
+    public List<Orders> FinAllOrder();
+    //根据id查询单个需求计划
+    public Orders FinbyOrder(long id);
+    //插入单个需求计划
+    public boolean insertOreder(Orders order);
+}

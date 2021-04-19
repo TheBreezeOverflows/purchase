@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common::header('')}">
+<head th:replace="~{common::header('需求计划录入')}">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
+
 </head>
-<META content=FrontPage.Editor.Document name=ProgId><LINK
-        href="css/style.css" rel=stylesheet>
+<META content=FrontPage.Editor.Document name=ProgId>
+<LINK href="css/style.css" rel=stylesheet>
+
 <SCRIPT language=JAVASCRIPT>
     function delCheckbox() {
         var objCheckbox = document.getElementsByName("p_orderno");
@@ -32,6 +34,8 @@
 <FORM name=form action=Order_newform.asp method=post
       encType=multipart/form-data></HEAD>
     <BODY>
+
+    <script src="../js/PagingQuery.js" type="text/javascript" charset="utf-8"></script>
     <CENTER>
         <TABLE width="90%" align=center border=0>
             <TBODY>
@@ -48,14 +52,14 @@
             <tr>
                 <td>
                     <div align="center">
-                        <FONT color=#000064>◆&nbsp;</FONT><FONT color=#000064>首页
-                        上一页</FONT>&nbsp;<A
-                            href="#"><FONT
-                            color=#0000be>下一页</FONT></A>&nbsp;<A
-                            href="#"><FONT
-                            color=#0000be>尾页</FONT></A><FONT color=#000064>&nbsp;共 [[${session.pageInfo.total}]] 个需求计划 每页[[${session.pageInfo.endRow}]]
-                        个需求计划</FONT><FONT color=#000064>&nbsp;页次:<FONT
-                            color=blue>[[${session.pageInfo.pageNum}]]</FONT>/[[${session.pageInfo.pages}]]页</FONT><FONT color=#000064>&nbsp;◆&nbsp;</FONT>
+                        <FONT color=#000064>◆&nbsp;</FONT>
+                        <A href="#" th:onclick="'Randompage('+1+','+2+')'"><FONT color=#000064>首页</FONT></A>
+                        <A href="#" th:onclick="'Randompage('+${session.pageInfo.pageNum}+','+1+')'" > <FONT color=#000064>上一页</FONT></A>&nbsp;
+                        <A href="#" th:onclick="'underpage('+${session.pageInfo.pageNum}+','+${session.pageInfo.pages}+')'"><FONT color=#0000be>下一页</FONT></A>&nbsp;
+                        <A href="#" th:onclick="'Randompage('+${session.pageInfo.pages}+','+3+')'"><FONT color=#0000be>尾页</FONT></A>
+                        <FONT color=#000064>&nbsp;共 [[${session.pageInfo.total}]] 个需求计划 每页[[${session.pageInfo.endRow}]] 个需求计划</FONT>
+                        <FONT color=#000064>&nbsp;页次:<FONT color=blue>[[${session.pageInfo.pageNum}]]</FONT>/[[${session.pageInfo.pages}]]页</FONT>
+                        <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
                     </div>
                 </td>
             </tr>
@@ -76,9 +80,9 @@
                                                     <td nowrap align="center">产品编码</td>
                                                     <td nowrap align="center">产品名称</td>
                                                 </tr>
-                                                <tr th:each="Material,stat:${session.pageInfo.list}">
+                                                <tr class="t2" th:each="Material,stat:${session.pageInfo.list}">
                                                         <td align=center>
-                                                            <input type="checkbox" name="p_orderno"value="1000201011133305" checked="checked">
+                                                            <input type="checkbox" name="p_orderno" th:value="${Material.id}" >
                                                         </td>
                                                         <td>[[${Material.id}]]</td>
                                                         <td>[[${Material.materialNum}]]</td>
@@ -98,15 +102,14 @@
                                                     </tr>
                                                 </c:forEach>-->
 
-
                                             </form></center></table>
                                 </td>
                             </tr>
                         </table>
                         <div align="center">
-                            请先选择物资，然后点击：<A
-                                href="javascript:window.document.location='planman/Order_newform'"><FONT
-                                size=3><U>下一步</U>
+                            请先选择物资，然后点击：
+                            <A href="#" onclick="EntrySkip()">
+                            <FONT size=3><U>下一步</U>
                         </FONT></A></div>
                     </div></td></tr></TBODY></TABLE></CENTER></BODY></form>
 

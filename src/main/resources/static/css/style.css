@@ -1,20 +1,20 @@
 TD {
 	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif
 }
-TR.T1 {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #99ccff; COLOR: #ffffff; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif
+TR.t1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #99ccff; COLOR: #ffffff; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif;
     HEIGHT: 20px
 }
-TR.T2 {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #f2f8ff; COLOR: #ffffff; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif
+TR.t2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #f2f8ff; COLOR: #ffffff; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif;
     HEIGHT: 20px
 }
-TD.T1 {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #99ccff; COLOR: #000000; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif
+TD.t1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #99ccff; COLOR: #000000; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif;
     HEIGHT: 20px
 }
-TD.T2 {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #f2f8ff; COLOR: #000000; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif
+TD.t2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #f2f8ff; COLOR: #000000; FONT-FAMILY: tahoma,Verdana, Arial, Helvetica, sans-serif;
     HEIGHT: 20px
 }
 P {

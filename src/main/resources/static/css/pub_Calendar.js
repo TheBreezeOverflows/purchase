@@ -99,7 +99,7 @@ function fBuildCal(iYear, iMonth) {
 }
 
 function fDrawCal(iYear, iMonth, iCellHeight, sDateTextSize) {
-  var WeekDay = new Array("ÈÕ","Ò»","¶þ","Èý","ËÄ","Îå","Áù");
+  var WeekDay = new Array("ï¿½ï¿½","Ò»","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½");
   var styleTD = " bgcolor='"+gcBG+"' bordercolor='"+gcBG+"' valign='middle' align='center' height='"+iCellHeight+"' style='font-size:11px; ";
 
   with (document) {
@@ -215,7 +215,7 @@ function fGetXY(aTag){
 //       dateCtrl is the widget into which you want to put the selected date.
 // i.e.: <input type="text" name="dc" style="text-align:center" readonly><INPUT type="button" value="V" onclick="fPopCalendar(dc,dc);return false">
 
-function fPopUpCalendarDlg(ctrlobj)   //µ¯³öÈÕÀú
+function fPopUpCalendarDlg(ctrlobj)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
 	showx = event.screenX - event.offsetX - 4 - 210 ; // + deltaX;
 	showy = event.screenY - event.offsetY + 18; // + deltaY;
@@ -229,7 +229,7 @@ function fPopUpCalendarDlg(ctrlobj)   //µ¯³öÈÕÀú
 	}
 }
 
-function fPopUpMonthDlg(ctrlobj)   //µ¯³öÈÕÀú Ö»·µ»ØÔÂ·Ý 
+function fPopUpMonthDlg(ctrlobj)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ 
 {
 	showx = event.screenX - event.offsetX - 4 - 210 ; // + deltaX;
 	showy = event.screenY - event.offsetY + 18; // + deltaY;
@@ -275,17 +275,17 @@ function fPopCalendar(popCtrl, dateCtrl, mode, defDate){
   }
 }
 
-var gMonths = new Array("1ÔÂ","2ÔÂ","3ÔÂ","4ÔÂ","5ÔÂ","6ÔÂ","7ÔÂ","8ÔÂ","9ÔÂ","10ÔÂ","11ÔÂ","12ÔÂ");
+var gMonths = new Array("1ï¿½ï¿½","2ï¿½ï¿½","3ï¿½ï¿½","4ï¿½ï¿½","5ï¿½ï¿½","6ï¿½ï¿½","7ï¿½ï¿½","8ï¿½ï¿½","9ï¿½ï¿½","10ï¿½ï¿½","11ï¿½ï¿½","12ï¿½ï¿½");
 
 with (document) {
 write("<Div id='VicPopCal' style='OVERFLOW:hidden;POSITION:absolute;VISIBILITY:hidden;border:0px ridge;width:100%;height:100%;top:0;left:0;z-index:100;overflow:hidden'>");
-write("<link rel='stylesheet'  href='style.css'>");
+write("<link rel='stylesheet'  href='css/style.css'>");
 write("<table border='0' bgcolor='#3366CC'>");
 write("<TR>");
 write("<td valign='middle' align='center'><input type='button' name='PrevMonth' value='<' style='height:20;width:20;FONT:bold' onClick='fPrevMonth()'>");
 write("&nbsp;<SELECT name='tbSelYear' onChange='fUpdateCal(tbSelYear.value, tbSelMonth.value)' Victor='Won'>");
 for(i=1980;i<giYear+6;i++)
-	write("<OPTION value='"+i+"'>"+i+"Äê</OPTION>");
+	write("<OPTION value='"+i+"'>"+i+"ï¿½ï¿½</OPTION>");
 write("</SELECT>");
 write("&nbsp;<select name='tbSelMonth' onChange='fUpdateCal(tbSelYear.value, tbSelMonth.value)' Victor='Won'>");
 for (i=0; i<12; i++)
@@ -303,7 +303,7 @@ write("</TR><TR><TD align='center'>");
 write("<TABLE width='100%'><TR><TD align='center'>");
 write("<B ID=\"CAL_B_BLANK\" style='color:"+gcBG+"; visibility:visible; cursor:hand; font-size:11px' onclick='fSetDate(0,0,0)' onMouseOver='this.style.color=gcToggle' onMouseOut='this.style.color=gcBG'></B>");
 write("</td><td algin='center'>");
-write("<B style='color:"+gcBG+";cursor:hand; font-size:11px' onclick='fSetDate(giYear,giMonth,giDay)' onMouseOver='this.style.color=gcToggle' onMouseOut='this.style.color=gcBG'>Ñ¡Ôñ: "+giYear+"/"+giMonth+"/"+giDay+"</B>");
+write("<B style='color:"+gcBG+";cursor:hand; font-size:11px' onclick='fSetDate(giYear,giMonth,giDay)' onMouseOver='this.style.color=gcToggle' onMouseOut='this.style.color=gcBG'>Ñ¡ï¿½ï¿½: "+giYear+"/"+giMonth+"/"+giDay+"</B>");
 write("</td></tr></table>");
 write("</TD></TR>");
 write("</TABLE></Div>");
