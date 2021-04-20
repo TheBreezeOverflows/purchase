@@ -28,6 +28,12 @@ public class UserController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping("/getShiroPrincipal")
+    @ResponseBody
+    public String getShiroPrincipal(){
+        return SecurityUtils.getSubject().getPrincipal().toString();
+    }
+
     //注册
     @PostMapping("/userRegist")
     public String userRegist(@RequestParam("uName") String userName,@RequestParam("uPassword")  String passWord){

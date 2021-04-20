@@ -16,13 +16,15 @@ public interface SupplierService {
      */
     Supplier getSupplierInfo(String userName);
 
-    //查询供应商产品
-    List<QuoteDetail> getSupplierProducts(String userName,Integer pageNum,Integer pageSize,String sort,String order);
-
     //查询供应商产品（datagrid）
-    EasyUIDataGridJsonEntity getSupplierProductsDaraGrid(String userName,Integer pageNum,Integer pageSize,String sort,String order);
+    EasyUIDataGridJsonEntity getSupplierProductsDataGrid(Integer pageNum,Integer pageSize,String sort,String order);
 
-    //获取总条数
-    int getTotalProducts(String userName);
+    //获取供应商产品总条数
+    int getTotalProducts();
 
+    //查询供应商产品类别（datagrid）
+    EasyUIDataGridJsonEntity getSupplierProductsTypeDataGrid(Integer pageNum,Integer pageSize,String sort,String order);
+
+    //获取供应商产品类别条数
+    int getTotalProductsType();
 }

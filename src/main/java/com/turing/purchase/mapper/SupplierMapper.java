@@ -26,4 +26,7 @@ public interface SupplierMapper {
     //查询供应商信息
     @Select("select * from supplier where user_id = (select id from sys_users where LOGIN_ID = #{userName})")
     Supplier selectByUserName(@Param("userName") String userName);
+
+    @Select("select id from supplier where user_id = (select id from sys_users where LOGIN_ID = #{userName})")
+    Integer selectIdByUserName(@Param("userName")String userName);
 }

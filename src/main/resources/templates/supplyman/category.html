@@ -1,102 +1,186 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{common::header('')}">
-    <link rel="stylesheet" type="text/css" th:href="@{/mycss/base.css}">
-
-    <style type="text/css">
-        table input{
-            font-size: 12px;
-            height: 18px;
-        }
-        .mylittelbtn{
-            width: 50px;
-            height: 20px;
-            vertical-align: middle;
-            line-height: 12px;
-        }
-    </style>
-
-    <SCRIPT language=JAVASCRIPT>
-        function mydelete(obj) {
-            if (confirm("您确定删除本商品？")) {
-                var myobj = obj.parentNode.parentNode.parentNode;
-                var myrow = obj.parentNode.parentNode;
-                myobj.deleteRow(myrow.rowIndex);
-            }
-        }
-    </SCRIPT>
-
 </HEAD>
 <BODY>
-<CENTER>
-    <FORM name=form action="" method=post>
-        <H4><FONT color=#0070c0 style="font-weight: bold">供应商材料类型维护</FONT></H4>
-        <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff
-               borderColorLight=#ffffff border=0>
-            <TBODY>
-            <TR>
-                <TD>
-                    <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
-                        <TBODY>
-                        <TR>
-                            <TD noWrap align=middle>
-                                类型编号：<INPUT maxLength=15 size=15 name=p_prodno>&nbsp;&nbsp;
-                                类型名称：<INPUT maxLength=15 size=15 name=p_prodname>&nbsp;&nbsp;
-                                <INPUT class="mylittelbtn" id=button2 onclick=submit_form_cx() type=button value=查询 name=button2>
-                            </TD>
-                        </TR>
-                        </TBODY>
-                    </TABLE>
-                </TD>
-            </TR>
-            </TBODY>
-        </TABLE>
-        <FORM name="form1" action="" method="Post">
-            <TABLE style="LINE-HEIGHT: 30px" width="100%"
-                   bgColor=#336699 borderColorLight=#006699>
-                <TBODY>
-                <TR>
-                    <TD>
-                        <TABLE class="table table-bordered table-hover table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
-                            <TBODY>
-                            <tr class=t2>
-                                <td colspan="11"><input class="mylittelbtn" style="float: left" type="button" value="增加" onclick="toreload('category_save');"/></td>
-                            </tr>
-                            <TR class=t1 style="background-color: rgb(153, 204, 255);">
-                                <TD noWrap align=middle>序号</TD>
-                                <TD noWrap align=middle>类型编号</TD>
-                                <TD noWrap align=middle>类型名称</TD>
-                                <TD noWrap align=middle>类型描述</TD>
-                                <TD noWrap align=middle>操纵</TD>
-                            </TR>
-                            <TR class=t2>
-                                <TD align=middle>2</TD>
-                                <TD align=middle>001005000<BR></TD>
-                                <TD>晶振<BR></TD>
-                                <TD align=right>芯片</TD>
-                                <TD align=center><a href="javascript:toreload('category_update')">修改</a>&nbsp;&nbsp;<a
-                                        onclick="mydelete(this)" style="cursor:hand">删除</a></TD>
-                            </TR>
-                            <tr class=t2>
-                                <td colspan="11">
-                                    <CENTER><FONT color=#000064>◆&nbsp;</FONT><FONT color=#000064>首页
-                                        上一页</FONT>&nbsp;<A
-                                            href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2"><FONT
-                                            color=#0000be>下一页</FONT></A>&nbsp;<A
-                                            href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4"><FONT
-                                            color=#0000be>尾页</FONT></A><FONT color=#000064>&nbsp;共 40 个需求计划 每页10
-                                        个需求计划</FONT><FONT color=#000064>&nbsp;页次:<FONT
-                                            color=blue>1</FONT>/4页</FONT><FONT color=#000064>&nbsp;◆&nbsp;</FONT>
-                                    </CENTER></td>
-                            </tr>
-                            </TBODY>
-                        </TABLE>
-                    </TD>
-                </TR>
-                </TBODY>
-            </TABLE>
+<div id="myPanel" class="panel">
+    <!--弹出对话框-->
+    <div id="dlog" class="easyui-dialog" style="width:400px;height:600px;padding:10px 20px"
+         data-options="buttons:'#dlogbtn',closed:true,modal:true">
+        <form id="myForm" method="post">
+            <div style="margin-bottom:20px;">
+                <input class="easyui-textbox" name="id" style="width:100%;" data-options="label:'类别编号:'">
+            </div>
+            <div style="margin-bottom:20px;">
+                <input class="easyui-textbox" name="id" style="width:100%;" data-options="label:'类别名称:'">
+            </div>
+        </form>
+    </div>
+    <div id="dlogbtn">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveOrUpdateEmp()">保存</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlog').dialog('close')">关闭</a>
+    </div>
+</div>
+<!--工具条-->
+<div id="myToolbar">
+    <center><H4><FONT color=#0070c0 style="font-weight: bold">供应商材料类型维护</FONT><IMG alt=帮助 src="../css/help_a.gif" border=0></H4></center>
+    <a href="#" id="btn_add" style="float: left" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'添加'"></a>
+    <div class="datagrid-btn-separator"></div>
+    <a href="#" id="btn_update" style="float: left" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>
+    <div class="datagrid-btn-separator"></div>
+    <a href="#" id="btn_delete" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true,text:'删除'"></a>
+    <br>
+    产品编号：
+    <input class="easyui-textbox" style="width:100px" textField="text">
+    产品名称:
+    <input class="easyui-textbox" style="width:100px" textField="text">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+</div>
+<table id="dg" data-options="fitColumns:true,scrollbarSize:0"></table>
+<script type="text/javascript" th:inline="none">
+    $(function(){
+        $('#dg').datagrid({
+            url:'/supplyman/getSupplierProductsTypePage',
+            method:'post',
+            fit:true,
+            striped:true,   //斑马线效果(隔行变色)
+            rownumbers:true,    //行号
+            pagination:true,    //分页工具
+            pageList:[5,10,15,20,25,30],  //分页显示数据数设置
+            //pagePosition:'top',    //分页插件位置
+            scrollbarSize:8,    //滚动条大小
+            columns:[[
+                {field:'id',title:'序号',checkbox:true},
+                {field:'materialNum',title:'类型编号',width:200,sortable:true},
+                {field:'materialName',title:'类型名称',width:200,sortable:true},
+                {field:'materialType',title:'类型描述',width:100}
+            ]],
+            toolbar:'#myToolbar'    //指定工具条
+        })
+    })
 
-        </FORM>
-    </FORM></CENTER>
-</CENTER></BODY>
+    //按钮事件
+    //添加按钮
+    $("#btn_add").click(function(){
+        $("#dlog").dialog('open').dialog('setTitle','新增供应商产品类别');
+        $("#myForm").form('clear');
+        url = ''
+    })
+    //修改按钮
+    $("#btn_update").click(function(){
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            $("#dlog").dialog('open').dialog('setTitle','修改产品类别');
+            $("#myForm").form('load',row)
+            url = ''
+        }else{
+            //消息提示
+            $.messager.show({
+                title: '警告',
+                msg: "没有选择要修改的行",
+                timeout:2000,
+                showType:'slide'
+            });
+        }
+    })
+    //删除按钮
+    $("#btn_delete").click(function(){
+        var rows = $("#dg").datagrid('getSelections');
+        if(rows.length > 0){
+            $.messager.confirm('警告',"您确定要删除这些行数据吗？已选中“"+rows.length+"”条数据",function(r){
+                if (r){
+                    //获取empno的数组
+                    var ids = "";
+                    for (var i = 0;i < rows.length;i++){
+                        ids += rows[i].empno
+                        if(i < rows.length-1){
+                            ids += ','
+                        }
+                    }
+                    url = "?ids="+ids
+                    deleteEmps()
+                }
+            });
+        }else{
+            //消息提示
+            $.messager.show({
+                title: '警告',
+                msg: "没有选择要删除的行",
+                timeout:2000,
+                showType:'slide'
+            });
+        }
+    })
+
+    //添加和修改整合函数
+    function saveOrUpdateEmp(){
+        $("#myForm").form('submit',{
+            url:url,
+            onSubmit: function(){
+                var isValid = $(this).form('validate');
+                if (!isValid){
+                    $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                }
+                return isValid;	// 返回false终止表单提交
+            },
+            success: function(result){
+                if(result == "success"){
+                    //提交成功，关闭对话框
+                    $('#dlog').dialog('close');
+                    //消息提示
+                    $.messager.show({
+                        title: '提示',
+                        msg: "更新成功",
+                        timeout:2000,
+                        showType:'slide'
+                    });
+                    //刷新数据表格
+                    $('#dg').datagrid('reload');
+                }
+
+                //错误信息
+                var result = eval('('+result+')');
+                if (result.errorMsg){
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlog').dialog('close');		// close the dialog
+                    $('#dg').datagrid('reload');	// reload the user data
+                }
+            }
+        })
+    }
+
+    //批量删除emp函数
+    function deleteEmps(){
+        $.ajax({
+            type:'post',
+            url:url,
+            success:function(data){
+                if(data == "success"){
+                    //刷新数据
+                    $("#dg").datagrid("reload");
+                    $.messager.show({
+                        title:'系统消息',
+                        msg:'删除成功',
+                        timeout:3000,
+                        showType:'slide'
+                    });
+                }
+            },
+            error:function(){
+                //消息提示
+                $.messager.show({
+                    title: '错误',
+                    msg: "发生未知错误 deleteField ",
+                    timeout:2000,
+                    showType:'slide'
+                });
+            }
+        })
+    }
+</script>
+</BODY>
 </HTML>

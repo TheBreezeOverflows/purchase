@@ -328,17 +328,13 @@
     </if>
   </update>
   <!--自定义sql-->
-  <select id="selectByUserName" resultMap="BaseResultMap">
+  <select id="selectBySupplierId" resultMap="BaseResultMap">
     select *
     from quote_detail
     where quote_id in (
       select id
       from quote
-      where supplier_id = (
-        select id
-        from sys_users
-        where LOGIN_ID = '${userName}'
-      )
+      where supplier_id = #{id}
     )
     <if test="sort != '' and order != ''">
       order by ${sort} ${order}

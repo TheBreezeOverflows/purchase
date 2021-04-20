@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
-<HEAD><TITLE></TITLE>
+<HEAD th:insert="~{common::header('')}">
     <META http-equiv=Content-Type content="text/html; charset=UTF-8">
     <LINK href="css/style.css" type=text/css rel=stylesheet>
 </HEAD>
@@ -25,9 +25,15 @@
             </TD>
             <TD noWrap align=right width="90%">&nbsp;&nbsp;&nbsp;&nbsp;
                 <FONT color=white>
-                    <B>用户：<FONT color=white>[[${session.emp.empName}]](株洲南车时代电气股份有限公司)</FONT>&nbsp;&nbsp;</B>
+                    <B>用户：<FONT color=white><span id="userNameSpan"></span></FONT>&nbsp;&nbsp;</B>
                 </FONT>
             </TD>
+            <script type="text/javascript">
+                $.get("user/getShiroPrincipal",function(data){
+                    var userNameSpan = $("#userNameSpan");
+                    userNameSpan.text(data)
+                })
+            </script>
             <TD noWrap>
                 <A onclick="window.open('About.ASP','child','status=no,scrollbars=no,toolbar=no,menubar=no,location=no,width=458,height=360,left='+(window.screen.width/2-229)+',top='+(window.screen.height/2-230)+' ')"
                     href="javascript:void(null)" shape=rect coords="162, 184, 242, 258">
