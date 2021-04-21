@@ -5,7 +5,7 @@
 <body>
 <div id="myPanel" class="panel">
     <!--弹出对话框-->
-    <div id="dlog" class="easyui-dialog" style="width:400px;height:600px;padding:10px 20px"
+    <div id="dlog" class="easyui-dialog" style="padding:10px 20px"
          data-options="buttons:'#dlogbtn',closed:true,modal:true">
         <form id="myForm" method="post">
             <div style="margin-bottom:20px;display: none">
@@ -90,6 +90,12 @@
     //按钮事件
     //添加按钮
     $("#btn_add").click(function(){
+        $("#dlog").panel("resize",{
+            width: 400,
+            height: 500,
+            left:window.innerWidth/2 - 400/2,
+            top:window.innerHeight/2 - 550/2
+        })
         $("#dlog").dialog('open').dialog('setTitle','新增供应商产品');
         $("#myForm").form('clear');
         url = ''
@@ -98,6 +104,12 @@
     $("#btn_update").click(function(){
         var row = $('#dg').datagrid('getSelected');
         if(row){
+            $("#dlog").panel("resize",{
+                width: 400,
+                height: 500,
+                left:window.innerWidth/2 - 400/2,
+                top:window.innerHeight/2 - 550/2
+            })
             $("#dlog").dialog('open').dialog('setTitle','修改供应商产品');
             $("#myForm").form('load',row)
             url = ''
