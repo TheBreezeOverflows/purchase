@@ -57,106 +57,61 @@
     </SCRIPT>
 </HEAD>
 <BODY>
-<DIV id=overDiv style="Z-INDEX: 1; POSITION: absolute"></DIV>
-<CENTER>
-    <FORM name=form action=Project_list_do.asp method=post><INPUT type=hidden
-                                                                  value=1 name=p_type>
-        <H4><FONT color=#0070c0 style="font-weight: bold">报价维护</FONT></H4>
-        <TABLE cellSpacing=1 cellPadding=0 width="100%"
-               borderColorLight=#ffffff border=0>
-            <TBODY>
-            <TR>
-                <TD>
-                    <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
-                        <TBODY>
-                        <TR>
-                            <TD noWrap align=middle>报价书名称：<INPUT size=10
-                                                                 name=p_title>&nbsp;&nbsp; 对应询价书名称：<INPUT size=10
-                                                                                                          name=p_Item>&nbsp;&nbsp;
-                                <INPUT class="mylittelbtn" onclick=submit_form_cx() type=button value=查询></TD>
-                        </TR>
-                        </TBODY>
-                    </TABLE>
-                </TD>
-            </TR>
-            </TBODY>
-        </TABLE>
-        <FORM
-                name="form1" action="" method="Post">
-            <CENTER>
-                <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
-                       bgColor=#336699 borderColorLight=#006699 border=0>
-                    <TBODY>
-                    <TR>
-                        <TD>
-                            <TABLE class="table table-bordered table-condensed" cellSpacing=1 cellPadding=3 width="100%" border=0>
-                                <TBODY>
-                                <TR class=t1 style="background-color: rgb(153, 204, 255);">
-                                    <TD noWrap align=middle>选择</TD>
-                                    <TD noWrap align=middle>序号</TD>
-                                    <TD noWrap align=middle>报价书标题</TD>
-                                    <TD noWrap align=middle>报价提交时间</TD>
-                                    <TD noWrap align=middle>对应询价书</TD>
-                                    <TD noWrap align=middle>询价截止时间</TD>
-                                    <TD noWrap align=middle colspan="2">采购类型</TD>
-                                </TR>
-                                <TR class=t2>
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133277
-                                                            name=p_orderno></TD>
-                                    <TD>1</TD>
-                                    <TD><A
-                                            href="javascript:xjfatzXjfamx()">对W65200000000的报价<BR></A></TD>
-                                    <TD>2010-1-8 17:05:38<BR></TD>
-                                    <TD>W65200000000</TD>
-                                    <TD>2010-1-9 17:05:38<BR></TD>
-                                    <TD colspan="2">公开求购</TD>
-                                </TR>
-                                </TBODY>
-                            </TABLE>
-                        </TD>
-                    </TR>
-                    </TBODY>
-                </TABLE>
-                <FONT color=#000064>◆&nbsp;</FONT>
-                <FONT color=#000064>首页</FONT>
-                <font>上一页</FONT>&nbsp;
-                <FONT color=#ff0000>1</FONT>&nbsp;
-                <A href="#"><FONT color=#0000be>2</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>3</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>4</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>5</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>6</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>7</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>8</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>9</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>10</FONT></A>&nbsp;
-                 到第 <SELECT onchange=submit_form_cx() name=page>
-                <OPTION value=1 selected>1</OPTION>
-                <OPTION value=2>2</OPTION>
-                <OPTION value=3>3</OPTION>
-                <OPTION value=4>4</OPTION>
-                <OPTION value=5>5</OPTION>
-                <OPTION value=6>6</OPTION>
-                <OPTION value=7>7</OPTION>
-                <OPTION value=8>8</OPTION>
-                <OPTION value=9>9</OPTION>
-                <OPTION value=10>10</OPTION>
-                <OPTION value=11>11</OPTION>
-                <OPTION value=12>12</OPTION>
-                <OPTION value=13>13</OPTION>
-                <OPTION value=14>14</OPTION>
-                <OPTION value=15>15</OPTION>
-            </SELECT>页&nbsp;
-                <A href="#"><FONT color=#0000be>下一页</FONT></A>&nbsp;
-                <A href="#"><FONT color=#0000be>尾页</FONT></A>
-                <FONT color=#000064>&nbsp;共 141 个采购计划 每页10个采购计划</FONT>
-                <FONT color=#000064>&nbsp;页次:<FONT color=blue>1</FONT>/15页</FONT>
-                <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
-                <INPUT type=hidden value=1 name=p_listtype>
-                <P align=center class="myp" style="margin-top: 15px"><INPUT onclick=toreload("修改公开求购报价书") type=button value=打开> <INPUT
-                        onclick="ret1();" type=button value=删除>
-                </P>
-            </CENTER></FORM>
-    </FORM></CENTER>
-</CENTER></BODY>
+
+<!--工具条-->
+<div id="myToolbar">
+    <center><H4><FONT color=#0070c0 style="font-weight: bold">报价维护</FONT></H4></center>
+    <a href="#" id="btn_open" style="float: left" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true,text:'打开'"></a>
+    <div class="datagrid-btn-separator"></div>
+    <a href="#" id="btn_delete" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true,text:'删除'"></a>
+    <br>
+    报价书名称：
+    <input class="easyui-textbox" style="width:100px" textField="text">
+    对应询价书名称:
+    <input class="easyui-textbox" style="width:100px" textField="text">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+</div>
+<!--数据表格-->
+<table id="dg"></table>
+
+<script type="text/javascript" th:inline="none">
+    $('#dg').datagrid({
+        url:'/supplyman/getQuotePage',
+        fitColumns:true,
+        method:'post',
+        fit:true,
+        striped:true,   //斑马线效果(隔行变色)
+        rownumbers:true,    //行号
+        pagination:true,    //分页工具
+        pageList:[5,10,15,20,25,30],  //分页显示数据数设置
+        //pagePosition:'top',    //分页插件位置
+        scrollbarSize:8,    //滚动条大小
+        singleSelect:true,  //单选一行
+        columns:[[
+            {field:'1',title:'选择',width:50,checkbox:true},
+            {field:'id',title:'序号',width:50},
+            {field:'queTitle',title:'报价书标题',width:200},
+            {field:'queDate',title:'报价提交时间',width:100},
+            {field:'enquireId',title:'对应询价书',width:100},
+            {field:'endDate',title:'询价截止时间',width:100},
+            {field:'stockId',title:'采购类型',width:100,
+                formatter: function(value,row,index){
+                    if (row.stockSupplier){
+                        if(row.stockSupplier.supplierId == 0){
+                            return "公开求购";
+                        }else{
+                            return "定向询价";
+                        }
+                        //return row.user.name;
+                    } else {
+                        return "公开求购";
+                    }
+                }
+            }
+        ]],
+        toolbar:'#myToolbar'    //指定工具条
+    });
+</script>
+
+</BODY>
 </HTML>

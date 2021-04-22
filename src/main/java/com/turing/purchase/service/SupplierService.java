@@ -16,10 +16,10 @@ public interface SupplierService {
      */
     Supplier getSupplierInfo(String userName);
 
-    //查询供应商产品（datagrid）
+    //查询供应商产品细节（datagrid）
     EasyUIDataGridJsonEntity getSupplierProductsDataGrid(Integer pageNum,Integer pageSize,String sort,String order);
 
-    //获取供应商产品总条数
+    //获取供应商产品细节总条数
     int getTotalProducts();
 
     //查询供应商产品类别（datagrid）
@@ -27,4 +27,10 @@ public interface SupplierService {
 
     //获取供应商产品类别条数
     int getTotalProductsType();
+
+    //查询供应商产品（datagrid）
+    EasyUIDataGridJsonEntity getQuoteDataGrid(Integer pageNum,Integer pageSize,String sort,String order);
+
+    //获取供应商产品条数
+    int getTotalQuote();
 }

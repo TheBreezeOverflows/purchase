@@ -1,11 +1,9 @@
 package com.turing.purchase.service.impl;
 
-import com.turing.purchase.entity.EasyUIDataGridJsonEntity;
-import com.turing.purchase.entity.Material;
-import com.turing.purchase.entity.QuoteDetail;
-import com.turing.purchase.entity.Supplier;
+import com.turing.purchase.entity.*;
 import com.turing.purchase.mapper.MaterialMapper;
 import com.turing.purchase.mapper.QuoteDetailMapper;
+import com.turing.purchase.mapper.QuoteMapper;
 import com.turing.purchase.mapper.SupplierMapper;
 import com.turing.purchase.service.SupplierService;
 import com.turing.purchase.util.HandleTool;
@@ -21,6 +19,8 @@ public class SupplierServiceImpl implements SupplierService {
     @Autowired(required = false)
     private SupplierMapper supplierMapper;
     @Autowired(required = false)
+    private QuoteMapper quoteMapper;
+    @Autowired(required = false)
     private QuoteDetailMapper quoteDetailMapper;
     @Autowired(required = false)
     private MaterialMapper materialMapper;
@@ -28,7 +28,7 @@ public class SupplierServiceImpl implements SupplierService {
     /**
      * 获取供应商基本信息
      * @param userName 用户名
-     * @return
+     * @return 供应商基本信息
      */
     @Override
     public Supplier getSupplierInfo(String userName) {
@@ -40,14 +40,14 @@ public class SupplierServiceImpl implements SupplierService {
 
     /**
      * 获取当前用户的供应商id
-     * @return
+     * @return 当前用户的供应商id
      */
     private int getSupplierId(){
         return supplierMapper.selectIdByUserName(SecurityUtils.getSubject().getPrincipal().toString());
     }
 
     /**
-     * 获取供应商产品 并分页、排序
+     * 获取供应商产品细节 并分页、排序
      * @param pageNum 当前页
      * @param pageSize 每页显示数量
      * @param sort 排序的列名
@@ -70,7 +70,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     /**
-     * 查询供应商产品的总数量（用于datagrid的分页格式实体）
+     * 查询供应商产品细节的总数量（用于datagrid的分页格式实体）
      * @return 供应商产品总数
      */
     @Override
@@ -107,10 +107,43 @@ public class SupplierServiceImpl implements SupplierService {
 
     /**
      * 查询供应商产品类别的总数目
-     * @return
+     * @return 供应商产品类别的总数目
      */
     @Override
     public int getTotalProductsType() {
         return materialMapper.selectTotalPageBySupplierId(getSupplierId());
+    }
+
+
+    /**
+     * 获取对应供应商的报价信息 分页、排序
+     * @param pageNum 当前页
+     * @param pageSize 每页显示数量
+     * @param sort 排序的列名
+     * @param order 排序方式
+     * @return 封装后的实体（用于转换成datagrid的json格式）
+     */
+    @Override
+    public EasyUIDataGridJsonEntity getQuoteDataGrid(Integer pageNum, Integer pageSize, String sort, String order) {
+        //获取supplierId
+        Integer id = getSupplierId();
+        //获取供应商产品列表（分页，排序）
+        List<Quote> list = quoteMapper.selectQuoteAndStockSupplier(id,(pageNum-1)*pageSize,pageSize,sort,order
+        );
+        //封装成datagrid格式实体
+        EasyUIDataGridJsonEntity easyui = new EasyUIDataGridJsonEntity();
+        easyui.setTotal(getTotalQuote());
+        easyui.setRows(list);
+        //返回封装后的实体
+        return easyui;
+    }
+
+    /**
+     * 获取对应供应商id 的报价总数
+     * @return 对应供应商id 的报价总数
+     */
+    @Override
+    public int getTotalQuote() {
+        return quoteMapper.selectCount(getSupplierId());
     }
 }

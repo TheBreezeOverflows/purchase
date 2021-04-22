@@ -35,6 +35,16 @@ public class Quote implements Serializable {
 
     private String status;
 
+    public StockSupplier getStockSupplier() {
+        return stockSupplier;
+    }
+
+    public void setStockSupplier(StockSupplier stockSupplier) {
+        this.stockSupplier = stockSupplier;
+    }
+
+    private StockSupplier stockSupplier;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
