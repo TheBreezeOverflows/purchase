@@ -5,6 +5,11 @@
     <ul id="mytree"></ul>
     <script type="text/javascript">
         function toreload(href){
+            var dlog = $("#dlog");
+            if(dlog[0] != undefined){
+                dlog.dialog().window().panel("destroy")
+            }
+
             $("#mycontent").panel("refresh",href);
         }
         $("#mytree").tree({

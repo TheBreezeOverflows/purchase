@@ -41,6 +41,16 @@ public class QuoteDetail implements Serializable {
 
     private Date endDate;
 
+    private String nullStr;
+
+    public String getNullStr() {
+        return nullStr;
+    }
+
+    public void setNullStr(String nullStr) {
+        this.nullStr = nullStr;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
