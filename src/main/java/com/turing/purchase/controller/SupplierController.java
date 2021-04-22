@@ -1,9 +1,6 @@
 package com.turing.purchase.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.turing.purchase.entity.EasyUIDataGridJsonEntity;
-import com.turing.purchase.entity.QuoteDetail;
 import com.turing.purchase.entity.Supplier;
 import com.turing.purchase.service.SupplierService;
 import org.apache.shiro.SecurityUtils;
@@ -84,6 +81,27 @@ public class SupplierController {
             @RequestParam(value = "order",defaultValue = "") String order){
 
         EasyUIDataGridJsonEntity daraGrid = supplierService.getSupplierProductsTypeDataGrid( pageNum, pageSize, sort, order);
+
+        return daraGrid;
+    }
+
+    /**
+     * 获取供应商产品 EasyUI 的 DataGrid 的 JSON 格式
+     * @param pageNum 当前页
+     * @param pageSize 每页显示数
+     * @param sort 排序的列名
+     * @param order 排序方式
+     * @return 供应商产品  封装后的json格式（用于RasyUI的datagrid加载数据）
+     */
+    @RequestMapping("/getQuotePage")
+    @ResponseBody
+    public EasyUIDataGridJsonEntity getQuotePage(
+            @RequestParam(value = "page",required = true,defaultValue = "1")Integer pageNum,
+            @RequestParam(value = "rows",required = true,defaultValue = "10")Integer pageSize,
+            @RequestParam(value = "sort",defaultValue = "") String sort,
+            @RequestParam(value = "order",defaultValue = "") String order){
+
+        EasyUIDataGridJsonEntity daraGrid = supplierService.getQuoteDataGrid( pageNum, pageSize, sort, order);
 
         return daraGrid;
     }

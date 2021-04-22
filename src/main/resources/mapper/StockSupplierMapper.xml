@@ -137,4 +137,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <!--自定义方法-->
+  <select id="selectStockSupplier" resultMap="BaseResultMap">
+    select * from stock_supplier
+  </select>
 </mapper>

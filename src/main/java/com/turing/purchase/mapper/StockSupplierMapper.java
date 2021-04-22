@@ -19,4 +19,7 @@ public interface StockSupplierMapper {
     int updateByExampleSelective(@Param("record") StockSupplier record, @Param("example") StockSupplierExample example);
 
     int updateByExample(@Param("record") StockSupplier record, @Param("example") StockSupplierExample example);
+
+    //自定义方法
+    List<StockSupplier> selectStockSupplier();
 }

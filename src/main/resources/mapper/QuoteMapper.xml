@@ -355,4 +355,37 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  
+  <!--自定义方法-->
+
+  <resultMap id="MyResultMap" type="com.turing.purchase.entity.Quote" >
+    <result column="ID" property="id" jdbcType="BIGINT" />
+    <result column="QUOTE_NUM" property="quoteNum" jdbcType="VARCHAR" />
+    <result column="ENQUIRE_ID" property="enquireId" jdbcType="BIGINT" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="BIGINT" />
+    <result column="QUO_COMPANY" property="quoCompany" jdbcType="VARCHAR" />
+    <result column="QUO_LINKMAN" property="quoLinkman" jdbcType="VARCHAR" />
+    <result column="QUO_PHONE" property="quoPhone" jdbcType="VARCHAR" />
+    <result column="QUO_FAX" property="quoFax" jdbcType="VARCHAR" />
+    <result column="QUO_EMAIL" property="quoEmail" jdbcType="VARCHAR" />
+    <result column="QUE_TITLE" property="queTitle" jdbcType="VARCHAR" />
+    <result column="QUE_DATE" property="queDate" jdbcType="TIMESTAMP" />
+    <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="SUM_AMOUNT" property="sumAmount" jdbcType="DECIMAL" />
+    <result column="OVERALL_PRICE" property="overallPrice" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <association property="stockSupplier"
+                 select="com.turing.purchase.mapper.StockSupplierMapper.selectStockSupplier"
+                 column="SUPPLIER_ID">
+
+    </association>
+  </resultMap>
+  
+  <select id="selectQuoteAndStockSupplier" resultMap="MyResultMap">
+    select * from quote where supplier_id = #{id}
+    <if test="sort != '' and order != ''">
+      order by ${sort} ${order}
+    </if>
+    limit #{pageNum},#{pageSize}
+  </select>
 </mapper>
