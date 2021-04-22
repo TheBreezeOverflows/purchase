@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common::header('')}">
+<head>
+    <LINK href="../css/style.css" rel=stylesheet>
+    <script src="../jquery.min.js"></script>
+    <META content="MSHTML 6.00.2900.5626" name=GENERATOR>
     <SCRIPT language=JAVASCRIPT>
         function chck()
         {  var  count=0;
@@ -215,8 +218,7 @@
             window.open(page,"newuser","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
         }
     </SCRIPT>
-    <LINK href="css/style.css" rel=stylesheet>
-    <META content="MSHTML 6.00.2900.5626" name=GENERATOR></HEAD>
+</HEAD>
 <BODY>
 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
        bgColor=#336699 borderColorLight=#006699 border=0>
@@ -235,39 +237,39 @@
                         </FONT></H2></TD></TR>
                 <TR class=t1>
                     <TD noWrap width="20%">需求计划编号</TD>
-                    <TD class=t2 noWrap>1000201011133266</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.id}]]</TD>
                     <TD noWrap>产品编码</TD>
-                    <TD class=t2 noWrap>W64001005001</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.materialCode}]]</TD>
                 </TR>
                 <TR class=t1>
                     <TD noWrap width="20%">产品名称</TD>
-                    <TD class=t2 noWrap>晶振(HC-49U-500M-0.005%)</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.materialName}]]</TD>
                     <TD noWrap>数量</TD>
-                    <TD class=t2 noWrap>222</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.amount}]]</TD>
                 </TR>
                 <TR class=t1>
                     <TD noWrap>计量单位</TD>
-                    <TD class=t2 noWrap>个</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.measureUnit}]]</TD>
                     <TD noWrap>预算单价(元)</TD>
-                    <TD class=t2 noWrap>380</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.unitPrice}]]</TD>
                 </TR>
                 <TR class=t1>
                     <TD noWrap>开始交货期</TD>
-                    <TD class=t2 noWrap>2010/01/08</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.endDate}]]</TD>
                     <TD noWrap>业务员</TD>
-                    <TD class=t2 noWrap>杨春</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.author}]]</TD>
                 </TR>
 
                 <TR class=t1>
                     <TD noWrap>电子邮件</TD>
-                    <TD class=t2 noWrap>yangchun@teg.cn</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.email}]]</TD>
                     <TD noWrap width="20%">联系电话</TD>
-                    <TD class=t2 noWrap>0733-8498057</TD></TR>
+                    <TD class=t2 noWrap>[[${session.planOrderid.phone}]]</TD></TR>
                 <TR class=t1>
                     <TD noWrap width="20%">联系传真</TD>
-                    <TD class=t2 noWrap>0733-8498440</TD>
+                    <TD class=t2 noWrap>[[${session.planOrderid.fax}]]</TD>
                     <TD noWrap width="20%">备注</TD>
-                    <TD class=t2 noWrap>&nbsp;</TD></TR>
+                    <TD class=t2 noWrap>&nbsp;[[${session.planOrderid.remark}]]</TD></TR>
 
                 </TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
 <CENTER><INPUT onclick=javascript:window.close() type=button value=关闭>

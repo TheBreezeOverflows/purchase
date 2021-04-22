@@ -120,7 +120,7 @@ public class PlanController {
         Orders or=new Orders();
         //设置参数
         or.setMaterialCode(MaterialsCoding);//物资编码
-        or.setMaterialName(MaterialsCoding);//物资名称
+        or.setMaterialName(MaterialsName);//物资名称
         or.setAmount(MaterialsQuantity);//数量
         or.setMeasureUnit(MaterialsUnit);//计量单位
         //单价
@@ -129,7 +129,7 @@ public class PlanController {
         or.setUnitPrice(bd);
         try {
             //开始交货日期
-            or.setStartDate(sdf.parse(MaterialsData));
+            or.setEndDate(sdf.parse(MaterialsData));
         } catch (ParseException e) {
             System.out.println("日期类型转换异常");
             e.printStackTrace();
@@ -144,7 +144,108 @@ public class PlanController {
 
 
 
+    //需求计划录入初始分页进入
+    @GetMapping("/planOrderSelect")
+    public String planOrder(@RequestParam(value = "pn",defaultValue = "1")Integer pn, HttpSession session){
+        PageHelper.startPage(pn,5);
+        //获取所有物资信息
+        List<Orders> orders = planOrdersService.FinAllOrder();
+        //通过PageInfo类解析分页结果,admins的是我们获取数据的数组
+        PageInfo<Orders> info = new PageInfo<>(orders);
+        session.setAttribute("pageInfo",info);
+        //info.getList()//可以查看当前info的所有信息
+        return "redirect:/planman/Order_ytb_list";
+    }
 
+
+    //需求计划录入的条件分页查询
+    @GetMapping("/planOrderSelects")
+    @ResponseBody
+    public String planOrders(@RequestParam(value = "pn",defaultValue = "1")Integer pn,String materCode,String matername,HttpSession session){
+        System.out.println("需求计划查询初次进入");
+        PageInfo<Orders> ordersPageInfo = planOrderPage(pn,materCode,matername, session);
+        StringBuilder  str= new StringBuilder ("<TABLE cellSpacing=1 cellPadding=3 width=\"100%\" border=0 id=\"table1\" style=\"text-align: center\">   <TBODY> <TR class=t1>       <TD noWrap align=middle>选择</TD>        <TD noWrap align=middle>序号</TD>        <TD noWrap align=middle>物资代码</TD>        <TD noWrap align=middle>物资名称</TD>        <TD noWrap align=middle>数量</TD>       <TD noWrap align=middle>采购类型</TD>       <TD noWrap align=middle>采购进度</TD>    </TR>   ");
+
+        //判断查询到的信息不为空
+        if (ordersPageInfo!=null){
+            //获取当前页面的信息数量
+            int InfoSize = ordersPageInfo.getSize();
+            for (int i=0;i<InfoSize;i++){
+                //字符串拼接
+                str.append("<TR class=t2> <td align=center>  <input type=\"checkbox\" name=\"checkbox\" id="+ordersPageInfo.getPageNum()+" value="+ordersPageInfo.getList().get(i).getId()+" onclick=\"opp(true)\" > </td> <td>"
+                        +ordersPageInfo.getList().get(i).getId()+"</td> <td>"+ordersPageInfo.getList().get(i).getMaterialCode()+"</td> <td>"
+                        +ordersPageInfo.getList().get(i).getMaterialName()+"</td> <td>"+ordersPageInfo.getList().get(i).getAmount()+"</td> <td> 制造中心采购 </td> <td> 未确认 </td> ");
+            }
+        }
+        str.append("</TBODY> </TABLE>");
+        return str.toString();
+    }
+
+
+    /**
+     * 分页查询的调用分页方法
+     * @param pn    查询第几页
+     * @param session session对象
+     */
+    public PageInfo<Orders>  planOrderPage(Integer pn,String materCode,String matername, HttpSession session){
+        PageHelper.startPage(pn,5);
+
+        //接收查询信息集合
+        List<Orders> orders=null;
+        //获取所有查询的物资信息
+        //判断是否未输入信息
+        if (materCode==""&&matername==""){
+            orders = planOrdersService.FinAllOrder();
+        } else{
+           orders = planOrdersService.FinAllOrderCondition(materCode,matername);
+        }
+        //判断查询到的信息是否为空，
+        if (orders!=null){
+            //通过PageInfo类解析分页结果,admins的是我们获取数据的数组
+            PageInfo<Orders> info = new PageInfo<>(orders);
+            session.setAttribute("pageInfo",info);
+            //info.getList()可以查看当前info的所有信息
+            System.out.println(info.getList());
+            return info;
+        }
+        return null;
+
+    }
+
+
+    //根据id获取信息
+    @GetMapping("/planOrderidSelect")
+    @ResponseBody
+    public boolean planOrderid(Integer id,HttpSession session){
+        System.out.println("根据id查询信息");
+        Orders orders = planOrdersService.FinbyOrder(id);
+        if (orders!=null){
+            session.setAttribute("planOrderid",orders);
+            return true;
+        }
+      return false;
+    }
+
+    //根据id删除信息
+    @GetMapping("/planReamOrder")
+    @ResponseBody
+    public boolean reamOrder(String str){
+        System.out.println("根据id删除信息");
+        if (!"".equals(str)){
+            //将str的最后一个','截取掉
+            str = str.substring(0, str.length() - 1);
+            //将截取到的id字符转换为数组
+            String[] split = str.split(",");
+            try {
+                boolean fal = planOrdersService.CircularDeletion(split);
+            }catch (Exception e){
+                System.out.println("循环删除异常");
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return false;
+    }
 
 
 

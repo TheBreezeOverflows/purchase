@@ -6,6 +6,7 @@ import com.turing.purchase.mapper.OrdersMapper;
 import com.turing.purchase.service.PlanOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -19,6 +20,16 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
     public List<Orders> FinAllOrder() {
 
         return ordersMapper.selectByExample(null);
+    }
+
+    //根据条件查询
+    @Override
+    public List<Orders> FinAllOrderCondition(String matercode, String matername) {
+        OrdersExample example =new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andMaterialCodeLike("%"+matercode+"%")
+                .andMaterialNameLike("%"+matername+"%");
+        return ordersMapper.selectByExample(example);
     }
 
 
@@ -45,5 +56,29 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
             fla=true;
         }
         return fla;
+    }
+
+    //根据id删除指定信息
+    @Override
+    public boolean remaOrder(long id) {
+        OrdersExample example =new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(id);
+        int in = ordersMapper.deleteByExample(example);
+        if (in>0){
+            return true;
+        }
+        return false;
+    }
+    @Override
+    @Transactional
+    public boolean CircularDeletion(String[] split){
+        if (split.length>0) {
+            for (String s : split) {
+                remaOrder(Integer.parseInt(s));
+            }
+           return true;
+        }
+        return false;
     }
 }

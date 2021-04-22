@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{common::header('')}"></head>
+
+<BODY>
 <SCRIPT language=JAVASCRIPT>
     function select_check(theForm) {
         var count = 0;
@@ -196,19 +198,11 @@
     }
 
     function print_order_detail() {
-        window.open("print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
+        window.open("planman/print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
     }
 
 
 </SCRIPT>
-
-<META http-equiv=Content-Language content=zh-cn>
-<META http-equiv=Content-Type content="text/html; charset=utf-8">
-<META content="MSHTML 6.00.2900.5626" name=GENERATOR>
-<META content=FrontPage.Editor.Document name=ProgId>
-<LINK
-        href="../css/style.css" rel=stylesheet>
-<SCRIPT language=JavaScript src="../css/pub_Calendar.js"></SCRIPT>
 
 <SCRIPT language=javascript>
     function submit_form(theForm, i) {
@@ -320,6 +314,8 @@
 
     function ddtzDdmx() {
         var obj = document.getElementsByName("checkbox");
+        //console.log("id="+$('input[type=checkbox]:checked').val());
+        var id=$('input[type=checkbox]:checked').val();
         var len = obj.length;
         var count = 0;
         for (var i = 0; i < len; i++) {
@@ -332,15 +328,92 @@
         } else if (count > 1) {
             alert("一次只能查看一条数据！");
         } else {
-            window.open("print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
-
+            //window.open("print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
+           $.ajax({
+                type : "get",
+                url: "plan/planOrderidSelect?id="+id,
+                success: function(data){
+                    if (data){
+                    print_order_detail();
+                    }else {
+                        alert("未查询到信息");
+                    }
+                }
+            })
         }
 
 
     }
-</SCRIPT>
+    //分页查询调用方法
+    function page(pa){
+        var matercode=$("#p_prodno").val();//物资编码
+        var matername=$("#p_prodname").val();//物资名称
+        $.ajax({
+            type : "get",
+            url: "plan/planOrderSelects?pn="+pa+"&materCode="+matercode+"&matername="+matername,
+            success: function(data){
+                $("#aa").html(data);//更新表格信息
+                document.getElementById("pagnum").innerText=pa;//更新当前页面
+            }
+        })
+    }
+    //实现不带条件的分页查询
+    function Randompage(Page,state) {
+        //判断跳转的是否为上一页页面
+        if (state==1){
+            //判断为上一页
+          var pa= document.getElementsByName("checkbox")[0].id;
+            //-0将string转为int类型
+            Page=pa-0;
+            if (Page!=1){
+                Page=Page-1;
+            }
+            //判断为上一页的查询
+            page(Page);
+        }
+        //判断为首页或者尾页
+        page(Page);
+    }
+    //下一页的判断
+    function underpage(Page,under) {
+        console.log("下一页");
+        var pa= document.getElementsByName("checkbox")[0].id;
+        //-0将string转为int类型
+        Page=pa-0;
+        if (Page!=under){
+            Page=Page+1;
+        }
+        //判断为默认的查询
+        page(Page);
+    }
 
-<BODY>
+    //删除
+    function rembase() {
+        if (confirm("确认当前选中信息删除？")) {
+            var strSel="";
+            $("[name='checkbox']:checked").each(function(index, element) {
+                strSel += $(this).val() + ",";
+            });
+            console.log("选中的值："+strSel);
+            if (strSel!=""){
+                $.ajax({
+                    type : "get",
+                    url : "/plan/planReamOrder?str=" + strSel,
+                    success : function(data) {
+                        if (data) {
+                            alert("删除成功");
+                            toreload("plan/planOrderSelect");
+                        } else {
+                            alert("删除失败");
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+
+</SCRIPT>
 <CENTER>
     <FORM name=form action=Order_ytb_do.asp method=post><INPUT type=hidden value=3
                                                                name=p_type>
@@ -353,9 +426,8 @@
                     <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
                         <TBODY>
                         <TR>
-                            <TD noWrap align=middle>物资编码：<INPUT size=10
-                                                                name=p_prodno>&nbsp;&nbsp; 物资名称：<INPUT size=10
-                                                                                                       name=p_prodname>&nbsp;&nbsp;
+                            <TD noWrap align=middle>物资编码：<INPUT size=10 id=p_prodno>&nbsp;&nbsp;
+                                物资名称：<INPUT size=10 id=p_prodname>&nbsp;&nbsp;
                                 状态：
                                 <SELECT style="WIDTH: 115px"
                                         name=p_status>
@@ -366,7 +438,9 @@
                                     <OPTION
                                             value=70>确定
                                     </OPTION>
-                                </SELECT> <INPUT onclick=submit_form_cx() type=button value=查询></TD>
+                                </SELECT>
+                                <INPUT th:onclick="'Randompage('+1+','+2+')'" type=button value=查询>
+                            </TD>
                         </TR>
                         </TBODY>
                     </TABLE>
@@ -374,76 +448,49 @@
             </TR>
             </TBODY>
         </TABLE>
-        <FORM
-                name="form1" action="" method="Post">
-            <CENTER><FONT color=#000064>◆&nbsp;</FONT><FONT color=#000064>首页
-                上一页</FONT>&nbsp;<A
-                    href="http://169.254.158.100/zzdl/Order/Order_ytb_list.asp?p_type=3&amp;p_prodno=&amp;p_prodname=&amp;p_status=&amp;p_stocktype=&amp;p_ordertype=&amp;page=2"><FONT
-                    color=#0000be>下一页</FONT></A>&nbsp;<A
-                    href="http://169.254.158.100/zzdl/Order/Order_ytb_list.asp?p_type=3&amp;p_prodno=&amp;p_prodname=&amp;p_status=&amp;p_stocktype=&amp;p_ordertype=&amp;page=22"><FONT
-                    color=#0000be>尾页</FONT></A><FONT color=#000064>&nbsp;共 214 个需求计划 每页10
-                个需求计划</FONT><FONT color=#000064>&nbsp;页次:<FONT
-                    color=blue>1</FONT>/22页</FONT><FONT color=#000064>&nbsp;◆&nbsp;</FONT>
+        <FORM name="form1" action="" method="Post">
+            <CENTER>
+                <FONT color=#000064>◆&nbsp;</FONT>
+                <A href="#" th:onclick="'Randompage('+1+','+2+')'"><FONT color=#000064>首页</FONT></A>
+                <A href="#" th:onclick="'Randompage('+${session.pageInfo.pageNum}+','+1+')'" > <FONT color=#000064>上一页</FONT></A>&nbsp;
+                <A href="#" th:onclick="'underpage('+${session.pageInfo.pageNum}+','+${session.pageInfo.pages}+')'"><FONT color=#0000be>下一页</FONT></A>&nbsp;
+                <A href="#" th:onclick="'Randompage('+${session.pageInfo.pages}+','+3+')'"><FONT color=#0000be>尾页</FONT></A>
+                <FONT color=#000064>&nbsp;共 [[${session.pageInfo.total}]] 个需求计划 每页[[${session.pageInfo.endRow}]] 个需求计划</FONT>
+                <FONT color=#000064>&nbsp;页次:
+                    <FONT color=blue><spa id="pagnum">[[${session.pageInfo.pageNum}]] </spa> </FONT>
+                    /[[${session.pageInfo.pages}]]页</FONT>
+                <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
                 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
                        bgColor=#336699 borderColorLight=#006699 border=0>
                     <TBODY>
                     <TR>
                         <TD>
-                            <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0 id="table1">
+                            <div id="aa">
+                            <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0 id="table1" style="text-align: center">
                                 <TBODY>
                                 <TR class=t1>
                                     <TD noWrap align=middle>选择</TD>
                                     <TD noWrap align=middle>序号</TD>
-                                    <TD noWrap align=middle>物资代码</TD>
+                                    <TD noWrap align=middle>物资编号</TD>
                                     <TD noWrap align=middle>物资名称</TD>
                                     <TD noWrap align=middle>数量</TD>
                                     <TD noWrap align=middle>采购类型</TD>
                                     <TD noWrap align=middle>采购进度</TD>
                                 </TR>
-                                <TR class=t2>
-                                    <TD align=middle><label>
-                                        <input type="checkbox" name="checkbox" value="checkbox" onClick="opp(true)">
-                                    </label></TD>
-                                    <TD>1</TD>
-                                    <TD>W64001005001<BR></TD>
-                                    <TD>晶振(HC-49U-500M-0.005%)<BR></TD>
-                                    <TD align=right>222<BR></TD>
+                                <tr class="t2" th:each="Orders,stat:${session.pageInfo.list}">
+                                    <td align=center>
+                                        <input type="checkbox" th:id="${Orders.id}" name="checkbox"  th:value="${Orders.id}"  onclick="opp(true)">
+                                    </td>
+                                    <td>[[${Orders.id}]]</td>
+                                    <td>[[${Orders.materialCode}]]</td>
+                                    <td>[[${Orders.materialName}]]</td>
+                                    <td>[[${Orders.amount}]]</td>
                                     <TD>制造中心采购</TD>
                                     <TD>未确认<BR></TD>
-                                </TR>
-                                <TR class=t2>
-                                    <TD align=middle><label>
-                                        <input type="checkbox" name="checkbox" value="checkbox" onClick="opp(false)">
-                                    </label></TD>
-                                    <TD>2</TD>
-                                    <TD>W65000400101<BR></TD>
-                                    <TD>CMOS电路(CD4001BCN)<BR></TD>
-                                    <TD align=right>12<BR></TD>
-                                    <TD>制造中心采购</TD>
-                                    <TD>确定<BR></TD>
-                                </TR>
-                                <TR class=t2>
-                                    <TD align=middle><input type="checkbox" name="checkbox" value="checkbox"
-                                                            onClick="opp(true)"></TD>
-                                    <TD>3</TD>
-                                    <TD>W64001005000<BR></TD>
-                                    <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
-                                    <TD align=right>222<BR></TD>
-                                    <TD>制造中心采购</TD>
-                                    <TD>未确认<BR></TD>
-                                </TR>
-                                <TR class=t2>
-                                    <TD align=middle><input type="checkbox" name="checkbox" value="checkbox"
-                                                            onClick="opp(true)"></TD>
-                                    <TD>4</TD>
-                                    <TD>WW0000000005<BR></TD>
-                                    <TD>网络配件<BR></TD>
-                                    <TD align=right>44444444444<BR></TD>
-                                    <TD>制造中心采购公开求购</TD>
-                                    <TD>未确认<BR></TD>
-                                </TR>
+                                </tr>
                                 </TBODY>
                             </TABLE>
+                            </div>
                         </TD>
                     </TR>
                     </TBODY>
@@ -453,10 +500,9 @@
                 <P align=center>
                     <INPUT name="button" type=button onclick=select_check(document.form) value=全选/取消>
                     <INPUT onClick="quedingData()" type=button value=确定>
-                    <INPUT onClick="javascript:ddtzDdmx()" type=button value=详情> <INPUT onClick="update_xuqiujihua();"
-                                                                                        type=button value=修改
-                                                                                        name=‘xiugai’> <INPUT
-                        onClick="delData();" type=button value=删除 name='shanchu'>
+                    <INPUT onClick="javascript:ddtzDdmx()" type=button value=详情>
+                    <INPUT onClick="update_xuqiujihua();" type=button value=修改 name=‘xiugai’>
+                    <INPUT th:onclick="rembase()" type=button value=删除 name='shanchu'>
                 </P>
             </CENTER>
         </FORM>
