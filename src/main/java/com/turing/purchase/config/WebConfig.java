@@ -54,6 +54,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("planman/Order_ytb_list_table").setViewName("planman/Order_ytb_list_table");
         registry.addViewController("planman/pclass_select").setViewName("planman/pclass_select");
         registry.addViewController("planman/print_order_detail").setViewName("planman/print_order_detail");
+        registry.addViewController("planman/print_order_detail_alter").setViewName("planman/print_order_detail_alter");
         registry.addViewController("planman/Project_list").setViewName("planman/Project_list");
         registry.addViewController("planman/Project_list3").setViewName("planman/Project_list3");
         registry.addViewController("planman/Project_list4").setViewName("planman/Project_list4");

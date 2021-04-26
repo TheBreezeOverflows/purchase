@@ -5,13 +5,16 @@ import com.turing.purchase.entity.SysMenus;
 import com.turing.purchase.entity.SysUsers;
 import com.turing.purchase.service.SysMenusService;
 import com.turing.purchase.service.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -53,6 +56,10 @@ public class UserRealm extends AuthorizingRealm {
         SysUsers byuser = UserService.findByName(uname);
         //判断是否有该用户
         if (!ObjectUtils.isEmpty(byuser)){
+            //将用户信息保存到session
+            Subject currentUser = SecurityUtils.getSubject();
+            Session session = currentUser.getSession();
+            session.setAttribute("SysUsers",byuser);
             //System.out.println("用户名："+byuser.getLoginId()+"密码："+byuser.getPassword()+"状态："+byuser.getStatus());
             return new SimpleAuthenticationInfo(byuser.getLoginId(),byuser.getPassword(), this.getName());
         }

@@ -193,12 +193,12 @@
         }
     }
 
-    function openwindown(page) {
-        window.open(page, "newuser", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
+    function openwindown() {
+        window.open("planman/print_order_detail_alter", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=550,left=560,top=285");
     }
 
     function print_order_detail() {
-        window.open("planman/print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
+        window.open("planman/print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=550,left=560,top=285");
     }
 
 
@@ -253,8 +253,20 @@
             alert("至少选择一条数据修改！");
         } else if (count > 1) {
             alert("一次只能修改一条数据！");
-        } else if (no = 0) {
-            window.location = "update_xuqiujihua";
+        } else{
+            //window.location = "update_xuqiujihua";
+            var id=$('input[type=checkbox]:checked').val();
+            $.ajax({
+                type : "get",
+                url: "plan/planOrderidSelect?id="+id,
+                success: function(data){
+                    if (data){
+                        openwindown();
+                    }else {
+                        alert("未查询到信息");
+                    }
+                }
+            })
         }
     }
 

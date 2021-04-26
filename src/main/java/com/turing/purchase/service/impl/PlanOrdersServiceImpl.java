@@ -81,4 +81,18 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
         }
         return false;
     }
+
+    @Override
+    public boolean UpdateOrder(Orders orders) {
+        //获取当前修改的原数据
+        Orders or = FinbyOrder(orders.getId());
+        OrdersExample example =new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(orders.getId());//id
+        int in = ordersMapper.updateByExampleSelective(orders,example);
+        if (in>0){
+            return true;
+        }
+        return false;
+    }
 }

@@ -17,4 +17,6 @@ public interface PlanOrdersService {
     public boolean remaOrder(long id);
     //循环调用id删除方法
     public boolean CircularDeletion(String[] split);
+    //修改指定需求计划
+    public boolean UpdateOrder(Orders orders);
 }

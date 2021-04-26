@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <LINK href="../css/style.css" rel=stylesheet>
     <script src="../jquery.min.js"></script>
     <META content="MSHTML 6.00.2900.5626" name=GENERATOR>
+    <link rel="stylesheet" href="../css/flexDate.css">
+    <SCRIPT language=JavaScript src="../js/flexDate.js"></SCRIPT>
     <SCRIPT language=JAVASCRIPT>
         function chck()
         {  var  count=0;
@@ -217,6 +220,43 @@
         {
             window.open(page,"newuser","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
         }
+
+        //修改
+        function update() {
+            if (confirm("确认修改当前信息？")) {
+                var materendDate=$("#materendDate").val();//交货期
+                if (materendDate!=""){
+                    var  materid=$("#materid").text();//获取id
+                    console.log("id="+materid);
+                    var materialCode=$("#materialCode").val();//产品编码
+                    var materialName=$("#materialName").val();//产品名称
+                    var materamount=$("#materamount").val();//产品数量
+                    var measureUnit=$("#measureUnit").val();//计量单位
+                    var materunitPrice=$("#materunitPrice").val();//单价
+
+                    var materemail=$("#materemail").val();//邮箱
+                    var materphone=$("#materphone").val();//联系电话
+                    var materfax=$("#materfax").val();//联系传真
+                    var materremark=$("#materremark").val();//备注
+                    $.ajax({
+                        type : "get",
+                        url : "/plan/planupdate?materid=" + materid+"&materialCode="+materialCode+"&materialName="+materialName+"&materamount="
+                                +materamount+"&measureUnit="+measureUnit+"&materunitPrice="+materunitPrice+"&materendDate="+materendDate+"&materemail="+materemail
+                            +"&materphone="+materphone+"&materfax="+materfax+"&materremark="+materremark,
+                        success : function(data) {
+                            if (data) {
+                                alert("修改成功");
+                                window.close();
+                            } else {
+                                alert("修改失败");
+                            }
+                        }
+                    })
+                }else {
+                    alert("交货期为必填项");
+                }
+            }
+        }
     </SCRIPT>
 </HEAD>
 <BODY>
@@ -230,47 +270,53 @@
                 <TR bgColor=#ffffff>
                     <TD align=middle width="100%" bgColor=#ffffff colSpan=20
                         height=22><B>
-                        <H2><FONT color=#0070c0>需求计划详细信息</FONT></H2></B> <A
+                        <H2><FONT color=#0070c0>需求计划修改</FONT></H2></B> <A
                             onclick="window.open('../help/Help.asp?Value=需求计划1','child','status=NO,scrollbars=yes,toolbar=no,menubar=no,location=no,left=200,top=100,width=700,height=400')"
                             href="javascript:void(null)"><IMG alt=帮助
                                                               src="css/help_a.gif" border=0></A>
                         </FONT></H2></TD></TR>
                 <TR class=t1>
                     <TD noWrap width="20%">需求计划编号</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.id}]]</TD>
+                    <TD class=t2 id="materid" noWrap>[[${session.planOrderid.id}]]</TD>
                     <TD noWrap>产品编码</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.materialCode}]]</TD>
+                    <TD class=t2 noWrap><input id="materialCode" th:value="${session.planOrderid.materialCode}"></TD>
                 </TR>
                 <TR class=t1>
                     <TD noWrap width="20%">产品名称</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.materialName}]]</TD>
+                    <TD class=t2 noWrap><input id="materialName" th:value="${session.planOrderid.materialName}"></TD>
                     <TD noWrap>数量</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.amount}]]</TD>
+                    <TD class=t2 noWrap><input id="materamount" th:value="${session.planOrderid.amount}"></TD>
                 </TR>
                 <TR class=t1>
                     <TD noWrap>计量单位</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.measureUnit}]]</TD>
+                    <TD class=t2 noWrap><input id="measureUnit" th:value="${session.planOrderid.measureUnit}"></TD>
                     <TD noWrap>预算单价(元)</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.unitPrice}]]</TD>
+                    <TD class=t2 noWrap><input id="materunitPrice" th:value="${session.planOrderid.unitPrice}"></TD>
                 </TR>
                 <TR class=t1>
                     <TD noWrap>开始交货期</TD>
-                    <TD class=t2 noWrap>[[${#dates.format(session.planOrderid.endDate,'yyy/MM/dd')}]]</TD>
+                    <TD class=t2 noWrap>
+
+                        <input type="text" readonly class="flexDate" format="yyyy/MM/dd" clearBtn="false" confirm="confirm" th:value="${#dates.format(session.planOrderid.endDate,'yyy/MM/dd')}" name="p_date1" id="materendDate"/>
+                    </TD>
                     <TD noWrap>业务员</TD>
                     <TD class=t2 noWrap>[[${session.planOrderid.author}]]</TD>
                 </TR>
 
                 <TR class=t1>
                     <TD noWrap>电子邮件</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.email}]]</TD>
+                    <TD class=t2 noWrap><input id="materemail" th:value="${session.planOrderid.email}"></TD>
                     <TD noWrap width="20%">联系电话</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.phone}]]</TD></TR>
+                    <TD class=t2 noWrap><input id="materphone" th:value="${session.planOrderid.phone}"></TD></TR>
                 <TR class=t1>
                     <TD noWrap width="20%">联系传真</TD>
-                    <TD class=t2 noWrap>[[${session.planOrderid.fax}]]</TD>
+                    <TD class=t2 noWrap><input id="materfax" th:value="${session.planOrderid.fax}"></TD>
                     <TD noWrap width="20%">备注</TD>
-                    <TD class=t2 noWrap>&nbsp;[[${session.planOrderid.remark}]]</TD></TR>
+                    <TD class=t2 noWrap>&nbsp;<input id="materremark" th:value="${session.planOrderid.remark}"></TD></TR>
 
                 </TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
-<CENTER><INPUT onclick=javascript:window.close() type=button value=关闭>
-</CENTER></BODY></HTML>
+<CENTER>
+    <INPUT onclick=javascript:window.close() type=button value=关闭>
+    <INPUT onclick="update()" type="button" value="确认修改">
+</CENTER>
+</BODY></HTML>

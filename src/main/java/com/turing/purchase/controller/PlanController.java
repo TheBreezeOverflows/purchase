@@ -6,8 +6,10 @@ package com.turing.purchase.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.turing.purchase.entity.Material;
 import com.turing.purchase.entity.Orders;
+import com.turing.purchase.entity.SysUsers;
 import com.turing.purchase.service.PlanDemandEnteringServer;
 import com.turing.purchase.service.PlanOrdersService;
 import lombok.extern.log4j.Log4j;
@@ -111,7 +113,7 @@ public class PlanController {
     @GetMapping("/saveplan")
     @ResponseBody
     public boolean save(String MaterialsCoding,String MaterialsName,String MaterialsQuantity,String MaterialsUnit,
-                        String MaterialsMoney,String MaterialsData,String MaterialsRemark){
+                        String MaterialsMoney,String MaterialsData,String MaterialsRemark,HttpSession session){
         System.out.println("进入保存的控制层");
         System.out.println("物资编码："+MaterialsCoding+"物资名："+MaterialsName+"数量："+MaterialsQuantity+"计量单位："+MaterialsUnit+
                 "单价："+MaterialsMoney+"日期"+MaterialsData+"备注："+MaterialsRemark);
@@ -134,6 +136,9 @@ public class PlanController {
             System.out.println("日期类型转换异常");
             e.printStackTrace();
         }
+        SysUsers emp =(SysUsers)session.getAttribute("SysUsers");
+        or.setAuthorId(emp.getId()+"");//编制人序号
+        or.setAuthor(emp.getLoginId());//编制人
         or.setRemark(MaterialsRemark);//备注
         boolean fal = planOrdersService.insertOreder(or);
         if (fal){
@@ -164,7 +169,7 @@ public class PlanController {
     public String planOrders(@RequestParam(value = "pn",defaultValue = "1")Integer pn,String materCode,String matername,HttpSession session){
         System.out.println("需求计划查询初次进入");
         PageInfo<Orders> ordersPageInfo = planOrderPage(pn,materCode,matername, session);
-        StringBuilder  str= new StringBuilder ("<TABLE cellSpacing=1 cellPadding=3 width=\"100%\" border=0 id=\"table1\" style=\"text-align: center\">   <TBODY> <TR class=t1>       <TD noWrap align=middle>选择</TD>        <TD noWrap align=middle>序号</TD>        <TD noWrap align=middle>物资代码</TD>        <TD noWrap align=middle>物资名称</TD>        <TD noWrap align=middle>数量</TD>       <TD noWrap align=middle>采购类型</TD>       <TD noWrap align=middle>采购进度</TD>    </TR>   ");
+        StringBuilder  str= new StringBuilder ("<TABLE cellSpacing=1 cellPadding=3 width=\"100%\" border=0 id=\"table1\" style=\"text-align: center\">   <TBODY> <TR class=t1>       <TD noWrap align=middle>选择</TD>        <TD noWrap align=middle>序号</TD>        <TD noWrap align=middle>物资编号</TD>        <TD noWrap align=middle>物资名称</TD>        <TD noWrap align=middle>数量</TD>       <TD noWrap align=middle>采购类型</TD>       <TD noWrap align=middle>采购进度</TD>    </TR>   ");
 
         //判断查询到的信息不为空
         if (ordersPageInfo!=null){
@@ -247,7 +252,45 @@ public class PlanController {
         return false;
     }
 
-
+    //保存
+    @GetMapping("/planupdate")
+    @ResponseBody
+    public boolean updateor(String materid,String materialCode,String materialName,String materamount,String measureUnit,String materunitPrice,
+                            String materendDate,String materemail,String materphone,String materfax,String materremark){
+        System.out.println("进入物资信息修改的控制层");
+        System.out.println("id="+materid+"产品编码="+materialCode+"产品名称="+materialName+"产品数量="+materamount+"计量单位="+measureUnit+"单价="
+                +materunitPrice+"交货期="+materendDate+"邮箱="+materemail+"联系电话="+materphone+"联系传真="+materfax+"备注="+materremark);
+        // 时间格式转换
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
+        Orders order=new Orders();
+       order.setId(Long.parseLong(materid));//设置id
+       order.setMaterialCode(materialCode);//设置产品编号
+       order.setMaterialName(materialName);//设置产品姓名
+       order.setAmount(materamount);//数量
+       order.setMeasureUnit(measureUnit);//计量单位
+       order.setEmail(materemail);//邮箱
+       order.setPhone(materphone);//联系电话
+       order.setFax(materfax);//联系传真
+       order.setRemark(materremark);//备注
+        //单价
+        BigDecimal bd=new BigDecimal(materunitPrice);
+        bd=bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+        order.setUnitPrice(bd);
+        try {
+            //开始交货日期
+            order.setEndDate(sdf.parse(materendDate));
+        } catch (ParseException e) {
+            System.out.println("日期类型转换异常");
+            e.printStackTrace();
+        }
+        System.out.println("order参数设置完毕"+order);
+        boolean fal = planOrdersService.UpdateOrder(order);
+        if (fal){
+            System.out.println("修改成功");
+            return true;
+        }
+        return false;
+    }
 
 
 }
