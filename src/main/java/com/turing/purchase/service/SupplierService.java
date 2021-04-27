@@ -1,8 +1,7 @@
 package com.turing.purchase.service;
 
-import com.turing.purchase.entity.EasyUIDataGridJsonEntity;
-import com.turing.purchase.entity.QuoteDetail;
-import com.turing.purchase.entity.Supplier;
+import com.turing.purchase.entity.*;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,7 +16,9 @@ public interface SupplierService {
     Supplier getSupplierInfo(String userName);
 
     //查询供应商产品细节（datagrid）
-    EasyUIDataGridJsonEntity getSupplierProductsDataGrid(Integer pageNum,Integer pageSize,String sort,String order);
+    EasyUIDataGridJsonEntity getSupplierProductsDataGrid(Integer pageNum,Integer pageSize,String sort,String order,
+                                                                String materialCode,
+                                                         String materialName);
 
     //获取供应商产品细节总条数
     int getTotalProducts();
@@ -33,4 +34,29 @@ public interface SupplierService {
 
     //获取供应商产品条数
     int getTotalQuote();
+
+    //添加供应商产品细节
+    int insertQuoteDetail(QuoteDetail quoteDetail);
+
+    //修改供应商产品细节
+    int updateQuoteDetail(QuoteDetail quoteDetail);
+
+    //删除供应商产品细节
+    int deleteQuoteDetail(Integer quotedetailId);
+
+    //批量删除供应商产品细节
+    int deleteQuoteDetails(String[] ids);
+
+    //添加产品类别
+    int insertMaterial(Material material);
+
+    //修改产品类别
+    int updateMaterial(Material material);
+
+    //删除产品类别
+    int deleteMaterial(long materialId);
+
+    //添加供应商产品
+    int insertQuote(QuoteWithBLOBs quote);
+
 }

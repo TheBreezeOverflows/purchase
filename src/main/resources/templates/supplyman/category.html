@@ -41,9 +41,9 @@
     <div class="datagrid-btn-separator"></div>
     <a href="#" id="btn_delete" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true,text:'删除'"></a>
     <br>
-    产品编号：
+    类型编号：
     <input class="easyui-textbox" style="width:100px" textField="text">
-    产品名称:
+    类型名称:
     <input class="easyui-textbox" style="width:100px" textField="text">
     <a href="#" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
 </div>
@@ -81,7 +81,7 @@
         })
         $("#dlog").dialog('open').dialog('setTitle','新增供应商产品类别');
         $("#myForm").form('clear');
-        url = ''
+        url = '/supplyman/addProductType'
     })
     //修改按钮
     $("#btn_update").click(function(){
@@ -95,7 +95,18 @@
             })
             $("#dlog").dialog('open').dialog('setTitle','修改产品类别');
             $("#myForm").form('load',row)
-            url = ''
+            //选中对应下拉列表
+            var materialType = row.materialType;
+            var ccs = $("#cc")[0].options;
+            for(var i = 0;i < ccs.length; i++){
+                if(ccs[i].innerText == materialType){
+                    console.log(ccs[i].value)
+                    $("#cc").combobox({
+                        value:ccs[i].value
+                    });
+                }
+            }
+            url = '/supplyman/updateProductType'
         }else{
             //消息提示
             $.messager.show({

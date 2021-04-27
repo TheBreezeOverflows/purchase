@@ -35,6 +35,20 @@ public class Quote implements Serializable {
 
     private String status;
 
+    private StockSupplier stockSupplier;
+
+    private Enquire enquire;
+
+    private static final long serialVersionUID = 1L;
+
+    public Enquire getEnquire() {
+        return enquire;
+    }
+
+    public void setEnquire(Enquire enquire) {
+        this.enquire = enquire;
+    }
+
     public StockSupplier getStockSupplier() {
         return stockSupplier;
     }
@@ -42,10 +56,6 @@ public class Quote implements Serializable {
     public void setStockSupplier(StockSupplier stockSupplier) {
         this.stockSupplier = stockSupplier;
     }
-
-    private StockSupplier stockSupplier;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

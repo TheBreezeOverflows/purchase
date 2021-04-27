@@ -35,4 +35,6 @@ public interface QuoteMapper {
 
     @Select("select count(*) from quote where supplier_id = #{id}")
     int selectCount(@Param("id") Integer supplierId);
+
+    int insertSelectiveReturnId(QuoteWithBLOBs record);
 }

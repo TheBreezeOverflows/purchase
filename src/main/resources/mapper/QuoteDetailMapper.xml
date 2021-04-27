@@ -336,6 +336,8 @@
       from quote
       where supplier_id = #{id}
     )
+    and material_code like #{materialCode}
+    and material_name like #{materialName}
     <if test="sort != '' and order != ''">
       order by ${sort} ${order}
     </if>

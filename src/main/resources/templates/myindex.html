@@ -3,15 +3,15 @@
 <head th:replace="~{common::header('主页')}"></head>
 <body class="easyui-layout">
     <!--状态条-->
-    <div data-options="region:'north',href:'/bar',border:false" style="height:22px;background-color: #005890;font-size: 12px">
+    <div data-options="region:'north',href:'/bar',border:false" style="margin:0;height:25px;background-color: #005890;font-size: 12px;padding: 5px 10px 0px 10px">
 
     </div>
     <!--菜单-->
-    <div data-options="region:'west',title:'菜单',border:false,collapsible:false" href="/myleftRequire" style="width:250px;background-color: #efefef;">
+    <div data-options="region:'west',title:'菜单',collapsible:false" href="/myleftRequire" style="width:250px;background-color: #efefef;padding: 0">
 
     </div>
     <!--内容-->
-    <div id="mycontent" data-options="region:'center',cache:false" href="/mainRequire" style="background-color: rgb(239, 239, 239);margin: 0;padding: 0;"></div>
+    <div id="mycontent" data-options="region:'center',title:'内容展示',cache:false" href="/mainRequire" style="background-color: rgb(239, 239, 239);padding: 0;"></div>
 
 </body>
 </html>

@@ -36,7 +36,9 @@ public interface QuoteDetailMapper {
                                        @Param("pageNum") Integer pageNum,
                                        @Param("pageSize") Integer pageSize,
                                        @Param("sort")String sort,
-                                       @Param("order")String order);
+                                       @Param("order")String order,
+                                        @Param("materialCode")String materialCode,
+                                         @Param("materialName")String materialName);
 
 
     /**
@@ -46,4 +48,7 @@ public interface QuoteDetailMapper {
      */
     @Select("select count(*) from quote_detail where quote_id in (select id from quote where supplier_id = #{id})")
     Integer selectTotalCountBySupplierId(@Param("id") Integer supplierId);
+
+    @Select("SELECT QUOTE_ID FROM quote_detail where ID = #{id}")
+    Integer selectQuoteIdByQuoteDetailId(@Param("id")int id);
 }

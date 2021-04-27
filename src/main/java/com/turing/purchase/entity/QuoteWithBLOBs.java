@@ -7,6 +7,16 @@ public class QuoteWithBLOBs extends Quote implements Serializable {
 
     private String quoRemark;
 
+    private Long myID;
+
+    public Long getMyID() {
+        return myID;
+    }
+
+    public void setMyID(Long myID) {
+        this.myID = myID;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public String getQuoAddress() {

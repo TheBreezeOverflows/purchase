@@ -1,5 +1,7 @@
 package com.turing.purchase.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -187,4 +189,23 @@ public class HandleTool {
         return result.toString();
     }
 
+    /**
+     * 获取流水号 规则 对应编号前缀 + 当前日期 + 5位数流水号
+     * @param perStr 对应编号前缀
+     * @param num 对应流水号
+     * @return 流水号字符串
+     */
+    public static String getReverNumber(String perStr,int num){
+        //获取当前日期
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String format = sdf.format(date);
+        //拼接
+        StringBuffer sb = new StringBuffer(perStr);
+        sb.append(format);
+        //字符串补 0 流水号
+        String format1 = String.format("%05d", num);
+        sb.append(format1);
+        return sb.toString();
+    }
 }

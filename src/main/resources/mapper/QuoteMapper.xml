@@ -377,7 +377,10 @@
     <association property="stockSupplier"
                  select="com.turing.purchase.mapper.StockSupplierMapper.selectStockSupplier"
                  column="SUPPLIER_ID">
-
+    </association>
+    <association property="enquire"
+                 select="com.turing.purchase.mapper.EnquireMapper.selectAllEnquire"
+                 column="ENQUIRE_ID">
     </association>
   </resultMap>
   
@@ -388,4 +391,117 @@
     </if>
     limit #{pageNum},#{pageSize}
   </select>
+
+  <insert id="insertSelectiveReturnId"
+          parameterType="com.turing.purchase.entity.QuoteWithBLOBs"
+          useGeneratedKeys="true"
+          keyProperty="myID">
+    insert into quote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="quoteNum != null" >
+        QUOTE_NUM,
+      </if>
+      <if test="enquireId != null" >
+        ENQUIRE_ID,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="quoCompany != null" >
+        QUO_COMPANY,
+      </if>
+      <if test="quoLinkman != null" >
+        QUO_LINKMAN,
+      </if>
+      <if test="quoPhone != null" >
+        QUO_PHONE,
+      </if>
+      <if test="quoFax != null" >
+        QUO_FAX,
+      </if>
+      <if test="quoEmail != null" >
+        QUO_EMAIL,
+      </if>
+      <if test="queTitle != null" >
+        QUE_TITLE,
+      </if>
+      <if test="queDate != null" >
+        QUE_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="sumAmount != null" >
+        SUM_AMOUNT,
+      </if>
+      <if test="overallPrice != null" >
+        OVERALL_PRICE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="quoAddress != null" >
+        QUO_ADDRESS,
+      </if>
+      <if test="quoRemark != null" >
+        QUO_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="quoteNum != null" >
+        #{quoteNum,jdbcType=VARCHAR},
+      </if>
+      <if test="enquireId != null" >
+        #{enquireId,jdbcType=BIGINT},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="quoCompany != null" >
+        #{quoCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="quoLinkman != null" >
+        #{quoLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="quoPhone != null" >
+        #{quoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="quoFax != null" >
+        #{quoFax,jdbcType=VARCHAR},
+      </if>
+      <if test="quoEmail != null" >
+        #{quoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="queTitle != null" >
+        #{queTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="queDate != null" >
+        #{queDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sumAmount != null" >
+        #{sumAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="overallPrice != null" >
+        #{overallPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="quoAddress != null" >
+        #{quoAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="quoRemark != null" >
+        #{quoRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>
