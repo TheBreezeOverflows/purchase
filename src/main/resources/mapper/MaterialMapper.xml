@@ -182,4 +182,45 @@
     </if>
     limit #{pageNum},#{pageSize}
   </select>
+
+  <insert id="insertSelectiveReturnId"
+          parameterType="com.turing.purchase.entity.Material"
+          useGeneratedKeys="true" keyProperty="id" >
+    insert into material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="materialNum != null" >
+        MATERIAL_NUM,
+      </if>
+      <if test="materialName != null" >
+        MATERIAL_NAME,
+      </if>
+      <if test="materialUnit != null" >
+        MATERIAL_UNIT,
+      </if>
+      <if test="materialType != null" >
+        MATERIAL_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="materialNum != null" >
+        #{materialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialUnit != null" >
+        #{materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null" >
+        #{materialType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
 </mapper>

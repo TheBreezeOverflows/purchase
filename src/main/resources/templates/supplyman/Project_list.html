@@ -92,7 +92,15 @@
             {field:'id',title:'序号',width:50},
             {field:'queTitle',title:'报价书标题',width:200},
             {field:'queDate',title:'报价提交时间',width:100},
-            {field:'enquireId',title:'对应询价书',width:100},
+            {field:'enquireId',title:'对应询价书',width:100,
+                formatter:function(value,row,index){
+                    if(row.enquire){
+                        return row.enquire.enquireNum;
+                    } else{
+                        return value;
+                    }
+                }
+            },
             {field:'endDate',title:'询价截止时间',width:100},
             {field:'stockId',title:'采购类型',width:100,
                 formatter: function(value,row,index){

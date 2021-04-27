@@ -23,4 +23,12 @@ public interface EnquireMapper {
     int updateByExampleWithBLOBs(@Param("record") Enquire record, @Param("example") EnquireExample example);
 
     int updateByExample(@Param("record") Enquire record, @Param("example") EnquireExample example);
+
+    //自定义方法
+
+    /**
+     * 查询所有询价表
+     * @return
+     */
+    List<Enquire> selectAllEnquire();
 }

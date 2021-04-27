@@ -1,15 +1,14 @@
 package com.turing.purchase.controller;
 
 import com.turing.purchase.entity.EasyUIDataGridJsonEntity;
+import com.turing.purchase.entity.Material;
+import com.turing.purchase.entity.QuoteDetail;
 import com.turing.purchase.entity.Supplier;
 import com.turing.purchase.service.SupplierService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +27,9 @@ public class SupplierController {
     @GetMapping("/getSupplier")
     public String getSupplier(HttpSession session){
         Supplier supplier = supplierService.getSupplierInfo((String) SecurityUtils.getSubject().getPrincipal());
+        if(supplier == null){
+            supplier = new Supplier();
+        }
         session.setAttribute("supplier",supplier);
         return "redirect:/supplymanLook";
     }
@@ -57,9 +59,14 @@ public class SupplierController {
             @RequestParam(value = "page",required = true,defaultValue = "1")Integer pageNum,
             @RequestParam(value = "rows",required = true,defaultValue = "10")Integer pageSize,
             @RequestParam(value = "sort",defaultValue = "") String sort,
-            @RequestParam(value = "order",defaultValue = "") String order){
+            @RequestParam(value = "order",defaultValue = "") String order,
+            @RequestParam(value = "materialCode",defaultValue = "") String materialCode,
+            @RequestParam(value = "materialName",defaultValue = "")String materialName){
 
-        EasyUIDataGridJsonEntity daraGrid = supplierService.getSupplierProductsDataGrid( pageNum, pageSize, sort, order);
+        EasyUIDataGridJsonEntity daraGrid = supplierService.getSupplierProductsDataGrid( pageNum,
+                pageSize,
+                sort,
+                order,materialCode,materialName);
 
         return daraGrid;
     }
@@ -104,6 +111,68 @@ public class SupplierController {
         EasyUIDataGridJsonEntity daraGrid = supplierService.getQuoteDataGrid( pageNum, pageSize, sort, order);
 
         return daraGrid;
+    }
+
+
+    /**
+     * 添加供应商产品细节信息
+     * @param quoteDetail
+     * @return
+     */
+    @PostMapping("/addProduct")
+    @ResponseBody
+    public String addProduct(QuoteDetail quoteDetail){
+        int i = supplierService.insertQuoteDetail(quoteDetail);
+        return i>0?"success":"";
+    }
+
+    /**
+     * 修改供应商产品细节信息
+     * @param quoteDetail
+     * @return
+     */
+    @PostMapping("/updateProduct")
+    @ResponseBody
+    public String updateProduct(QuoteDetail quoteDetail){
+        int i = supplierService.updateQuoteDetail(quoteDetail);
+        return i>0?"success":"";
+    }
+
+    /**
+     * 删除供应商产品细节信息（包括供应商产品）
+     * @param ids 供应商产品细节id数组字符串
+     *            例如1,2,3,4,5（切割成数组使用）
+     * @return
+     */
+    @PostMapping("/deleteProducts")
+    @ResponseBody
+    public String deleteProducts(String ids){
+        String[] split = ids.split(",");
+        int i = supplierService.deleteQuoteDetails(split);
+        return i>0?"success":"";
+    }
+
+    /**
+     * 添加供应商产品类别
+     * @return
+     */
+    @PostMapping("/addProductType")
+    @ResponseBody
+    public String addProductType(Material material){
+        int i = supplierService.insertMaterial(material);
+        return i>0?"success":"";
+    }
+
+    /**
+     * 修改供应商产品类别
+     * @param material
+     * @return
+     */
+    @PostMapping("/updateProductType")
+    @ResponseBody
+    public String updateProductType(Material material){
+        int i = supplierService.updateMaterial(material);
+        return i>0?"success":"";
     }
 
 }

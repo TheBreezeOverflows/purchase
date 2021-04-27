@@ -30,4 +30,12 @@ public interface MaterialMapper {
 
     @Select("select count(*) from material where id in (select material_id from supp_material where supplier_id = #{id})")
     Integer selectTotalPageBySupplierId(@Param("id")Integer supplierId);
+
+    /**
+     * 插入一条产品记录
+     * @param material 产品记录对象
+     * @return 插入成功的主键id
+     */
+    int insertSelectiveReturnId(Material material);
+
 }
