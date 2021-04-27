@@ -9,6 +9,8 @@ public interface PlanOrdersService {
     public List<Orders> FinAllOrder();
     //根据条件查询所有需求计划
     public List<Orders> FinAllOrderCondition(String matercode,String matername);
+    //根据条件加排序方式查询所有需求计划
+    public List<Orders> FinAllOrdercodenmaeorby(String matercode,String matername,String orby);
     //根据id查询单个需求计划
     public Orders FinbyOrder(long id);
     //插入单个需求计划

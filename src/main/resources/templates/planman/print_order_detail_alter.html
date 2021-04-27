@@ -297,7 +297,7 @@
                     <TD noWrap>开始交货期</TD>
                     <TD class=t2 noWrap>
 
-                        <input type="text" readonly class="flexDate" format="yyyy/MM/dd" clearBtn="false" confirm="confirm" th:value="${#dates.format(session.planOrderid.endDate,'yyy/MM/dd')}" name="p_date1" id="materendDate"/>
+                        <input type="text" readonly class="flexDate" format="yyyy/MM/dd" clearBtn="false" confirm="confirm" th:value="${#dates.format(session.planOrderid.startDate,'yyy/MM/dd')}" name="p_date1" id="materendDate"/>
                     </TD>
                     <TD noWrap>业务员</TD>
                     <TD class=t2 noWrap>[[${session.planOrderid.author}]]</TD>

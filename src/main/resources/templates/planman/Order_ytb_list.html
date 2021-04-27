@@ -365,7 +365,9 @@
             url: "plan/planOrderSelects?pn="+pa+"&materCode="+matercode+"&matername="+matername,
             success: function(data){
                 $("#aa").html(data);//更新表格信息
-                document.getElementById("pagnum").innerText=pa;//更新当前页面
+                document.getElementById("pagnum").innerText=pa;//更新当前页面显示数
+                document.getElementById("pagsize").innerText=document.getElementsByName("checkbox")[0].parentElement.id;//总页数
+                document.getElementById("pagetotal").innerText= document.getElementsByName("checkbox")[0].parentElement.parentElement.id;//总数量
             }
         })
     }
@@ -382,14 +384,19 @@
             }
             //判断为上一页的查询
             page(Page);
+        }else if (state==3){
+            //尾页
+          var Page=document.getElementsByName("checkbox")[0].parentElement.id;
+            page(Page);
         }
         //判断为首页或者尾页
         page(Page);
     }
     //下一页的判断
-    function underpage(Page,under) {
+    function underpage(Page) {
         console.log("下一页");
-        var pa= document.getElementsByName("checkbox")[0].id;
+        var pa= document.getElementsByName("checkbox")[0].id;//当前页
+        var under= document.getElementsByName("checkbox")[0].parentElement.id;//总页
         //-0将string转为int类型
         Page=pa-0;
         if (Page!=under){
@@ -465,12 +472,12 @@
                 <FONT color=#000064>◆&nbsp;</FONT>
                 <A href="#" th:onclick="'Randompage('+1+','+2+')'"><FONT color=#000064>首页</FONT></A>
                 <A href="#" th:onclick="'Randompage('+${session.pageInfo.pageNum}+','+1+')'" > <FONT color=#000064>上一页</FONT></A>&nbsp;
-                <A href="#" th:onclick="'underpage('+${session.pageInfo.pageNum}+','+${session.pageInfo.pages}+')'"><FONT color=#0000be>下一页</FONT></A>&nbsp;
+                <A href="#" th:onclick="'underpage('+${session.pageInfo.pageNum}+')'"><FONT color=#0000be>下一页</FONT></A>&nbsp;
                 <A href="#" th:onclick="'Randompage('+${session.pageInfo.pages}+','+3+')'"><FONT color=#0000be>尾页</FONT></A>
-                <FONT color=#000064>&nbsp;共 [[${session.pageInfo.total}]] 个需求计划 每页[[${session.pageInfo.endRow}]] 个需求计划</FONT>
+                <FONT color=#000064>&nbsp;共<spa id="pagetotal">[[${session.pageInfo.total}]]</spa> 个需求计划 每页[[${session.pageInfo.endRow}]] 个需求计划</FONT>
                 <FONT color=#000064>&nbsp;页次:
                     <FONT color=blue><spa id="pagnum">[[${session.pageInfo.pageNum}]] </spa> </FONT>
-                    /[[${session.pageInfo.pages}]]页</FONT>
+                    /<spa id="pagsize">[[${session.pageInfo.pages}]]</spa>页</FONT>
                 <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
                 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
                        bgColor=#336699 borderColorLight=#006699 border=0>
@@ -489,9 +496,9 @@
                                     <TD noWrap align=middle>采购类型</TD>
                                     <TD noWrap align=middle>采购进度</TD>
                                 </TR>
-                                <tr class="t2" th:each="Orders,stat:${session.pageInfo.list}">
-                                    <td align=center>
-                                        <input type="checkbox" th:id="${Orders.id}" name="checkbox"  th:value="${Orders.id}"  onclick="opp(true)">
+                                <tr class="t2" th:id="${session.pageInfo.total}" th:each="Orders,stat:${session.pageInfo.list}">
+                                    <td align=center th:id="${session.pageInfo.pages}">
+                                        <input type="checkbox" th:id="${session.pageInfo.pageNum}" name="checkbox"  th:value="${Orders.id}"  onclick="opp(true)">
                                     </td>
                                     <td>[[${Orders.id}]]</td>
                                     <td>[[${Orders.materialCode}]]</td>

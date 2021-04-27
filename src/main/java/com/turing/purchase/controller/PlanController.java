@@ -50,7 +50,7 @@ public class PlanController {
         planPclassPage(pn,session);
         return "redirect:/planman/pclass_select";
     }
-    //需求计划录入的初始分页查询
+    //需求计划录入的分页查询
     @GetMapping("/pclassSelects")
     @ResponseBody
     public boolean planPclassPaging(@RequestParam(value = "pn",defaultValue = "1")Integer pn, HttpSession session){
@@ -177,7 +177,7 @@ public class PlanController {
             int InfoSize = ordersPageInfo.getSize();
             for (int i=0;i<InfoSize;i++){
                 //字符串拼接
-                str.append("<TR class=t2> <td align=center>  <input type=\"checkbox\" name=\"checkbox\" id="+ordersPageInfo.getPageNum()+" value="+ordersPageInfo.getList().get(i).getId()+" onclick=\"opp(true)\" > </td> <td>"
+                str.append("<TR class=t2 id="+ordersPageInfo.getTotal()+"> <td align=center  id="+ordersPageInfo.getPages()+">  <input type=\"checkbox\" name=\"checkbox\" id="+ordersPageInfo.getPageNum()+" value="+ordersPageInfo.getList().get(i).getId()+" onclick=\"opp(true)\" > </td> <td>"
                         +ordersPageInfo.getList().get(i).getId()+"</td> <td>"+ordersPageInfo.getList().get(i).getMaterialCode()+"</td> <td>"
                         +ordersPageInfo.getList().get(i).getMaterialName()+"</td> <td>"+ordersPageInfo.getList().get(i).getAmount()+"</td> <td> 制造中心采购 </td> <td> 未确认 </td> ");
             }
@@ -292,5 +292,81 @@ public class PlanController {
         return false;
     }
 
+
+    //初始采购计划编制查询
+    @GetMapping("/planOrdersOrby")
+    public String planOrdersOrby(HttpSession session){
+        planOrderPageorby(1,10,"","","id",session);
+        return  "redirect:/planman/Order_wbxjfa_list";
+    }
+
+
+
+    //需求计划录入的条件分页查询
+    @GetMapping("/planOrdersOrbys")
+    @ResponseBody
+    public String planOrdersOrbys(@RequestParam(value = "pn",defaultValue = "1")Integer pn,@RequestParam(value = "size",defaultValue = "10")Integer size,String materCode,String matername,String orby,HttpSession session){
+        System.out.println("需求计划查询初次进入");
+        PageInfo<Orders> ordersPageInfo = planOrderPageorby(pn,size,materCode,matername,orby,session);
+        // 时间格式转换
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
+        StringBuilder  str= new StringBuilder ("<TABLE cellSpacing=1 cellPadding=3 width=\"100%\" border=0 id=\"table1\" style=\"text-align: center\">   <TBODY> <TR class=t1>       <TD noWrap align=middle>选择</TD>        <TD noWrap align=middle>序号</TD>        <TD noWrap align=middle>物资编号</TD>        <TD noWrap align=middle>物资名称</TD>        <TD noWrap align=middle>数量</TD>       <TD noWrap align=middle>预算价格</TD>       <TD noWrap align=middle>需求时间</TD>    </TR>   ");
+
+        //判断查询到的信息不为空
+        if (ordersPageInfo!=null){
+            //获取当前页面的信息数量
+            int InfoSize = ordersPageInfo.getSize();
+            for (int i=0;i<InfoSize;i++){
+                //字符串拼接
+                str.append("<TR class=t2 id="+ordersPageInfo.getTotal()+"> <td align=center id="+ordersPageInfo.getPages()+">  <input type=\"checkbox\" name=\"checkbox\" id="+ordersPageInfo.getPageNum()+" value="+ordersPageInfo.getList().get(i).getId()+" onclick=\"opp(true)\" > </td> <td>"
+                        +ordersPageInfo.getList().get(i).getId()+"</td> <td>"+ordersPageInfo.getList().get(i).getMaterialCode()+"</td> <td>"
+                        +ordersPageInfo.getList().get(i).getMaterialName()+"</td> <td>"+ordersPageInfo.getList().get(i).getAmount()+"</td> <td></td> <td>"+sdf.format(ordersPageInfo.getList().get(i).getEndDate())+"</td> ");
+            }
+        }
+        str.append("</TBODY> </TABLE>");
+        return str.toString();
+    }
+
+
+    /**
+     *
+     * @param pn 第几页
+     * @param size 每页几条数据
+     * @param materCode 产品编号
+     * @param matername 产品姓名
+     * @param orby 排序方式
+     * @param session session对象
+     * @return 当前分页查询后的内容
+     */
+    public PageInfo<Orders>  planOrderPageorby(Integer pn,Integer size,String materCode,String matername,String orby, HttpSession session){
+        String orderBy = orby + " desc";
+        PageHelper.startPage(pn,size,orderBy);
+        //接收查询信息集合
+        List<Orders> orders=null;
+        //获取所有查询的物资信息
+        //判断是否未输入信息
+        orders = planOrdersService.FinAllOrderCondition(materCode,matername);
+           // orders = planOrdersService.FinAllOrdercodenmaeorby(materCode,matername,orby);
+        /*//添加预算价格
+        for (int i=0;i<orders.size();i++){
+            //当前单价
+            BigDecimal unitPrice = orders.get(i).getUnitPrice();
+            //数量转为bigdeciml类型
+            BigDecimal   inamount   =   new   BigDecimal(orders.get(i).getAmount());
+            unitPrice=inamount.multiply(unitPrice);
+            orders.get(i).setSumPrice(unitPrice);
+        }*/
+        //判断查询到的信息是否为空，
+        if (orders!=null){
+            System.out.println("排序查询查到信息");
+            //通过PageInfo类解析分页结果,admins的是我们获取数据的数组
+            PageInfo<Orders> info = new PageInfo<>(orders);
+            session.setAttribute("pageInfo",info);
+            //info.getList()可以查看当前info的所有信息
+            System.out.println(info.getList());
+            return info;
+        }
+        return null;
+    }
 
 }

@@ -48,6 +48,8 @@ public class Orders implements Serializable {
 
     private String address;
 
+
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

@@ -33,6 +33,14 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
     }
 
 
+    //根据条件加排序方式查询所有需求计划
+    @Override
+    public List<Orders> FinAllOrdercodenmaeorby(String matercode, String matername, String orby) {
+        return ordersMapper.selectByExampleOrderby("%"+matercode+"%", "%"+matername+"%", orby);
+
+    }
+
+
     //根据id查询单个需求计划
     @Override
     public Orders FinbyOrder(long id) {
@@ -82,6 +90,7 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
         return false;
     }
 
+    //修改
     @Override
     public boolean UpdateOrder(Orders orders) {
         //获取当前修改的原数据

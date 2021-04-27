@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{common::header('')}"></head>
+<BODY>
 <SCRIPT language=JAVASCRIPT>
     function chck() {
         var count = 0;
@@ -184,38 +185,37 @@
 <LINK
         href="css/style.css" rel=stylesheet>
 <SCRIPT language=javascript>
-    function submit_form(theForm, i) {
+    function
+
+    submit_form() {
+        var obj = document.getElementsByName("checkbox");
+        //console.log("id="+$('input[type=checkbox]:checked').val());
+        var id=$('input[type=checkbox]:checked').val();
+        var len = obj.length;
         var count = 0;
-        for (var k = 0; k < theForm.length; k++)
-            if ((theForm[k].type == "checkbox") && (theForm[k].checked))
+        for (var i = 0; i < len; i++) {
+            if (obj[i].checked) {
                 count++;
+            }
+        }
         if (count == 0) {
-            alert("提示信息：\n请选择需求计划。");
-            return;
+            alert("至少选择一条数据！");
+        } else if (count > 1) {
+            alert("一次只能查看一条数据！");
+        } else {
+            //window.open("print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
+            $.ajax({
+                type : "get",
+                url: "plan/planOrderidSelect?id="+id,
+                success: function(data){
+                    if (data){
+                        toreload('planman/bianzhicaigoujihua');
+                    }else {
+                        alert("未查询到信息");
+                    }
+                }
+            })
         }
-        if (i == 4) {
-            form.action = "Order_wtb_list";
-        }
-
-        if (i == 5) {
-            if (count > 1) {
-                alert("提示信息：\n只能对单条记录进行操作。");
-            }
-            else {
-                form.action = "Order_wtb_upddate.asp";
-                form.submit();
-            }
-        }
-
-        if (i == 2) {
-            form.action = "bianzhicaigoujihua";
-        }
-        if (i == 3) {
-            form.action = "Order_wtb_not.asp";
-        }
-        document.form.p_type.value = i;
-        window.document.form.submit();
-        return true;
     }
 
     function select_check(theForm) {
@@ -246,9 +246,64 @@
         window.open("print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
 
     }
+
+
+    //分页查询调用方法
+    function page(pa){
+        var matercode=$("#p_prodno").val();//物资编码
+        var matername=$("#p_prodname").val();//物资名称
+        var materorby=$("#orbyes").val();//排序方式
+        var matersize=$("#p_pagesize").val();//显示个数
+        $.ajax({
+            type : "get",
+            url: "plan/planOrdersOrbys?pn="+pa+"&size="+matersize+"&materCode="+matercode+"&matername="+matername+"&orby="+materorby,
+            success: function(data){
+                $("#aa").html(data);//更新表格信息
+                document.getElementById("pagnum").innerText=pa;//更新当前页面显示数
+                document.getElementById("pagsize").innerText=document.getElementsByName("checkbox")[0].parentElement.id;//总页数
+                document.getElementById("pagetotal").innerText= document.getElementsByName("checkbox")[0].parentElement.parentElement.id;//总数量
+
+            }
+        })
+    }
+    //实现不带条件的分页查询
+    function Randompage(Page,state) {
+        //判断跳转的是否为上一页页面
+        if (state==1){
+            //判断为上一页
+            var pa= document.getElementsByName("checkbox")[0].id;
+            //-0将string转为int类型
+            Page=pa-0;
+            if (Page!=1){
+                Page=Page-1;
+            }
+            //判断为上一页的查询
+            page(Page);
+        }else if (state==3){
+            //尾页
+            var Page=document.getElementsByName("checkbox")[0].parentElement.id;
+            page(Page);
+        }
+        //判断为首页或者尾页
+        page(Page);
+    }
+    //下一页的判断
+    function underpage(Page) {
+        console.log("下一页");
+        var pa= document.getElementsByName("checkbox")[0].id;//当前页
+        var under= document.getElementsByName("checkbox")[0].parentElement.id;//总页
+        //-0将string转为int类型
+        Page=pa-0;
+        if (Page!=under){
+            Page=Page+1;
+        }
+        //判断为默认的查询
+        page(Page);
+    }
+
 </SCRIPT>
 </HEAD>
-<BODY>
+
 <CENTER>
     <FORM name=form action="" method=get>
         <H2><FONT color=#0070c0>未编采购计划的需求一览表</FONT></H2>
@@ -260,27 +315,22 @@
                     <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
                         <TBODY>
                         <TR>
-                            <TD noWrap align=middle>物资编码：<INPUT maxLength=15 size=15
-                                                                name=p_prodno>&nbsp;&nbsp; 物资名称：<INPUT maxLength=15
-                                                                                                       size=15
-                                                                                                       name=p_prodname>&nbsp;&nbsp;
-                                每页显示个数： <SELECT name=p_pagesize>
+                            <TD noWrap align=middle>物资编码：<INPUT maxLength=15 size=15 id=p_prodno>&nbsp;&nbsp;
+                                物资名称：<INPUT maxLength=15 size=15 id=p_prodname>&nbsp;&nbsp;
+                                每页显示个数： <SELECT id=p_pagesize>
                                     <OPTION value=10 selected>10</OPTION>
                                     <OPTION value=20>20</OPTION>
                                     <OPTION value=30>30</OPTION>
                                     <OPTION value=50>50</OPTION>
-                                    <OPTION
-                                            value=100>100
+                                    <OPTION value=100>100
                                     </OPTION>
-                                    <OPTION value=4>全部</OPTION>
+                                    <OPTION value=1000000000>全部</OPTION>
                                 </SELECT> 排序：
-                                <SELECT name=p_orderby>
-                                    <OPTION value="" selected>按物资代码</OPTION>
-                                    <OPTION value=1>按需求时间</OPTION>
-                                    <OPTION
-                                            value=2>按需求数量
-                                    </OPTION>
-                                </SELECT> <INPUT id=button2 onclick=submit_form_cx() type=button value=查询 name=button2>
+                                <SELECT id="orbyes" name=p_orderby>
+                                    <OPTION value="MATERIAL_CODE" selected>按物资代码</OPTION>
+                                    <OPTION value="START_DATE">按需求时间</OPTION>
+                                    <OPTION value="AMOUNT">按需求数量</OPTION>
+                                </SELECT> <INPUT id=button2 th:onclick="'Randompage('+1+','+2+')'" type=button value=查询 name=button2>
                             </TD>
                         </TR>
                         </TBODY>
@@ -289,213 +339,52 @@
             </TR>
             </TBODY>
         </TABLE>
-        <FORM
-                name="form1" action="" method="Get">
-            <CENTER><FONT color=#000064>◆&nbsp;</FONT><FONT color=#000064>首页
-                上一页</FONT>&nbsp;<A
-                    href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=2"><FONT
-                    color=#0000be>下一页</FONT></A>&nbsp;<A
-                    href="http://169.254.158.100/zzdl/Order/Order_Wbxjfa_List.asp?p_type=0&amp;p_prodno=&amp;p_pagesize=&amp;p_ftype=&amp;p_orderby=&amp;page=4"><FONT
-                    color=#0000be>尾页</FONT></A><FONT color=#000064>&nbsp;共 40 个需求计划 每页10
-                个需求计划</FONT><FONT color=#000064>&nbsp;页次:<FONT
-                    color=blue>1</FONT>/4页</FONT><FONT color=#000064>&nbsp;◆&nbsp;</FONT>
+        <FORM name="form1" action="" method="Get">
+            <CENTER>
+                <FONT color=#000064>◆&nbsp;</FONT>
+                <A href="#" th:onclick="'Randompage('+1+','+2+')'"><FONT color=#000064>首页</FONT></A>
+                <A href="#" th:onclick="'Randompage('+${session.pageInfo.pageNum}+','+1+')'" > <FONT color=#000064>上一页</FONT></A>&nbsp;
+                <A href="#" th:onclick="'underpage('+${session.pageInfo.pageNum}+')'"><FONT color=#0000be>下一页</FONT></A>&nbsp;
+                <A href="#" th:onclick="'Randompage('+${session.pageInfo.pages}+','+3+')'"><FONT color=#0000be>尾页</FONT></A>
+                <FONT color=#000064>&nbsp;共<spa id="pagetotal">[[${session.pageInfo.total}]]</spa> 个需求计划 每页[[${session.pageInfo.endRow}]] 个需求计划</FONT>
+                <FONT color=#000064>&nbsp;页次:
+                    <FONT color=blue><spa id="pagnum">[[${session.pageInfo.pageNum}]] </spa> </FONT>
+                    /<spa id="pagsize">[[${session.pageInfo.pages}]]</spa>页</FONT>
+                <FONT color=#000064>&nbsp;◆&nbsp;</FONT>
                 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
                        bgColor=#336699 borderColorLight=#006699 border=0>
                     <TBODY>
                     <TR>
                         <TD>
-                            <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0 align="center">
-                                <TBODY>
-                                <TR class=t1 align="center">
-                                    <TD noWrap align=middle>选择</TD>
-                                    <TD noWrap align=middle>序号</TD>
-                                    <TD noWrap align=middle>物资代码</TD>
-                                    <TD noWrap align=middle>物资名称</TD>
-                                    <TD noWrap align=middle>数量</TD>
-                                    <TD noWrap align=middle>预算价格</TD>
-                                    <TD noWrap align=middle>需求时间</TD><!--<td nowrap align="center">提交时间</td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133201
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>1</TD>
-                                    <TD align=middle><A
-                                            href="javascript:ddtzDdmx()">W64001005000<BR></A></TD>
-                                    <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">222<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/07<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/07 15:27:41<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133190
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>2</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133190">W64001005000<BR></A>
-                                    </TD>
-                                    <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">1<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/07<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/07 14:26:42<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133221
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>3</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133221">W64001005000<BR></A>
-                                    </TD>
-                                    <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">10<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/07<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/07 16:04:53<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133245
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>4</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133245">W64001005000<BR></A>
-                                    </TD>
-                                    <TD>晶振(HC-49U-500K-0.005%)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">22<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/08<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/08 15:10:07<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133246
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>5</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133246">W64001005001<BR></A>
-                                    </TD>
-                                    <TD>晶振(HC-49U-500M-0.005%)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">11<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/08<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/08 15:10:11<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133207
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>6</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133207">W64001005001<BR></A>
-                                    </TD>
-                                    <TD>晶振(HC-49U-500M-0.005%)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">56<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/07<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/07 15:36:55<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133240
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>7</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133240">W64001010002<BR></A>
-                                    </TD>
-                                    <TD>SMD晶振(ZPB26-II/E-1.0M-TC-FB)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">11232<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/08<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/08 14:22:13<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133251
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>8</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133251">W64001190000<BR></A>
-                                    </TD>
-                                    <TD>晶振(TO-500B)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">100<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/08<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/08 15:20:28<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133199
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>9</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133199">W65000400101<BR></A>
-                                    </TD>
-                                    <TD>CMOS电路(CD4001BCN)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">10086<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/07<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/07 15:30:23<br></td>-->
-                                </TR>
-                                <TR class=t2 align="center">
-                                    <TD align=middle><INPUT type=checkbox value=1000201011133167
-                                                            name=p_orderno></TD>
-                                    <TD align=middle>10</TD>
-                                    <TD align=middle><A
-                                            href="http://169.254.158.100/zzdl/Demand/ddtz_ddmx.asp?strOrderCode=1000201011133167">W65000400101<BR></A>
-                                    </TD>
-                                    <TD>CMOS电路(CD4001BCN)<BR></TD>
-                                    <TD align=right>
-                                        <div align="center">12<BR>
-                                        </div>
-                                    </TD>
-                                    <TD align=right><BR></TD>
-                                    <TD align=right>
-                                        <div align="center">2010/01/07<BR>
-                                        </div>
-                                    </TD><!--<td align=right>2010/01/07 13:48:22<br></td>-->
-                                </TR>
-                                </TBODY>
-                            </TABLE>
+                            <div id="aa">
+                                <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0  align="center"  style="text-align: center">
+                                    <TBODY>
+                                    <TR class=t1 align="center">
+                                        <TD noWrap align=middle>选择</TD>
+                                        <TD noWrap align=middle>序号</TD>
+                                        <TD noWrap align=middle>物资代码</TD>
+                                        <TD noWrap align=middle>物资名称</TD>
+                                        <TD noWrap align=middle>数量</TD>
+                                        <TD noWrap align=middle>预算价格</TD>
+                                        <TD noWrap align=middle>需求时间</TD><!--<td nowrap align="center">提交时间</td>-->
+                                    </TR>
+                                    <tr class="t2" th:id="${session.pageInfo.total}" th:each="Orders,stat:${session.pageInfo.list}">
+                                        <td align=center>
+                                            <input type="checkbox" th:id="${session.pageInfo.pageNum}" name="checkbox"  th:value="${Orders.id}">
+                                        </td>
+                                        <td>[[${Orders.id}]]</td>
+                                        <td>[[${Orders.materialCode}]]</td>
+                                        <td>[[${Orders.materialName}]]</td>
+                                        <td>[[${Orders.amount}]]</td>
+                                        <TD></TD>
+                                        <TD>[[${#dates.format(Orders.endDate,'yyy/MM/dd')}]]</TD>
+                                    </tr>
+
+
+
+                                    </TBODY>
+                                </TABLE>
+                            </div>
                         </TD>
                     </TR>
                     </TBODY>

@@ -371,4 +371,21 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <select id="selectByExampleOrderby"   resultMap="BaseResultMap" parameterType="String" >
+    select * from orders where
+--     判断是否有编号
+    <if test="matercode !=''">
+      MATERIAL_CODE like #{matercode} and
+    </if>
+    1=1
+--     判断是否有产品姓名
+    <if test="matername !=''">
+      and MATERIAL_NAME like #{matername}
+    </if>
+--     判断排序方式
+    <if test="orby !=''">
+      order by #{orby} DESC
+    </if>
+  </select>
 </mapper>

@@ -23,4 +23,6 @@ public interface OrdersMapper {
     int updateByExampleWithBLOBs(@Param("record") Orders record, @Param("example") OrdersExample example);
 
     int updateByExample(@Param("record") Orders record, @Param("example") OrdersExample example);
+
+    List<Orders> selectByExampleOrderby(@Param("matercode") String matercode,@Param("matername")String matername,@Param("orby") String orby);
 }
