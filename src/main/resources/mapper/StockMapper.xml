@@ -136,7 +136,7 @@
       #{leadAgree,jdbcType=VARCHAR}, #{leadDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}, 
       #{leadOpinion,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.turing.purchase.entity.StockWithBLOBs" >
+  <insert id="insertSelective" parameterType="com.turing.purchase.entity.StockWithBLOBs" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into stock
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

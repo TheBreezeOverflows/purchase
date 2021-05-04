@@ -1,14 +1,9 @@
-
-<html>
-<head>
-<meta http-equiv="Content-Language" content="zh-cn">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
-<link rel="stylesheet" href="css/style.css">
-<!--<div ID="overDiv" STYLE="position:absolute; visibility:hide; z-index:1;"></div>-->
-<script Language="JavaScript" src="../pub_Calendar.js"></script>
-<title>采购计划一览表</title>
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('采购下达')}">
+</head>
+<body>
 <SCRIPT LANGUAGE=javascript>
     function select_check(theForm)
       {
@@ -50,29 +45,26 @@
 	
          return true;
       }      
-      function submit_form(theForm,i)
+      function submit_form()
       {
-        var count=0;
-        for (var k = 0; k < theForm.length; k++)
-        if ((theForm[k].type == "radio") && (theForm[k].checked))
-        count++;
-        if (count==0)
-        {
-          alert("提示信息：\n请选择采购计划。");
-          return;
-        }
-        if (i==3)
-        {
-          form.action="../Enquire/Enquire_form.asp";
-        }
-        if (i==6)
-        {
-          form.action="../Bidding/bidding_add.asp";
-        }
-         document.form.p_type.value=i;
-         //window.document.form.submit();
-	 window.location.href="xjfatz_xjfamx";
-         return true;
+          var a=$("input[type='radio']:checked" );
+          var strSel="";
+              strSel = a.val();
+          if (strSel!=""&&strSel!=null){
+              $.ajax({
+                  type : "get",
+                  url : "/planStock/StockDetailGeneral?id=" + strSel,
+                  success : function(data) {
+                      if (data) {
+                          toreload('planman/xjfatz_xjfamx');
+                      } else {
+                          alert("跳转失败")
+                      }
+                  }
+              })
+          } else if (strSel==""||strSel==null){
+              alert("请至少选中一个值");
+          }
       }
       function submit_form_cx()
       {
@@ -85,21 +77,33 @@
 	 	cGetRow=window.event.srcElement.parentElement.parentElement.rowIndex;
 	 }
 	  function delData(){
-	 	var obj = document.getElementById("p_orderno");
-	 	if(obj.checked){
-			obj01.deleteRow(cGetRow);
-		}else{
-			alert("请选择要删除的数据！");
-		}
+          var a=$("input[type='radio']:checked" );//获取当前选择单选按钮
+          var strSel="";
+          strSel = a.val();
+          if (strSel!=""&&strSel!=null){
+              $.ajax({
+                  type : "get",
+                  url : "/planStock/StockTransmit?id=" + strSel,
+                  success : function(data) {
+                      if (data) {
+                          alert("下达成功");
+                          toreload('planman/Project_list4');
+                      } else {
+                          alert("下达失败,请查看部长的审核是否同意");
+                      }
+                  }
+              })
+          } else if (strSel==""||strSel==null){
+              alert("请选择要下达的值");
+          }
 	 }
 </SCRIPT>
-</head>
-<body>
+
 <center>
 <form name=form action="#" method="post">
 <input type="hidden" name="p_type" value="3">
 
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
+<TABLE style="LINE-HEIGHT: 30px;text-align: center;" cellSpacing=1 cellPadding=0     width="100%"  bgColor=#336699 borderColorLight=#006699 border=0>
 <tr>
 <td>
 <table cellpadding="3" cellspacing="1" border="0" width="100%" id="table1">
@@ -110,14 +114,13 @@
 </tr>
 
 <TR Height=35>
-<td class=t2 colspan=8 align=right> <!--align="center"-->
+<td class=t2 colspan=8 align=right style="text-align: center"> <!--align="center"-->
  
-   <input type=button value="打开" onClick="submit_form(document.form,1)" >
-   <input type=button value="下达" onClick="delData();" >
-   <input type=button value="返回" onClick=" javascript:history.back()">
+   <input type=button  style="height:30px" value="打开" onClick="submit_form()" >
+   <input type=button style="height:30px" value="下达" onClick="delData();" >
+   <input type=button style="height:30px" value="返回" onClick=" javascript:history.back()">
 </TD>
 </TR>
-
     <tr class="t1">
     <td nowrap align="center">选择</td>
     <td nowrap align="center">序号</td>
@@ -129,21 +132,19 @@
     <td nowrap align="center">对应询价书</td>
     </tr>
 
-    <tr class="t2">
-    
-    <td align=center><input type="radio" name="p_orderno" value="1000201001251761" onClick="getLen();"></td>
-    
-    <td >1</td>
-    <td >天下无贼<br></td>
-    <td >制造中心采购公开求购<br></td>
-    <td ><a href="javascript:openwindown('../Order/work_log.asp?p_code=1000201001251761&p_type=2')">采购计划未下达</a><br></td>
-	<td></td>    
-    <td >2010/01/09 00:00<br></td>
-
-       <td ><br></td>
-
+    <tr class="t2" th:each="Stock,stat:${session.StockNoSubmit}">
+        <td align=center><input type="radio" name="p_orderno" th:value="${Stock.id}" onClick="getLen();"></td>
+        <td>[[${Stock.id}]]</td>
+        <td>[[${Stock.stockName}]]</td>
+        <td>
+            <span th:if="${Stock.stockType}==1">公开求购</span>
+            <span th:if="${Stock.stockType}==2">定向求购</span>
+        </td>
+        <td>采购计划未下达</td>
+        <td><br></td>
+        <td>[[${#dates.format(Stock.endDate,'yyy/MM/dd')}]]<br></td>
+        <td ><br></td>
     </tr>
-
 </table></td></tr></table>
 
 <input type="hidden" name="p_listtype" value="3">

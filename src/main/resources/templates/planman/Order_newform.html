@@ -70,7 +70,6 @@
     //保存
     function  saveplan() {
         //设置传参的值
-
         var MaterialsCoding=table2.rows[0].cells[1].innerText;//物资编码
         var MaterialsName=table2.rows[1].cells[1].innerText;//物资名称
         var MaterialsQuantity=$("#quantity").val();//数量
@@ -226,7 +225,7 @@
 
     <input type="button" value="重新选择物资" onclick="toreload('planman/pclass_select');">
 
-    <input type="button" value="保存" onClick="javascript:submit_form1();" on>
+    <input type="button" value="保存" onClick="javascript:submit_form1();">
 
     <input type="button" value="全部需求录入完毕" onClick="javascript:submit_form()">
 </center>

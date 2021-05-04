@@ -4,6 +4,9 @@ import com.turing.purchase.entity.Orders;
 
 import java.util.List;
 
+/**
+ * 需求计划表的操作
+ */
 public interface PlanOrdersService {
     //查询所有需求计划
     public List<Orders> FinAllOrder();

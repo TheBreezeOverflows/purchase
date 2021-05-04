@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <LINK href="../css/style.css" rel=stylesheet>
+    <script src="../jquery.min.js"></script>
+    <META content="MSHTML 6.00.2900.5626" name=GENERATOR>
+
+</head>
+<body>
 <SCRIPT LANGUAGE="JAVASCRIPT">
     function chck() {
         var count = 0;
@@ -12,27 +21,23 @@
         }
     }
 
-    function Add(SourceList, TargetList) {
-        var nIndex = SourceList.selectedIndex;
-        var nCount = 0;
-        if (nIndex == -1) {
-            // Process continue only if at least one item selected
-            //alert("请先选择一项!");
+    function Add() {
+        var stockall=$("#p_gys_all");//可选jqu
+       var stockalltext =stockall.find("option:selected").text();//可选的text
+        var stocksel=$("#p_gys_sel");//已选
+        var stockgysall=stockall.val();//可选val
+        if (stockgysall ==null) {
+            alert("请在可选商家中先选择一项!");
             return;
-        }
-        for (i = 0; i < SourceList.length; i++) {
-            if (SourceList.options(i).selected == true) {
-                if (inSouceList(SourceList.options(i).value, TargetList) == false) {
-                    var objSelected = new Option(SourceList[i].text, SourceList[i].value);
-                    TargetList.options[TargetList.length] = objSelected;
-                }
+        }else if (stockgysall.length==1){
+            $("#p_gys_all option[value="+stockgysall+"]").remove();
+            stocksel.append("<option value="+stockgysall+">"+stockalltext+"</option>");
+        }else if (stockgysall.length>1) {
+        for (i = 0; i < stockgysall.length; i++) {
+          var text=document.getElementById("p_gys_all").options[0].text;
+            $("#p_gys_all option[value="+stockgysall[i]+"]").remove();
+            stocksel.append("<option value="+stockgysall[i]+">"+text+"</option>");
             }
-        }
-        for (var i = 0; i < TargetList.options.length; i++) {
-            TargetList.options(i).selected = true;
-        }
-        if (navigator.appName == "Netscape") {
-            history.go(0)
         }
     }
 
@@ -45,24 +50,24 @@
         return false;
     }
 
-    function Remove(SelectList) {
-        var nIndex = SelectList.selectedIndex;
-        var nCount = 0;
-        if (nIndex == -1) {
-            // Process continue only if at least one item selected
-            //alert("请先选择一项!");
+    function Remove() {
+        var stockall=$("#p_gys_all");//可选
+        var stockgysall=stockall.val();//可选val
+        var stocksel=$("#p_gys_sel");//已选
+        var stockgyssel=stocksel.val();//已选val
+        var stockalltext =stocksel.find("option:selected").text();//已选择的text
+        if (stockgyssel ==null) {
+            alert("请在可选商家中先选择一项!");
             return;
-        }
-        while (nCount < SelectList.length) {
-            if (SelectList.options(nCount).selected == true) {
-                SelectList.options[nCount] = null;
+        }else if (stockgyssel.length==1){
+            $("#p_gys_sel option[value="+stockgyssel+"]").remove();
+            stockall.append("<option value="+stockgyssel+">"+stockalltext+"</option>");
+        }else if (stockgyssel.length>1) {
+            for (i = 0; i < stockgyssel.length; i++) {
+                var text=document.getElementById("p_gys_sel").options[0].text;
+                $("#p_gys_sel option[value="+stockgyssel[i]+"]").remove();
+                stockall.append("<option value="+stockgyssel[i]+">"+text+"</option>");
             }
-            else {
-                nCount++;
-            }
-        }
-        if (navigator.appName == "Netscape") {
-            history.go(0)
         }
     }
 
@@ -173,59 +178,59 @@
         window.open(page, "newuser", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=400,left=100,top=150");
     }
 </SCRIPT>
-
-
-<html>
-<head>
-    <meta http-equiv="Content-Language" content="zh-cn">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
-    <meta name="ProgId" content="FrontPage.Editor.Document">
-    <link rel="stylesheet" href="css/style.css">
-    <script Language="JavaScript" src="css/pub_Calendar.js"></script>
-    <title>编制采购计划</title>
     <SCRIPT LANGUAGE=javascript>
         function abc() {
             var ll = document.getElementById("p_cgtype").value;
             var dis1 = document.getElementById("gkqg");
             var dis2 = document.getElementById("dxqg");
 
-            if (ll == 1) {
-                dis1.style.display = "block";
-                dis2.style.display = "none";
-            } else {
+            if (ll == 2) {
                 dis2.style.display = "block";
                 dis1.style.display = "none";
+            } else {
+                dis1.style.display = "block";
+                dis2.style.display = "none";
             }
         }
 
-        function submit_form(theForm, i) {
-            document.form.action = "Project_Save.asp";
-            if ((document.form.p_gys_sel.options.length == 0) &&
-                (document.form.p_cgtype.value == 2 ||
-                    document.form.p_cgtype.value == 4 ||
-                    document.form.p_cgtype.value == 5 ||
-                    document.form.p_cgtype.value == 6 ||
-                    document.form.p_cgtype.value == 7 ||
-                    document.form.p_cgtype.value == 8 ||
-                    document.form.p_cgtype.value == 11)) {
-                alert("请选择供应商。");
-                return;
+        //添加
+        function submit_form() {
+            var planStockNumber=$("#planStockNumer").val();//获取计划编号
+            var planStockName=$("#planStockname").val();//获取采购计划名称
+            var planStockWrite=$("#palnStockWrite").val();//获取当前编制人
+            var planStockBudget=$("#planStockBudget").val();//获取当前预算
+            var palnStockDate=document.getElementById("palnStockDate").innerHTML;
+            var stocktype=$("#p_cgtype").val();//采购类型（公开1/定向2）
+            var stocksel="";//商家id
+            //判断是采购名称是否填入
+            if (planStockName==""){
+                alert("请输入采购名称");
+            }else if (planStockBudget==""){
+                alert("请输入预算金额")
+            }else{
+            //判断是否是定向求购
+            if(stocktype==2){
+                //获取定向求购的商家的id
+                 stocksel=$("#p_gys_sel option").map(function(){
+                                return $(this).val();
+                        }).get().join(",")
             }
-            if (form.p_input[5].value.length > 400) {
-                alert("说明不能超过400字。");
-                return;
+            var planStockRemare=$("#planStockRemare");//获取当前备注
+            $.ajax({
+                type : "get",
+                url : "/planStock/insertStockMessage?planStockNumber="+planStockNumber+"&planStockName="+planStockName+"&planStockWrite="+
+                    planStockWrite+"&planStockBudget="+planStockBudget+"&palnStockDate="+palnStockDate+"&stocktype="+stocktype+"&stocksel="+
+                    stocksel,
+                success : function(data) {
+                    if (data) {
+                        alert("添加成功！");
+                        toreload("planman/Order_wbxjfa_list");
+                    } else {
+                        alert("添加失败")
+                    }
+                }
+            })
             }
-            for (n = 0; n < document.form.p_gys_all.options.length; n++) {
-                document.form.p_gys_all.options(n).selected = true;
-            }
-            for (n = 0; n < document.form.p_gys_sel.options.length; n++) {
-                document.form.p_gys_sel.options(n).selected = true;
-            }
-            document.form.p_type.value = i;
-            alert("采购计划编制成功！");
-            window.location.href = "Project_list";
-            //CheckAll();
         }
 
         function select_cgtype(xyprice_null) {
@@ -273,8 +278,7 @@
             }
         }
     </SCRIPT>
-</head>
-<body>
+
 <center>
 
     <h2><font color=#0070C0>编制采购计划</font></h2>
@@ -285,18 +289,16 @@
                borderColorLight=#006699 border=0>
             <tr>
                 <td>
-                    <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                    <table cellpadding="3" cellspacing="1" border="1" width="100%">
 
                         <tr>
                         <tr class="t1">
                             <td>采购计划编号</td>
                             <td>
-                                1000201001251787
-                                <input type="hidden" name="p_input" value="1000201001251787"></td>
+                                <input readonly="readonly" id="planStockNumer" th:value="${session.PurchaseWriteOrderNumber}"></td>
                             <td><font color=red>采购计划名称</font></td>
                             <td>
-                                <input type="text" name="p_input" size="20" maxlength="100" value="20020055100109" Chk=1
-                                       alt="请输入采购计划名称。"></td>
+                                <input type="text" id="planStockname" size="20" maxlength="100" value="" Chk=1alt="请输入采购计划名称。"></td>
                         </tr>
                         <tr class="t1">
                             <td>公司名称</td>
@@ -305,16 +307,17 @@
                                 <input type="hidden" name="p_input" value="1000"></td>
                             <td>编制人</td>
                             <td>
-                                <input type="text" name="p_input" size="20" readonly maxlength="100" value="杨春" Chk=1
+                                <input type="text" id="palnStockWrite" size="20" readonly maxlength="100" th:value="${session.SysUsers.loginId}" Chk=1
                                        alt="请输入编制人。"></td>
                         </tr>
                         <tr class="t1">
                             <td>预算金额(元)</td>
                             <td>
-                                <input type="text" name="p_input" size="20" maxlength="20" value="84360"
-                                       onKeyPress="check_num_dot()" Chk=3></td>
+                                <input type="text" id="planStockBudget" size="20" maxlength="20" onKeyPress="check_num_dot()" Chk=3></td>
                             <td>采购计划编制时间</td>
-                            <td>2010/01/09</td>
+                            <td>
+                                [[${#dates.format(new java.util.Date().getTime(), 'yyyy/MM/dd')}]]</td>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -322,10 +325,10 @@
         </table>
 
         <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" bgColor=#336699
-               borderColorLight=#006699 border=0>
+               borderColorLight=#006699 border=0 >
             <tr>
                 <td>
-                    <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                    <table cellpadding="3" cellspacing="1" border="1" width="100%"  style="text-align: center">
 
                         <tr class="t1">
                             <td nowrap align="center">序号</td>
@@ -344,20 +347,17 @@
                             <td nowrap align="center">录入详细<br>交货情况</td>
                             -->
                         </tr>
-
                         <tr class="t2">
-                            <td align=center>1</td>
-                            <td>W64001005001<br></td>
-                            <td>
-                                <a href="../Project/print_order_detail.asp?p_type=1&p_orderno=1000201011133266&p_ordernum=1" target="_new">晶振(HC-49U-500M-0.005%)</a><br></td>
-                            <td align=right>222<br></td>
+                            <td align=center>[[${session.PurchaseWriteOrderMessage.id}]]</td>
+                            <td>[[${session.PurchaseWriteOrderMessage.materialCode}]]<br></td>
+                            <td>[[${session.PurchaseWriteOrderMessage.materialName}]]<br></td>
+                            <td align=right>[[${session.PurchaseWriteOrderMessage.amount}]]<br></td>
+                            <td align=center>[[${session.PurchaseWriteOrderMessage.measureUnit}]]<br></td>
+                            <td align=center id="palnStockDate">[[${#dates.format(session.PurchaseWriteOrderMessage.endDate,'yyy/MM/dd')}]]<br></td>
 
-                            <td align=center>个<br></td>
-                            <td align=center>2010/01/08<br></td>
+                            <td nowrap align="center"></td>
 
-                            <td nowrap align="center"><a href="Xyprice_list.asp?itemcode=W64001005001"><br></a></td>
-
-                            <td align=right>84360<br></td>
+                            <td align=right>[[${session.PurchaseWriteOrderMessage.sumPrice}]]</td>
                             <td align=right><br></td>
                             <!--
                             <td align="center"><a href="javascript:openwindown('../Project/Project_Delivery.asp?p_projno=1000201001251787&p_orderno=1000201011133266&p_ordernum=1')"><img src="../images/Open.gif" border="0" WIDTH="18" HEIGHT="12"></a></td>
@@ -373,13 +373,13 @@
                borderColorLight=#006699 border=0>
             <tr>
                 <td>
-                    <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                    <table cellpadding="3" cellspacing="1" border="1" width="100%">
 
                         <tr class="t1">
                             <td width=15% align="center"><font color=red>采购方式</font></td>
                             <td colspan=3>
 
-                                <SELECT name="p_cgtype" Chk=1 alt="请选择采购方式。" onChange="abc()">
+                                <SELECT id="p_cgtype" Chk=1 alt="请选择采购方式。" onChange="abc()">
                                     <OPTION value="1">公开求购</OPTION>
                                     <OPTION value="2">定向询价</OPTION>
                                 </SELECT>
@@ -399,16 +399,21 @@
                                             <th>
                                                 <font color="black">供应商名称</font></th>
                                         </tr>
-                                        <tr class="t2">
-                                            <td>
-                                                <div align="center">好又多</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="t2">
-                                            <td>
-                                                <div align="center">多又好</div>
-                                            </td>
-                                        </tr>
+                                        <span th:if="${session.PurchaseWriteSupplierName}!=null">
+                                            <tr class="t2"  th:each="Supplier,stat:${session.PurchaseWriteSupplierName}">
+                                                <td align=center th:id="${Supplier.id}">
+                                                    <div align="center">[[${Supplier.contact}]]</div>
+                                                </td>
+                                            </tr>
+                                        </span>
+                                        <span th:if="${session.PurchaseWriteSupplierName}==null">
+                                            <tr class="t2">
+                                                <td align=center>
+                                                    此产品尚未查询到有供应商
+                                                </td>
+                                            </tr>
+                                        </span>
+
                                     </table>
                                 </div>
 
@@ -418,25 +423,23 @@
                                             <td align="center">
                                                 <b>可选</b>
                                                 <br>
-                                                <select name="p_gys_all" size=15 style="width:160px" multiple>
-
-                                                    <OPTION value="12">北京康特电子有限公司</OPTION>
-
+                                                <select id="p_gys_all" size=15 style="width:160px" multiple>
+                                                <span th:if="${session.PurchaseWriteSupplierName}!=null">
+                                                    <span  th:each="Supplier,stat:${session.PurchaseWriteSupplierName}">
+                                                         <OPTION th:value="${Supplier.id}">[[${Supplier.contact}]]</OPTION>
+                                                    </span>
+                                                </span>
                                                 </SELECT>
                                             <td align="center" vAlign=center>
+                                            <input type="button" id="add" style="height:30px" value="添加" onclick="Add()">
 
-                                                <input type=button name="add" value="添加"
-                                                       onclick=Add(document.form.p_gys_all,document.form.p_gys_sel)>
-                                                <p>
-                                                    <input type=button name="del" value="删除"
-                                                           onclick=Remove(document.form.p_gys_sel)>
-
+                                            <p>
+                                                <input type="button" style="height:30px" id="del" value="删除" onclick="Remove()">
                                             </td>
                                             <td align="center">
                                                 <b>已选</b>
                                                 <br>
-                                                <select name="p_gys_sel" size=15 style="width:160px" multiple>
-
+                                                <select id="p_gys_sel" size=15 style="width:160px" multiple>
                                                 </SELECT>
                                             </td>
                                         </tr>
@@ -448,7 +451,7 @@
                         <tr class="t1">
                             <td width=15% align="center" nowrap>说明：<br>（400字以内）</td>
                             <td colspan=3>
-<TEXTAREA NAME="p_input" ROWS=3 COLS=77 style="width:100%">
+<TEXTAREA id="planStockRemare" ROWS=3 COLS=77 style="width:100%">
 
 </TEXTAREA>
                             </td>
@@ -470,7 +473,7 @@
         <input type="hidden" name="page" value="">
 
         <br>
-        <input type="button" value="确定" onClick="submit_form(document.form,1)">
+        <input type="button" value="确定" onClick="submit_form()">
         <input type="button" value="重设" onClick="form.reset()">
 
         <input type="button" value="取消" onClick="window.location='Order_wbxjfa_list'">

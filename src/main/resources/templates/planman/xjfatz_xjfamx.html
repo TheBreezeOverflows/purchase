@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common::header('')}"></head>
+<html lang="zh_CN" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::header('采购计划明细信息')}"></head>
+<BODY>
 <SCRIPT language=JAVASCRIPT> 
 function chck()
 {  var  count=0;
@@ -219,19 +221,15 @@ function check_num_dot()
 <SCRIPT language=javascript>
 		function reback()
 		{
-		 history.back ();
+            toreload('planman/Project_list4');
 		}
 </SCRIPT>
-<LINK href="css/style.css" rel=stylesheet>
-<FORM name=form action="" method=post>
-<META content="MSHTML 6.00.2900.5626" name=GENERATOR></FORM>
-<BODY>
 <TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" 
 bgColor=#336699 borderColorLight=#006699 border=0>
   <TBODY>
   <TR>
     <TD>
-      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
+      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=1>
         <TBODY>
         <TR bgColor=#ffffff>
           <TD align=middle width="100%" bgColor=#ffffff colSpan=20 
@@ -243,30 +241,35 @@ bgColor=#336699 borderColorLight=#006699 border=0>
 </FONT></H2></TD></TR>
         <TR class=t1>
           <TD noWrap width="20%">采购计划编号</TD>
-          <TD class=t2 noWrap>1000201001251780</TD><!--*******************************************************************以下为第二列****************************************************************-->
+          <TD class=t2 noWrap>[[${session.StockMessage.stockNum}]]</TD><!--*******************************************************************以下为第二列****************************************************************-->
           <TD noWrap width="20%">采购计划名称</TD>
-          <TD class=t2 noWrap>11111111111111</TD>
+          <TD class=t2 noWrap>[[${session.StockMessage.stockName}]]</TD>
         </TR>
         <TR class=t1>
           <TD noWrap width="20%">公司名称</TD>
           <TD class=t2 noWrap>株洲南车时代电气股份有限公司</TD><!--*******************************************************************以下为第二列****************************************************************-->
           <TD noWrap width="20%">编制人</TD>
-          <TD class=t2 noWrap>杨春</TD></TR>
+          <TD class=t2 noWrap>[[${session.StockMessage.author}]]</TD></TR>
         <TR class=t1>
           <TD noWrap width="20%">预算金额(元)</TD>
-          <TD class=t2 noWrap>55</TD><!--*******************************************************************以下为第二列****************************************************************-->
+          <TD class=t2 noWrap>[[${session.StockMessage.budget}]]</TD><!--*******************************************************************以下为第二列****************************************************************-->
           <TD noWrap width="20%">计划询价开始时间</TD>
-          <TD class=t2 noWrap>2010/01/09</TD></TR>
+          <TD class=t2 noWrap>
+          <span th:if="${session.StockMessage.startDate}!=null">
+            [[${#dates.format(session.StockMessage.startDate,'yyy/MM/dd')}]]
+          </span>
+          </TD>
+        </TR>
         <TR class=t1>
           <TD noWrap width="20%">计划报价截止时间</TD>
-          <TD class=t2 noWrap>2010/01/10 00:00</TD>
+          <TD class=t2 noWrap>[[${#dates.format(session.StockMessage.endDate,'yyy/MM/dd')}]]</TD>
           <TD class=t2 colSpan=2><BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" 
+<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
 bgColor=#336699 borderColorLight=#006699 border=0>
   <TBODY>
   <TR>
     <TD>
-      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
+      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=1  style="text-align: center">
         <TBODY>
         <TR class=t1>
           <TD noWrap align=middle>序号</TD>
@@ -278,29 +281,36 @@ bgColor=#336699 borderColorLight=#006699 border=0>
           <TD noWrap align=middle>协议价格<BR>（元）</TD>
           <TD noWrap align=middle>预算总金额<BR>（元）</TD>
           <TD noWrap align=middle>计划价<BR>（元/不含税）</TD></TR>
-        <TR class=t2>
-          <TD>1</TD>
-          <TD>W64001005000<BR></TD>
-          <TD><A 
-            href="http://169.254.158.100/zzdl/Project/print_order_detail.asp?p_type=1&amp;p_orderno=1000201011133300&amp;p_ordernum=1" 
-            target=_new>晶振(HC-49U-500K-0.005%)</A><BR></TD>
-          <TD align=right>11<BR></TD>
-          <TD>个<BR></TD>
-          <TD>2010/01/09<BR></TD>
-          <TD noWrap align=middle><A 
-            href="http://169.254.158.100/zzdl/Demand/Xyprice_list.asp?itemcode=W64001005000"></A><BR></TD>
-          <TD>55<BR></TD>
-          <TD>0.43<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" 
+        <TR class=t2 align=center>
+          <td align=center>[[${session.PurchaseWriteOrderMessage.id}]]</td>
+          <td>[[${session.PurchaseWriteOrderMessage.materialCode}]]<br></td>
+          <td>[[${session.PurchaseWriteOrderMessage.materialName}]]<br></td>
+          <td align=center>[[${session.PurchaseWriteOrderMessage.amount}]]<br></td>
+          <td align=center>[[${session.PurchaseWriteOrderMessage.measureUnit}]]<br></td>
+          <td align=center>[[${#dates.format(session.PurchaseWriteOrderMessage.endDate,'yyy/MM/dd')}]]<br></td>
+          <TD></TD>
+          <TD>[[${session.PurchaseWriteOrderMessage.sumPrice}]]<BR></TD>
+          <TD>[[${session.StockMessage.budget}]]<BR></TD>
+        </TR>
+        </TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
 bgColor=#336699 borderColorLight=#006699 border=0>
   <TBODY>
   <TR>
     <TD>
-      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
+      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=1 style="text-align: center">
         <TBODY>
         <TR>
           <TD class=t1 noWrap width="20%">采购方式</TD>
-          <TD class=t2>公开求购</TD></TR>
+          <TD class=t2>
+            <span th:if="${session.StockMessage.stockType}==1">
+              公开求购
+            </span>
+            <span th:if="${session.StockMessage.stockType}==2">
+              定向求购
+            </span>
+          </TD>
+        </TR>
         <TR>
           <TD class=t1 noWrap width="20%">可选供应商</TD>
           <TD class=t2><A 
@@ -308,20 +318,46 @@ bgColor=#336699 borderColorLight=#006699 border=0>
             target=_new><INPUT type=hidden name=kxgys><B>可选供应商</B></A></B></TD></TR>
         <TR>
           <TD class=t1 noWrap width="20%">拟选供应商</TD>
-          <TD class=t2>本产品类所有供应商</TD></TR>
+          <TD class=t2>
+            <span th:if="${session.StockMessage.stockType}==1">
+              本产品类所有供应商
+            </span>
+            <span th:if="${session.StockMessage.stockType}==2">
+                <span th:if="${session.PurchaseWriteSupplierName}!=null">
+                    <span  th:each="Supplier,stat:${session.PurchaseWriteSupplierName}">
+                         <span th:id="${Supplier.id}">[[${Supplier.contact}]]&nbsp&nbsp</span>
+                    </span>
+                </span>
+            </span>
+          </TD>
+        </TR>
         <TR>
           <TD class=t1 noWrap width="20%">说明</TD>
-          <TD class=t2>1111111111111</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
-<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%" 
+          <TD class=t2>[[${session.PurchaseWriteOrderMessage.remark}]]</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE style="LINE-HEIGHT: 30px" cellSpacing=1 cellPadding=0 width="100%"
 bgColor=#336699 borderColorLight=#006699 border=0>
   <TBODY>
   <TR>
     <TD>
-      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=0>
+      <TABLE cellSpacing=1 cellPadding=3 width="100%" border=1 style="text-align: center">
         <TBODY>
         <TR class=t1>
           <TD width="20%">部长是否同意</TD>
-          <TD class=t2>未审核</TD></TR>
+          <TD class=t2>
+            <span th:if="${session.StockMessage.leadAgree}==null">
+              未审核
+            </span>
+            <span th:if="${session.StockMessage.leadAgree}==''">
+              未审核
+            </span>
+            <span th:if="${session.StockMessage.leadAgree}=='S002-0'">
+              不同意
+            </span>
+            <span th:if="${session.StockMessage.leadAgree}=='S002-1'">
+              同意
+            </span>
+
+          </TD></TR>
         <TR class=t1>
           <TD width="20%" rowSpan=2>部长审核意见</TD>
           <TD class=t2><BR></TD></TR>

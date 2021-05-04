@@ -9,9 +9,12 @@ import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import com.turing.purchase.entity.Material;
 import com.turing.purchase.entity.Orders;
+import com.turing.purchase.entity.Supplier;
 import com.turing.purchase.entity.SysUsers;
+import com.turing.purchase.service.IdMappingService;
 import com.turing.purchase.service.PlanDemandEnteringServer;
 import com.turing.purchase.service.PlanOrdersService;
+import com.turing.purchase.service.SupplierService;
 import lombok.extern.log4j.Log4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,19 +34,26 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.turing.purchase.util.HandleTool.getReverNumber;
+
 /**
  * 计划员控制层
  */
 @Controller
 @RequestMapping("plan")
 public class PlanController {
-    //物资ser依赖
+    //物资信息ser依赖
     @Autowired
     private PlanDemandEnteringServer planDemandEnteringServer;
 
     //需求计划表ser依赖
     @Autowired
     private PlanOrdersService planOrdersService;
+
+    //供应商信息ser依赖
+    @Autowired
+    private SupplierService supplierService;
+
     //需求计划录入初始分页进入
     @GetMapping("/pclassSelect")
     public String planPclass(@RequestParam(value = "pn",defaultValue = "1")Integer pn, HttpSession session){
@@ -83,7 +93,6 @@ public class PlanController {
     @GetMapping("/EntryPageSkip")
     @ResponseBody
     public  boolean EntryPageSkip(String str, HttpSession session){
-        System.out.println("进入录入物资页面");
         //判断获取到的选中集合是否为空
         if (!"".equals(str)){
             //从第几页开始查，每页有几条数据;
@@ -115,8 +124,6 @@ public class PlanController {
     public boolean save(String MaterialsCoding,String MaterialsName,String MaterialsQuantity,String MaterialsUnit,
                         String MaterialsMoney,String MaterialsData,String MaterialsRemark,HttpSession session){
         System.out.println("进入保存的控制层");
-        System.out.println("物资编码："+MaterialsCoding+"物资名："+MaterialsName+"数量："+MaterialsQuantity+"计量单位："+MaterialsUnit+
-                "单价："+MaterialsMoney+"日期"+MaterialsData+"备注："+MaterialsRemark);
         // 时间格式转换
         SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
         Orders or=new Orders();
@@ -167,7 +174,6 @@ public class PlanController {
     @GetMapping("/planOrderSelects")
     @ResponseBody
     public String planOrders(@RequestParam(value = "pn",defaultValue = "1")Integer pn,String materCode,String matername,HttpSession session){
-        System.out.println("需求计划查询初次进入");
         PageInfo<Orders> ordersPageInfo = planOrderPage(pn,materCode,matername, session);
         StringBuilder  str= new StringBuilder ("<TABLE cellSpacing=1 cellPadding=3 width=\"100%\" border=0 id=\"table1\" style=\"text-align: center\">   <TBODY> <TR class=t1>       <TD noWrap align=middle>选择</TD>        <TD noWrap align=middle>序号</TD>        <TD noWrap align=middle>物资编号</TD>        <TD noWrap align=middle>物资名称</TD>        <TD noWrap align=middle>数量</TD>       <TD noWrap align=middle>采购类型</TD>       <TD noWrap align=middle>采购进度</TD>    </TR>   ");
 
@@ -194,7 +200,6 @@ public class PlanController {
      */
     public PageInfo<Orders>  planOrderPage(Integer pn,String materCode,String matername, HttpSession session){
         PageHelper.startPage(pn,5);
-
         //接收查询信息集合
         List<Orders> orders=null;
         //获取所有查询的物资信息
@@ -222,7 +227,6 @@ public class PlanController {
     @GetMapping("/planOrderidSelect")
     @ResponseBody
     public boolean planOrderid(Integer id,HttpSession session){
-        System.out.println("根据id查询信息");
         Orders orders = planOrdersService.FinbyOrder(id);
         if (orders!=null){
             session.setAttribute("planOrderid",orders);
@@ -252,15 +256,13 @@ public class PlanController {
         return false;
     }
 
-    //保存
+    //修改
     @GetMapping("/planupdate")
     @ResponseBody
     public boolean updateor(String materid,String materialCode,String materialName,String materamount,String measureUnit,String materunitPrice,
                             String materendDate,String materemail,String materphone,String materfax,String materremark){
         System.out.println("进入物资信息修改的控制层");
-        System.out.println("id="+materid+"产品编码="+materialCode+"产品名称="+materialName+"产品数量="+materamount+"计量单位="+measureUnit+"单价="
-                +materunitPrice+"交货期="+materendDate+"邮箱="+materemail+"联系电话="+materphone+"联系传真="+materfax+"备注="+materremark);
-        // 时间格式转换
+       // 时间格式转换
         SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
         Orders order=new Orders();
        order.setId(Long.parseLong(materid));//设置id
@@ -293,7 +295,7 @@ public class PlanController {
     }
 
 
-    //初始采购计划编制查询
+    //初始未编采购计划的需求一览表
     @GetMapping("/planOrdersOrby")
     public String planOrdersOrby(HttpSession session){
         planOrderPageorby(1,10,"","","id",session);
@@ -347,18 +349,8 @@ public class PlanController {
         //判断是否未输入信息
         orders = planOrdersService.FinAllOrderCondition(materCode,matername);
            // orders = planOrdersService.FinAllOrdercodenmaeorby(materCode,matername,orby);
-        /*//添加预算价格
-        for (int i=0;i<orders.size();i++){
-            //当前单价
-            BigDecimal unitPrice = orders.get(i).getUnitPrice();
-            //数量转为bigdeciml类型
-            BigDecimal   inamount   =   new   BigDecimal(orders.get(i).getAmount());
-            unitPrice=inamount.multiply(unitPrice);
-            orders.get(i).setSumPrice(unitPrice);
-        }*/
         //判断查询到的信息是否为空，
         if (orders!=null){
-            System.out.println("排序查询查到信息");
             //通过PageInfo类解析分页结果,admins的是我们获取数据的数组
             PageInfo<Orders> info = new PageInfo<>(orders);
             session.setAttribute("pageInfo",info);
@@ -369,4 +361,53 @@ public class PlanController {
         return null;
     }
 
+    //初始编制采购计划页面跳转
+    @GetMapping("/planOrdersSuper")
+    @ResponseBody
+    public boolean planOrdersSuper(Integer id,HttpSession session){
+        //根据需求计划id查询需求计划信息
+        Orders order = planOrdersService.FinbyOrder(id);
+        if (order!=null){
+            //添加预算总金额
+             //当前单价
+            BigDecimal unitPrice = order.getUnitPrice();
+            //数量转为bigdeciml类型
+            BigDecimal   inamount   =   new   BigDecimal(order.getAmount());
+            unitPrice=inamount.multiply(unitPrice);
+            order.setSumPrice(unitPrice);
+            //根据查询到的需求计划信息查询物资id
+            //获取物资编号
+            String materialCode = order.getMaterialCode();
+            //根据物资编号查询物资信息
+            Material material = planDemandEnteringServer.FinSingleMaterCode(materialCode);
+            if (material!=null) {
+                //根据物资信息id获取有此物资信息的供应商表id集合
+                List<Long> supplierMaterInfoId = supplierService.getSupplierMaterInfoId(material.getId());
+                //判断拥有此物资信息的供应商是否为空
+                if (supplierMaterInfoId != null) {
+                    //设置一个初始供应商集合对象存储根据id获取到的供应商
+                    List<Supplier> supplier =new ArrayList<>();
+                    //根据供应商表id集合查询供应商信息
+                    for (Long log : supplierMaterInfoId) {
+                        Supplier supplierInfo = supplierService.getSupplierInfobyId(log);
+                        if (supplierInfo != null) {
+                            //判断根据id查询到的供应商不为空，放入初始设置的集合对象中
+                            supplier.add(supplierInfo);
+                        }
+                    }
+                    session.setAttribute("PurchaseWriteSupplierName",supplier);
+                }else{
+                    session.setAttribute("PurchaseWriteSupplierName",null);
+                }
+            }
+            //创建采购计划编号
+            int in=1;
+            in=order.getId().intValue();
+            String str = getReverNumber("ST-"+order.getId()+"-", in);
+            session.setAttribute("PurchaseWriteOrderNumber",str);
+            session.setAttribute("PurchaseWriteOrderMessage",order);
+            return  true;
+        }
+        return  false;
+    }
 }

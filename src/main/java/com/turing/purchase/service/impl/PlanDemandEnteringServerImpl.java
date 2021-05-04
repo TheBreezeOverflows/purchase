@@ -34,4 +34,31 @@ public class PlanDemandEnteringServerImpl implements PlanDemandEnteringServer {
         }
         return null;
     }
+
+    /**
+     *  根据物资编号查询物资信息
+     * @param MateraCode 物资编号
+     * @return 物资信息对象
+     */
+    @Override
+    public Material FinSingleMaterCode(String MateraCode) {
+        MaterialExample example =new MaterialExample();
+        MaterialExample.Criteria criteria = example.createCriteria();
+        criteria.andMaterialNumEqualTo(MateraCode);
+        List<Material> materials = materMapper.selectByExample(example);
+        if (materials.size()>0){
+            return materials.get(0);
+        }
+        return null;
+    }
+
+
+    //根据物资姓名模糊查询获取所有与之有关的物资信息集合
+    @Override
+    public List<Material> FinSingleMaterName(String MateraName) {
+        MaterialExample example =new MaterialExample();
+        MaterialExample.Criteria criteria = example.createCriteria();
+        criteria.andMaterialNameLike("%"+MateraName+"%");
+        return materMapper.selectByExample(example);
+    }
 }

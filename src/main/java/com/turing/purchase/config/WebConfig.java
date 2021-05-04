@@ -74,7 +74,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("planman/xjfatz_xjfamx").setViewName("planman/xjfatz_xjfamx");
         registry.addViewController("planman/xjfatz_xjfamx2").setViewName("planman/xjfatz_xjfamx2");
         registry.addViewController("planman/xjfatz_xjfamx3").setViewName("planman/xjfatz_xjfamx3");
-
+        //询价书
+        registry.addViewController("/queryandqueto/Project_list").setViewName("queryandqueto/Project_list");
+        registry.addViewController("/queryandqueto/ask1").setViewName("queryandqueto/ask1");
         //测试页面
         registry.addViewController("/myindex").setViewName("myindex");
         registry.addViewController("/myleftRequire").setViewName("myleftRequire");

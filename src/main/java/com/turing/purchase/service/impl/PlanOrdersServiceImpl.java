@@ -78,6 +78,7 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
         }
         return false;
     }
+    //循环调用根据id删除方法
     @Override
     @Transactional
     public boolean CircularDeletion(String[] split){
@@ -94,7 +95,6 @@ public class PlanOrdersServiceImpl implements PlanOrdersService {
     @Override
     public boolean UpdateOrder(Orders orders) {
         //获取当前修改的原数据
-        Orders or = FinbyOrder(orders.getId());
         OrdersExample example =new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(orders.getId());//id

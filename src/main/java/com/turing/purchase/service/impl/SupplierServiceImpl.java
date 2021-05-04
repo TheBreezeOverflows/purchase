@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +26,6 @@ public class SupplierServiceImpl implements SupplierService {
     private MaterialMapper materialMapper;
     @Autowired(required = false)
     private SuppMaterialMapper suppMaterialMapper;
-
     //流水号
     public static int reverNum = 1;
 
@@ -48,6 +48,47 @@ public class SupplierServiceImpl implements SupplierService {
         supplier.setStatus(HandleTool.getAllNoStr(supplier.getStatus()));
         supplier.setKind(HandleTool.getAllNoStr(supplier.getKind()));
         return supplier;
+    }
+
+    /**
+     *
+     * @param  id 供应商id
+     * @return 供应商对象
+     */
+    @Override
+    public Supplier getSupplierInfobyId(long id) {
+        SupplierExample example =new SupplierExample();
+        SupplierExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(id);
+        List<Supplier> suppliers = supplierMapper.selectByExample(example);
+        if (suppliers.size()>0){
+            return suppliers.get(0);
+        }
+        return null;
+    }
+
+
+    /**
+     *
+     * @param materid 产品信息id
+     * @return 供应商id集合
+     */
+    @Override
+    public List<Long> getSupplierMaterInfoId(long materid) {
+        SuppMaterialExample example=new SuppMaterialExample();
+        SuppMaterialExample.Criteria criteria = example.createCriteria();
+        criteria.andMaterialIdEqualTo(materid);
+        //根据物资信息id获取供应商id集合
+        List<SuppMaterial> suppMaterials = suppMaterialMapper.selectByExample(example);
+        if (suppMaterials.size()>0){
+            List<Long> supmaterbyid= new ArrayList<>();
+            //遍历获取到的供应商集合
+            for (SuppMaterial supmater:suppMaterials) {
+                supmaterbyid.add(supmater.getSupplierId());
+            }
+            return supmaterbyid;
+        }
+        return null;
     }
 
     /**

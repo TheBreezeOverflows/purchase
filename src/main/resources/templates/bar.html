@@ -23,10 +23,6 @@
     </A>
 </div>
 <SCRIPT language=javascript>
-    $.get("user/getShiroPrincipal",function(data){
-        var userNameSpan = $("#userNameSpan");
-        userNameSpan.text(data)
-    })
 
     function ConfirmLogout() {
         if (confirm("注销当前用户，并以其它身份登录？")) {

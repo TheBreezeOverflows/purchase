@@ -2,6 +2,7 @@
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{common::header('')}"></head>
 <BODY>
+
 <SCRIPT language=JAVASCRIPT>
     function chck() {
         var count = 0;
@@ -182,8 +183,7 @@
 <META http-equiv=Content-Type content="text/html; charset=utf-8">
 <META content="MSHTML 6.00.2900.5626" name=GENERATOR>
 <META content=FrontPage.Editor.Document name=ProgId>
-<LINK
-        href="css/style.css" rel=stylesheet>
+<LINK href="css/style.css" rel=stylesheet>
 <SCRIPT language=javascript>
     function
 
@@ -206,7 +206,7 @@
             //window.open("print_order_detail", "Canny2", "toolbar=0,location=0,status=0,menubar=0,scrollbars=0,width=600,height=440,left=100,top=60");
             $.ajax({
                 type : "get",
-                url: "plan/planOrderidSelect?id="+id,
+                url: "plan/planOrdersSuper?id="+id,
                 success: function(data){
                     if (data){
                         toreload('planman/bianzhicaigoujihua');
@@ -392,7 +392,7 @@
                 <INPUT type=hidden value=0
                        name=p_type>
                 <P align=center><INPUT onclick=select_check(document.form) type=button value=全选/取消>
-                    <INPUT onclick=submit_form(document.form,2) type=button value=编制采购计划 name=upd> <INPUT
+                    <INPUT onclick=submit_form() type=button value=编制采购计划 name=upd> <INPUT
                             onClick=" javascript:history.back()" type=button value=返回 name=goback>
                 </P></CENTER>
         </FORM>

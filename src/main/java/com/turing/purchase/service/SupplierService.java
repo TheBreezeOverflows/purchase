@@ -15,6 +15,20 @@ public interface SupplierService {
      */
     Supplier getSupplierInfo(String userName);
 
+    /**
+     * 根据供应商id
+     * @param  id 供应商id
+     * @return 供应商对象
+     */
+    Supplier getSupplierInfobyId(long id);
+
+    /**
+     *  根据产品信息id获取有此产品的供应商id集合
+     * @param materid 产品信息id
+     * @return 供应商id集合
+     */
+    List<Long> getSupplierMaterInfoId(long materid);
+
     //查询供应商产品细节（datagrid）
     EasyUIDataGridJsonEntity getSupplierProductsDataGrid(Integer pageNum,Integer pageSize,String sort,String order,
                                                                 String materialCode,
