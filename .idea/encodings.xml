@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/Order_wbxjfa_list.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/Order_ytb_list.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/Project_list.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/Project_list3.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/bianzhicaigoujihua.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/category.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/jiffprov_look.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/provider_cx.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/provider_cx_jbxxlist.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/xjfatz_xjfamx.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/xjfatz_xjfamx2.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/planman/xjfatz_xjfamx3.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/templates/queryandqueto/Project_list.html" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
