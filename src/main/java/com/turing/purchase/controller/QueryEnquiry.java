@@ -1,5 +1,6 @@
 package com.turing.purchase.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.turing.purchase.entity.IdMapping;
@@ -64,13 +65,6 @@ public class QueryEnquiry {
         //从第几页开始查，每页有几条数据,pn默认为1
         PageInfo<Stock> stockPageInfo = planPclassPage(pn, StockName, MaterName, StockType, session);
         //修改条件session
-        System.out.println("stname="+StockName+"matername="+MaterName+"sttype="+StockType);
-        if (MaterName==""){
-            System.out.println("''");
-        }
-        if (MaterName==null){
-            System.out.println("null");
-        }
         session.setAttribute("pTitle",StockName);//采购名称
         session.setAttribute("pItem",MaterName);//物资名称
         session.setAttribute("pStocktype",StockType);//类型
@@ -142,11 +136,19 @@ public class QueryEnquiry {
                 }
             }
         }
-        PageHelper.startPage(pn,5);
+        //创建Page
+        Page page = new Page(pn,5);
+        //为Page类中的total属性赋值
+        int total =stocklist.size();
+        page.setTotal(total);
+        //计算当前需要显示的数据下标起始值
+        int startIndex = (pn - 1) * 5;
+        int endIndex = Math.min(startIndex + 5,total);
+        //从链表中截取需要显示的子链表，并加入到Page
+        page.addAll(stocklist.subList(startIndex,endIndex));
         //通过PageInfo类解析分页结果,admins的是我们获取数据的数组
-        PageInfo<Stock> info = new PageInfo<>(stocklist);
+        PageInfo<Stock> info = new PageInfo<>(page);
         //info.getList()可以查看当前info的所有信息
-        System.out.println("有"+info.getTotal()+"个size="+info.getEndRow());
         return info;
     }
 
